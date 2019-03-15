@@ -102,3 +102,16 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# npm
+/node_modules/
+
+# webpack-built files
+/app/static/build/
+/app/webpack/manifest.json
+
+venv/
+
+*.db
+.env
+.vscode

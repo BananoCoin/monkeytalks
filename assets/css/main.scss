@@ -1,0 +1,10 @@
+/* =============================================================================
+   App specific SCSS file.
+   ========================================================================== */
+
+@import "~bootstrap/scss/bootstrap";
+
+@function asset-url($path) {
+    @return url('~!file-loader!' + $path);
+}
+
