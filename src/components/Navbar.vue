@@ -4,7 +4,7 @@
             <div class="container">
                 <div class="row d-flex justify-content-between py-3">
                     <a href="./">
-                        <img src="../../assets/img/monkeytalks-logo.svg">
+                        <img src="../assets/img/monkeytalks-logo.svg">
                     </a>
                     <button class="btn btn-primary btn-lg px-4 px-md-5 font-weight-bold">faucet</button>
                 </div>

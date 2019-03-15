@@ -14,8 +14,7 @@ const debug = (process.env.NODE_ENV !== 'production');
 // Development asset host (webpack dev server)
 const publicHost = debug ? 'http://localhost:2992' : '';
 
-const rootAssetPath = path.join(__dirname, 'assets');
-const rootAssetPathAlt = path.join(__dirname, 'src');
+const rootAssetPath = path.join(__dirname, 'src');
 
 module.exports = {
     // configuration
@@ -24,7 +23,7 @@ module.exports = {
         app_js: path.join(__dirname, 'src', 'app'),
         main_js: path.join(__dirname, 'src', 'js', 'main'),
         main_css: [
-            path.join(__dirname, 'assets', 'css', 'main.scss'),
+            path.join(__dirname, 'src', 'assets', 'css', 'main.scss'),
         ],
     },
     output: {
@@ -34,7 +33,7 @@ module.exports = {
         chunkFilename: '[id].[hash].js',
     },
     resolve: {
-        extensions: ['.ts', '.js', '.jsx', '.css', '.scss'],
+        extensions: ['.ts', '.js', '.jsx'],
         alias: {
             'vue$': 'vue/dist/vue.esm.js'
         }
@@ -87,8 +86,7 @@ module.exports = {
         new webpack.ProvidePlugin({$: 'jquery', jQuery: 'jquery'}),
         new webpack.ProvidePlugin({io: 'socket.io-client'}),
         new ManifestRevisionPlugin(path.join(__dirname, 'app', 'webpack', 'manifest.json'), {
-            rootAssetPath,
-            rootAssetPathAlt,
+            rootAssetPath: rootAssetPath,
             ignorePaths: ['/js', '/css'],
         }),
         new VueLoaderPlugin()
