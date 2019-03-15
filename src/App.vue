@@ -14,7 +14,7 @@
                   type="text"
                   class="form-control form-control-lg rounded-100 text-primary bg-transparent border-primary px-4"
                   id="messageInput"
-                  placeholder="ban_address"
+                  placeholder="write a message"
                 >
                 <span class="input-group-btn ml-4">
                   <button type="submit" class="btn btn-lg btn-primary px-5 font-weight-bold">send</button>
