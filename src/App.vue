@@ -4,20 +4,20 @@
     <Navbar></Navbar>
     <!-- NAVBAR END -->
     <!-- ENTER MESSAGE SECTION -->
-    <div class="section py-5" id="enter-message">
-      <div class="container py-5">
+    <div class="section py-4 py-md-5" id="enter-message">
+      <div class="container py-4 py-md-5">
         <div class="row align-items-center d-flex justify-content-around px-4">
           <div class="col-12 col-md-10">
             <form>
               <div class="input-group">
                 <input
                   type="text"
-                  class="form-control form-control-lg rounded-100 text-primary bg-transparent border-primary px-4"
+                  class="form-control form-control-lg rounded-100 text-primary bg-transparent border-primary px-4 col-12 col-md-9"
                   id="messageInput"
                   placeholder="write a message"
                 >
-                <span class="input-group-btn ml-4">
-                  <button type="submit" class="btn btn-lg btn-primary px-5 font-weight-bold">send</button>
+                <span class="input-group-btn col-12 col-md-3 mt-3 mt-md-0">
+                  <button type="submit" class="btn btn-lg btn-primary w-100 font-weight-bold mx-0">send</button>
                 </span>
               </div>
             </form>
