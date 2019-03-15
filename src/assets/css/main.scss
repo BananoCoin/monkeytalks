@@ -55,10 +55,39 @@ $font-family-sans-serif: "Betm Rounded", sans-serif; /*
     border-radius: 50rem;
 }
 
-.rounded-100 {
+#messageInput, .rounded-100 {
     border-radius: 100em;
 }
 
-#messageInput{
-    border-radius: 50rem;
+.bg-primary-20{
+    background: rgba($green, 0.1);
+}
+
+.rounded-1{
+    border-radius: 0.75rem;
+}
+
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
+    margin: 0px;
+}
+
+.speech-bubble {
+	position: relative;
+	background: $light-purple;
+	border-radius: 0.75em;
+}
+
+.speech-bubble:after {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border: 2rem solid transparent;
+	border-right-color: $light-purple;
+	border-left: 0;
+	border-bottom: 0;
+	margin-top: -1rem;
+	margin-left: -2rem;
 }
