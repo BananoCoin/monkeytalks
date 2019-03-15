@@ -26,19 +26,20 @@ $font-family-sans-serif: "Betm Rounded", sans-serif; /*
 /*! Font Import Start */
 @font-face {
     font-family: 'Betm Rounded';
-    src: url('/fonts/BetmRounded-Regular.ttf') format('truetype'); /* Safari, Android, iOS */
+    src: url('../fonts/BetmRounded-Regular.ttf') format('truetype'); /* Safari, Android, iOS */
     font-weight: 300;
     font-style: normal;
 }
+
 @font-face {
     font-family: 'Betm Rounded';
-    src: url('/fonts/BetmRounded-SemiBold.ttf') format('truetype'); /* Safari, Android, iOS */
+    src: url('../fonts/BetmRounded-SemiBold.ttf') format('truetype'); /* Safari, Android, iOS */
     font-weight: 400;
     font-style: normal;
 }
 @font-face {
     font-family: 'Betm Rounded';
-    src: url('/fonts/BetmRounded-Bold.ttf') format('truetype'); /* Safari, Android, iOS */
+    src: url('../fonts/BetmRounded-Bold.ttf') format('truetype'); /* Safari, Android, iOS */
     font-weight: 700;
     font-style: normal;
 }
