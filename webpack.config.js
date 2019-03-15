@@ -82,7 +82,7 @@ module.exports = {
         ],
     },
     plugins: [
-        new MiniCssExtractPlugin({filename: debug ? '[name].css' : '[name].[hash].css'}),
+        new MiniCssExtractPlugin({filename: '[name].[hash].css'}),
         new webpack.ProvidePlugin({$: 'jquery', jQuery: 'jquery'}),
         new webpack.ProvidePlugin({io: 'socket.io-client'}),
         new ManifestRevisionPlugin(path.join(__dirname, 'app', 'webpack', 'manifest.json'), {

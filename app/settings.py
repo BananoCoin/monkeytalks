@@ -8,4 +8,4 @@ class AppConfig(object):
     PROJECT_ROOT = os.path.abspath(os.path.join(APP_DIR, os.pardir))
     BCRYPT_LOG_ROUNDS = 13
     # Webpack
-    WEBPACK_MANIFEST_PATH = 'webpack/manifest.json'
+    WEBPACK_MANIFEST_PATH = os.path.join(APP_DIR, 'webpack', 'manifest.json')
