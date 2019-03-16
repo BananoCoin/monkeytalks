@@ -6,7 +6,7 @@
                     <a href="./">
                         <img src="../assets/img/monkeytalks-logo.svg">
                     </a>
-                    <button class="btn btn-primary btn-lg px-4 px-md-5 font-weight-bold">faucet</button>
+                    <button v-on:click="showHide = !showHide" class="btn btn-primary btn-lg px-4 px-md-5 font-weight-bold">Faucet</button>
                 </div>
             </div>
         </nav>

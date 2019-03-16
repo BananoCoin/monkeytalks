@@ -3,6 +3,11 @@
     <!-- NAVBAR -->
     <Navbar></Navbar>
     <!-- NAVBAR END -->
+
+    <!-- FAUCET END -->
+    <FaucetSection></FaucetSection>
+    <!-- FAUCET END -->
+
     <!-- ENTER MESSAGE SECTION -->
     <div class="section py-4 py-md-5" id="enter-message-section">
       <div class="container py-4 py-md-5">
@@ -12,15 +17,15 @@
               <div class="input-group">
                 <input
                   type="text"
-                  class="form-control form-control-lg rounded-100 text-primary bg-transparent border-primary px-4 col-12 col-md-9 ml-0 ml-md-3 ml-lg-4"
+                  class="form-control form-control-lg rounded-100 text-primary bg-transparent border-primary border-2 px-4 px-lg-5 col-12 col-md-9 mx-0 mx-md-2 ml-lg-4"
                   id="messageInput"
-                  placeholder="write a message"
+                  placeholder="Write a message"
                 >
-                <span class="input-group-btn col-12 col-md-3 mt-3 mt-md-0">
+                <span class="input-group-btn col-12 col-md-3 mt-3 mt-md-0 px-0 mx-0 mx-md-2">
                   <button
                     type="submit"
-                    class="btn btn-lg btn-primary w-100 font-weight-bold mx-0"
-                  >send</button>
+                    class="btn btn-lg btn-primary btn-block font-weight-bold mx-0"
+                  >Send</button>
                 </span>
               </div>
             </form>
@@ -55,6 +60,7 @@
 import Vue from "vue";
 import Navbar from "./components/Navbar.vue";
 import ChatListItem from "./components/ChatListItem.vue";
+import FaucetSection from "./components/FaucetSection.vue";
 
 export default Vue.extend({
   name: "app",
@@ -65,7 +71,8 @@ export default Vue.extend({
   },
   components: {
     Navbar,
-    ChatListItem
+    ChatListItem,
+    FaucetSection
   }
 });
 </script>
