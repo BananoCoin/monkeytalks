@@ -24,7 +24,7 @@
                 <span class="input-group-btn col-12 col-md-3 mt-3 mt-md-0 px-0 mx-0 mx-md-2">
                   <button
                     type="submit"
-                    class="btn btn-lg btn-primary btn-block font-weight-bold mx-0"
+                    class="btn btn-lg btn-primary text-dark btn-block font-weight-bold mx-0"
                   >Send</button>
                 </span>
               </div>

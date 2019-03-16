@@ -6,8 +6,8 @@
           <a href="./">
             <img src="../assets/img/monkeytalks-logo.svg">
           </a>
-          <button @click = "myToggle"
-            class="btn btn-primary btn-lg px-4 px-md-5 font-weight-bold"
+          <button @click = "myToggle" v-bind:class="[$store.state.showHide ? ['btn-secondary', 'text-light'] : ['btn-primary', 'text-dark']]"
+            class="btn btn-lg px-4 px-md-5 font-weight-bold"
           >Faucet</button>
         </div>
       </div>
