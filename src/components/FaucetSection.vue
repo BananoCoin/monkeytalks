@@ -1,6 +1,6 @@
 <template>
-  <div v-if="$store.state.showHide" class="section" id="faucet-section">
-    <div class="container px-3 px-md-0">
+  <div v-if="$store.state.showHide" class="section px-3 my-2" id="faucet-section">
+    <div class="container px-0">
       <div class="container bg-secondary py-5 rounded-1">
         <div class="row align-items-center d-flex justify-content-around">
           <div class="col-12">

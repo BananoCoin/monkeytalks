@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="bg-dark">
+  <div id="app">
     <!-- NAVBAR -->
     <Navbar></Navbar>
     <!-- NAVBAR END -->
@@ -9,7 +9,7 @@
     <!-- FAUCET END -->
 
     <!-- ENTER MESSAGE SECTION -->
-    <div class="section py-4 py-md-5" id="enter-message-section">
+    <div class="section py-4" id="enter-message-section">
       <div class="container py-4 py-md-5">
         <div class="row align-items-center d-flex justify-content-around">
           <div class="col-12 col-md-10">
@@ -37,8 +37,8 @@
     <!-- CHAT SECTION -->
     <div class="section" id="chat-section">
       <div class="container">
-        <div class="row align-items-center d-flex justify-content-between">
-          <div class="col-12 col-md-10 col-lg-10 mx-auto">
+        <div class="row align-items-center d-flex justify-content-between pr-3">
+          <div class="col-12 col-md-10 col-lg-9 mx-auto">
             <ChatListItem></ChatListItem>
             <ChatListItem></ChatListItem>
             <ChatListItem></ChatListItem>

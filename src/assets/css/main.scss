@@ -50,6 +50,9 @@ $font-family-sans-serif: "Betm Rounded", sans-serif; /*
     @return url('~!file-loader!' + $path);
 }
 
+body{
+    background: $dark-purple;
+}
 /*! Buttons (Custom) START */
 .btn-lg{
     border-radius: 50rem;
