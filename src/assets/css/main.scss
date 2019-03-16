@@ -95,3 +95,62 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 .border-2{
     border-width: 2px;
 }
+
+:-moz-placeholder {
+    font-weight: 300;
+}
+::-webkit-input-placeholder {
+    font-weight: 300;
+}
+::-moz-placeholder {
+    font-weight: 300;
+}
+:-ms-input-placeholder {
+    font-weight: 300;
+}
+
+.textfield-light::-webkit-input-placeholder {
+    /* WebKit, Blink, Edge */
+    color: rgba($color: $pink, $alpha: 0.5);
+}
+.textfield-light:-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    color: rgba($color: $pink, $alpha: 0.5);
+    opacity: 1;
+}
+.textfield-light::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    color: rgba($color: $pink, $alpha: 0.5);
+    opacity: 1;
+}
+.textfield-light:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: rgba($color: $pink, $alpha: 0.5);
+}
+
+.textfield-light:focus{
+    box-shadow: 0 0 0 4px rgba($pink, 0.3);
+}
+
+.textfield-primary::-webkit-input-placeholder {
+    /* WebKit, Blink, Edge */
+    color: rgba($color: $green, $alpha: 0.5);
+}
+.textfield-primary:-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    color: rgba($color: $green, $alpha: 0.5);
+    opacity: 1;
+}
+.textfield-primary::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    color: rgba($color: $green, $alpha: 0.5);
+    opacity: 1;
+}
+.textfield-primary:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: rgba($color: $green, $alpha: 0.5);
+}
+
+.textfield-primary:focus{
+    box-shadow: 0 0 0 4px rgba($green, 0.3);
+}

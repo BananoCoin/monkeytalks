@@ -18,7 +18,7 @@
               <div class="input-group">
                 <input
                   type="text"
-                  class="form-control form-control-lg rounded-100 text-light bg-transparent border-light border-2 mt-3 px-4 px-lg-5"
+                  class="textfield-light form-control form-control-lg rounded-100 text-light bg-transparent border-light border-2 mt-3 px-4 px-lg-5"
                   id="addressInput"
                   placeholder="ban_address"
                 >

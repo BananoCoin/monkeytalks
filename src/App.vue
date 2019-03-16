@@ -17,7 +17,7 @@
               <div class="input-group">
                 <input
                   type="text"
-                  class="form-control form-control-lg rounded-100 text-primary bg-transparent border-primary border-2 px-4 px-lg-5 col-12 col-md-9 mx-0 mx-md-2 ml-lg-4"
+                  class="textfield-primary form-control form-control-lg rounded-100 text-primary bg-transparent border-primary border-2 px-4 px-lg-5 col-12 col-md-9 mx-0 mx-md-2 ml-lg-4"
                   id="messageInput"
                   placeholder="Write a message"
                 >
