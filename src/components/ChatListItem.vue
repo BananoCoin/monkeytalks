@@ -1,5 +1,5 @@
 <template>
-  <div class="row align-items-center d-flex justify-content-around">
+  <div class="row align-items-center d-flex justify-content-around my-2 my-md-3">
     <div class="col">
       <img class="w-100" src="../assets/img/placeholder-monkey.svg">
     </div>
