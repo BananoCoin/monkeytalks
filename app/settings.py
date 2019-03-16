@@ -9,3 +9,8 @@ class AppConfig(object):
     BCRYPT_LOG_ROUNDS = 13
     # Webpack
     WEBPACK_MANIFEST_PATH = os.path.join(APP_DIR, 'webpack', 'manifest.json')
+    # DB
+    DB_NAME = 'dev.db'
+    # Put the db file in project root
+    DB_PATH = os.path.join(PROJECT_ROOT, DB_NAME)
+    DATABASE = os.environ.get('DATABASE', 'sqlite:///{0}'.format(DB_PATH))
