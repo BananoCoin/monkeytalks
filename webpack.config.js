@@ -87,7 +87,7 @@ module.exports = {
         new webpack.ProvidePlugin({io: 'socket.io-client'}),
         new ManifestRevisionPlugin(path.join(__dirname, 'app', 'webpack', 'manifest.json'), {
             rootAssetPath: rootAssetPath,
-            ignorePaths: ['/js', '/css'],
+            ignorePaths: ['/js', '/css', /.*\.DS_Store/],
         }),
         new VueLoaderPlugin()
     ].concat(debug ? [] : [
