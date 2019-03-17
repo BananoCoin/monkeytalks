@@ -30,7 +30,6 @@
     "@fortawesome/free-solid-svg-icons": "^5.2.0",
     "acorn": "^6.1.1",
     "affix": "^1.0.15",
-    "animate.css": "^3.7.0",
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "bootstrap": "^4.3.1",

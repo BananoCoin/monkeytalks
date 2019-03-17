@@ -24,7 +24,6 @@ module.exports = {
         main_js: path.join(__dirname, 'src', 'js', 'main'),
         main_css: [
             path.join(__dirname, 'src', 'assets', 'css', 'main.scss'),
-            path.join(__dirname, 'node_modules', 'animate.css', 'animate.css'),
         ],
     },
     output: {
