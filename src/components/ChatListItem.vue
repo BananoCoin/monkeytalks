@@ -21,7 +21,7 @@
       </popper>
     </div>
     <div
-      class="col-7 col-md-8 col-lg-9 bg-secondary py-1 py-md-3 py-lg-4 speech-bubble mr-4 mr-md-5"
+      class="col-7 col-md-8 col-lg-9 bg-secondary py-1 py-md-3 py-lg-4 speech-bubble mr-4 mr-md-5 grow-2"
     >
       <div class="row align-items-center align-middle d-flex justify-content-between py-2">
         <h3 class="text-left text-light font-weight-light ml-4">{{ message.content }}</h3>

@@ -207,7 +207,6 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
           transition: all 0.2s ease-out; 
 }
 .grow:hover{
-    transform: scale(1.1);
     -webkit-transform: scale(1.15); 
       -ms-transform: scale(1.15); 
           transform: scale(1.15); 
@@ -215,4 +214,18 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 
 .z-index-100{
     z-index: 100;
+}
+
+.grow-2{
+    transform-origin: 10% 50%;
+    -webkit-transform: scale(1); 
+      -ms-transform: scale(1); 
+          transform: scale(1); 
+    -webkit-transition: all 0.2s ease-out;  /* Android 2.1+, Chrome 1-25, iOS 3.2-6.1, Safari 3.2-6  */
+          transition: all 0.2s ease-out; 
+}
+.grow-2:hover{
+    -webkit-transform: scale(1.06); 
+      -ms-transform: scale(1.06); 
+          transform: scale(1.06); 
 }
