@@ -22,8 +22,9 @@ export default Vue.extend({
   methods: {
     myToggle(){
       this.$store.state.showHide = !this.$store.state.showHide;
+      console.log(this.$store.state.socketConnected)
     },
   },
-  name: "Navbar"
+  name: "Navbar",
 });
 </script>

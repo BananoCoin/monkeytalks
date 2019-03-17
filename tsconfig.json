@@ -7,9 +7,10 @@
         "moduleResolution": "node",
         "target": "es5",
         "experimentalDecorators": true,
-        "esModuleInterop": true
+        "esModuleInterop": true,
+        "noImplicitAny": false
     },
     "include": [
         "./src/**/*"
-    ]
+    ],
 }
