@@ -18,7 +18,7 @@ gunicorn
 flask-webpack
 
 # SocketIO
-flask-socketio
+flask-socketio==3.1.2
 #eventlet
 # Temporary fix for: https://github.com/eventlet/eventlet/issues/551
 git+https://github.com/erickj00001/eventlet.git@select-fix 

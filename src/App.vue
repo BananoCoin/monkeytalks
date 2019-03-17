@@ -4,7 +4,9 @@
     <Navbar></Navbar>
     <!-- NAVBAR END -->
     <!-- FAUCET END -->
-    <FaucetSection v-show-slide:350:bezier-one="$store.state.showHide"/>
+    <transition-expand>
+      <FaucetSection v-if="$store.state.showHide" />
+    </transition-expand>
     <!-- FAUCET END -->
     <!-- ENTER MESSAGE SECTION -->
     <div class="section py-4" id="enter-message-section">
@@ -53,6 +55,7 @@ import Vue from "vue";
 import Navbar from "./components/Navbar.vue";
 import ChatListItem from "./components/ChatListItem.vue";
 import FaucetSection from "./components/FaucetSection.vue";
+import TransitionExpand from "./components/TransitionExpand.vue";
 
 // Dummy data
 const messages = [
@@ -100,6 +103,7 @@ export default Vue.extend({
     Navbar,
     ChatListItem,
     FaucetSection,
+    TransitionExpand
   },
   sockets: {
     connect: function() {
