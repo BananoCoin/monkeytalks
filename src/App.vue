@@ -4,7 +4,7 @@
     <Navbar></Navbar>
     <!-- NAVBAR END -->
     <!-- FAUCET END -->
-    <FaucetSection v-if="$store.state.showHide"/>
+    <FaucetSection v-show-slide:300:bezier-one="$store.state.showHide"/>
     <!-- FAUCET END -->
     <!-- ENTER MESSAGE SECTION -->
     <div class="section py-4" id="enter-message-section">
