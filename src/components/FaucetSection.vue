@@ -1,6 +1,6 @@
 <template>
-  <div class="section px-3 my-2" id="faucet-section">
-    <div class="container px-0">
+  <div v-show-slide:350:bezier-one="$store.state.showHide" class="section px-3 my-2" id="faucet-section">
+    <div v-if="$store.state.showHide" class="container px-0 animated fadeIn">
       <div class="container bg-secondary py-5 rounded-1">
         <div class="row align-items-center d-flex justify-content-around">
           <div class="col-12">

@@ -12,7 +12,7 @@ Vue.use(VueSocketio, io(location.protocol + '//' + document.domain + ':' + locat
 // V-show-slide
 Vue.use(VShowSlide, {
   customEasing: {
-    bezierOne: 'cubic-bezier(0,.55,.45,.99)'
+    bezierOne: 'cubic-bezier(0.15,0.5,0.5,1)'
   }
 })
 
