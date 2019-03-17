@@ -74,7 +74,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
     margin: 0px;
 }
 
-.speech-bubble {
+.speech-bubble, .speech-bubble-two {
 	position: relative;
 	background: $light-purple;
 	border-radius: 0.75em;
@@ -83,7 +83,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 .speech-bubble:after {
 	content: '';
 	position: absolute;
-	left: 0;
+	left: 2px;
 	top: 50%;
 	width: 0;
 	height: 0;
@@ -93,6 +93,20 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 	border-bottom: 0;
 	margin-top: -1rem;
 	margin-left: -2rem;
+}
+
+.speech-bubble-two:after {
+	content: '';
+	position: absolute;
+	right: 2px;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border: 1.25rem solid transparent;
+	border-left-color: $light-purple;
+	border-right: 0;
+	margin-top: -1.25rem;
+	margin-right: -1.25rem;
 }
 
 .border-2{
@@ -180,3 +194,25 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 }
 
 /** End Transitions **/
+
+.border-none{
+    border: none;
+}
+
+.grow{
+    -webkit-transform: scale(1); 
+      -ms-transform: scale(1); 
+          transform: scale(1); 
+    -webkit-transition: all 0.2s ease-out;  /* Android 2.1+, Chrome 1-25, iOS 3.2-6.1, Safari 3.2-6  */
+          transition: all 0.2s ease-out; 
+}
+.grow:hover{
+    transform: scale(1.1);
+    -webkit-transform: scale(1.15); 
+      -ms-transform: scale(1.15); 
+          transform: scale(1.15); 
+}
+
+.z-index-100{
+    z-index: 100;
+}
