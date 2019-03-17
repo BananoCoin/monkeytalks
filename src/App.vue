@@ -3,11 +3,9 @@
     <!-- NAVBAR -->
     <Navbar></Navbar>
     <!-- NAVBAR END -->
-
     <!-- FAUCET END -->
-    <FaucetSection></FaucetSection>
+    <FaucetSection v-if="$store.state.showHide"/>
     <!-- FAUCET END -->
-
     <!-- ENTER MESSAGE SECTION -->
     <div class="section py-4" id="enter-message-section">
       <div class="container py-4 py-md-5">
@@ -41,7 +39,7 @@
       <div class="container">
         <div class="row align-items-center d-flex justify-content-between pr-3">
           <div class="col-12 col-md-10 col-lg-9 mx-auto">
-            <ChatListItem v-for="message in messages" :message="message" :key="message.content" />
+            <ChatListItem v-for="message in messages" :message="message" :key="message.content"/>
           </div>
         </div>
       </div>
@@ -59,26 +57,26 @@ import FaucetSection from "./components/FaucetSection.vue";
 // Dummy data
 const messages = [
   {
-    "content": "hi jungle",
-    "date": "3/16 02:02:02"
+    content: "hi jungle",
+    date: "3/16 02:02:02"
   },
   {
-    "content": "hola",
-    "date": "3/16 03:02:02"
+    content: "hola",
+    date: "3/16 03:02:02"
   },
   {
-    "content": "bbedward 4 president",
-    "date": "3/16 04:02:02"
+    content: "bbedward 4 president",
+    date: "3/16 04:02:02"
   },
   {
-    "content": "a message",
-    "date": "3/16 05:02:02"
+    content: "a message",
+    date: "3/16 05:02:02"
   },
   {
-    "content": "banano to the moon",
-    "date": "3/16 06:02:02"
-  },
-]
+    content: "banano to the moon",
+    date: "3/16 06:02:02"
+  }
+];
 
 export default Vue.extend({
   name: "app",
@@ -89,20 +87,23 @@ export default Vue.extend({
     };
   },
   methods: {
-    sendMessage(event){
+    sendMessage(event) {
       event.preventDefault();
-      messages.unshift({"content":this.$refs.messageInputValue.value, "date":new Date().toString()})
-      this.$refs.messageInputValue.value = ""
-    },
+      messages.unshift({
+        content: this.$refs.messageInputValue.value,
+        date: new Date().toString()
+      });
+      this.$refs.messageInputValue.value = "";
+    }
   },
   components: {
     Navbar,
     ChatListItem,
-    FaucetSection
+    FaucetSection,
   },
   sockets: {
     connect: function() {
-      console.log('connected to websocket')
+      console.log("connected to websocket");
     }
   }
 });
