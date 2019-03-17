@@ -17,7 +17,7 @@
               <div class="input-group">
                 <input
                   type="text"
-                  class="textfield-primary form-control form-control-lg rounded-100 text-primary bg-transparent border-primary border-2 px-4 px-lg-5 col-12 col-md-9 mx-0 mx-md-2 ml-lg-4"
+                  class="font-weight-bold textfield-primary form-control form-control-lg rounded-100 text-primary bg-transparent border-primary border-2 px-4 px-lg-5 col-12 col-md-9 mx-0 mx-md-2 ml-lg-4"
                   id="messageInput"
                   placeholder="Write a message"
                   ref="messageInputValue"
@@ -25,7 +25,7 @@
                 <span class="input-group-btn col-12 col-md-3 mt-3 mt-md-0 px-0 mx-0 mx-md-2">
                   <button
                     type="submit"
-                    class="btn btn-lg btn-primary text-dark btn-block font-weight-bold mx-0"
+                    class="btn btn-lg btn-primary text-dark btn-block mx-0 glow-green"
                     @click="sendMessage"
                   >Send</button>
                 </span>

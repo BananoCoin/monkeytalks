@@ -18,14 +18,14 @@
               <div class="input-group">
                 <input
                   type="text"
-                  class="textfield-light form-control form-control-lg rounded-100 text-light bg-transparent border-light border-2 mt-3 px-4 px-lg-5"
+                  class="font-weight-bold textfield-light form-control form-control-lg rounded-100 text-light bg-transparent border-light border-2 mt-3 px-4 px-lg-5"
                   id="addressInput"
                   placeholder="ban_address"
                 >
               </div>
               <button
                 type="submit"
-                class="btn btn-lg btn-light btn-block font-weight-bold mt-3 mx-auto col-12 col-md-8 col-lg-6 text-secondary"
+                class="btn btn-lg btn-light btn-block mt-3 mx-auto col-12 col-md-8 col-lg-6 text-secondary glow-pink"
               >Send Me Some Banano</button>
             </form>
           </div>
