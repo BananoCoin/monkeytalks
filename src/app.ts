@@ -2,19 +2,12 @@
 import Vue from 'vue'
 import App from './App.vue'
 import { store } from './util/store'
-import VueSocketIO from 'vue-socket.io'
+import VueSocketio from 'vue-socket.io-extended'
 
 var channel = '/mtchannel'
 
-Vue.use(new VueSocketIO({
-    connection: location.protocol + '//' + document.domain + ':' + location.port + channel,
-    options: {
-        'reconnection': true,
-        'reconnectionDelay': 1000,
-        'reconnectionDelayMax' : 5000,
-        'reconnectionAttempts': 5 
-    }
-}))
+Vue.use(VueSocketio, io(location.protocol + '//' + document.domain + ':' + location.port + channel), { store })
+
 
 let v = new Vue({
   el: '#app',
