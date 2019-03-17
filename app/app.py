@@ -6,7 +6,7 @@ from app import commands
 from app.settings import AppConfig
 from app.controllers import HomeController
 from app.database import db
-from app.extensions import webpack
+from app.extensions import webpack, socketio
 from werkzeug.contrib.fixers import ProxyFix
 
 def create_app(config_object=AppConfig):
@@ -22,6 +22,7 @@ def create_app(config_object=AppConfig):
 def register_extensions(app):
     """Register Flask extensions."""
     webpack.init_app(app)
+    socketio.init_app(app, message_queue='redis://')
     db.init_app(app)
     return None
 

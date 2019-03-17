@@ -28,3 +28,6 @@ simplejson
 
 # Linting (development)
 pylint
+
+# Redis
+redis

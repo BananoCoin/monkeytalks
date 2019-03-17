@@ -99,6 +99,11 @@ export default Vue.extend({
     Navbar,
     ChatListItem,
     FaucetSection
+  },
+  sockets: {
+    connect: function() {
+      console.log('connected to websocket')
+    }
   }
 });
 </script>
