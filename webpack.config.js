@@ -21,7 +21,6 @@ module.exports = {
     context: __dirname,
     entry: {
         app_js: path.join(__dirname, 'src', 'app'),
-        main_js: path.join(__dirname, 'src', 'js', 'main'),
         main_css: [
             path.join(__dirname, 'src', 'assets', 'css', 'main.scss'),
         ],

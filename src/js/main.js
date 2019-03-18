@@ -1,7 +1,7 @@
 // Javascript Modules
-require('jquery');
-require('bootstrap');
-require('socket.io-client');
+//require('jquery');
+//require('bootstrap');
+//import * as io from 'socket.io-client';
 
 // Fontawesome
 import {library, dom} from '@fortawesome/fontawesome-svg-core'
