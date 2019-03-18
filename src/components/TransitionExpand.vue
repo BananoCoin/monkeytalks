@@ -79,7 +79,7 @@ export default Vue.extend({
 <style>
 .expand-enter-active,
 .expand-leave-active {
-  transition: height 1s ease-in-out;
+  transition: height 0.35s cubic-bezier(0.15,0.5,0.5,1);
   overflow: hidden;
 }
 

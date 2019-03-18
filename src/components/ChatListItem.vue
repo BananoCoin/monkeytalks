@@ -34,6 +34,7 @@
 import Vue from "vue";
 import Popper from "vue-popperjs";
 import "vue-popperjs/dist/vue-popper.css";
+
 export default Vue.extend({
   name: "ChatListItem",
   props: {

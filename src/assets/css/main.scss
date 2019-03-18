@@ -151,29 +151,6 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
     box-shadow: 0 0 0 4px rgba($green, 0.3);
 }
 
-/** Transitions **/
-
-* {
-  will-change: height;
-  transform: translateZ(0);
-  backface-visibility: hidden;
-  perspective: 1000px;
-}
-
-.expand-enter-active,
-.expand-leave-active {
-  transition: all 0.35s cubic-bezier(0.15,0.5,0.5,1);
-  overflow: hidden;
-}
-
-.expand-enter,
-.expand-leave-to {
-  height: 0;
-  opacity: 0;
-}
-
-/** End Transitions **/
-
 .border-none{
     border: none;
 }

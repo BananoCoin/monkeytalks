@@ -48,7 +48,7 @@ module.exports = {
             {
                 test: /\.s?[ac]ss$/,
                 use: [
-                    MiniCssExtractPlugin.loader,
+                    { loader: 'vue-style-loader', options: { sourceMap: true } },
                     { loader: 'css-loader', options: { sourceMap: true } },
                     { loader: 'sass-loader', options: { sourceMap: true } }
                 ],
@@ -82,7 +82,6 @@ module.exports = {
         ],
     },
     plugins: [
-        new MiniCssExtractPlugin({filename: '[name].[hash].css'}),
         new webpack.ProvidePlugin({$: 'jquery', jQuery: 'jquery'}),
         new webpack.ProvidePlugin({io: 'socket.io-client'}),
         new ManifestRevisionPlugin(path.join(__dirname, 'app', 'webpack', 'manifest.json'), {

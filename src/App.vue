@@ -113,3 +113,20 @@ export default Vue.extend({
 });
 
 </script>
+
+<style lang="scss">
+  @import './assets/css/atten_font.css';
+  @import './assets/css/main.scss';
+</style>
+
+<style>
+  .expand-enter-active,
+  .expand-leave-active {
+    transition-property: opacity, height;
+  }
+
+  .expand-enter,
+  .expand-leave-to {
+    opacity: 0;
+  }
+</style>
