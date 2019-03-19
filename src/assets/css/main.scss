@@ -270,3 +270,58 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 .absolute {
     position: absolute;
 }
+
+#amountQr > canvas {
+    width: 100%;
+    margin-top: 57%;
+}
+.w-49{
+    width: 42.5%;
+}
+
+//  MEDIA QUERIES
+//––––––––––––––––––––––––––––––––––––––––––––––––––
+
+// A map of breakpoints.
+$breakpoints: (
+  xs: 576px,
+  sm: 768px,
+  md: 992px,
+  lg: 1200px
+);
+
+
+//
+//  RESPOND ABOVE
+//––––––––––––––––––––––––––––––––––––––––––––––––––
+
+// @include respond-above(sm) {}
+@mixin respond-above($breakpoint) {
+
+  // If the breakpoint exists in the map.
+  @if map-has-key($breakpoints, $breakpoint) {
+
+    // Get the breakpoint value.
+    $breakpoint-value: map-get($breakpoints, $breakpoint);
+
+    // Write the media query.
+    @media (min-width: $breakpoint-value) {
+      @content;
+    }
+  
+  // If the breakpoint doesn't exist in the map.
+  } @else {
+
+    // Log a warning.
+    @warn 'Invalid breakpoint: #{$breakpoint}.';
+  }
+}
+
+@include respond-above(sm){
+    #amountQr > canvas {
+        margin-top: 58%;
+    }
+    .w-49{
+        width: 43%;
+    }
+}
