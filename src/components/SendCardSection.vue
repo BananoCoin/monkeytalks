@@ -4,7 +4,7 @@
       <div class="container bg-secondary py-5 rounded-1 col-12 col-md-10">
         <div class="row align-items-center d-flex justify-content-around">
           <div class="col-12 col-md-1">
-               <qriously value="Hello World!" :size="200" />
+               <qriously value="Hello World!" id="amountQr" />
           </div>
           <div class="col-12 col-md-5">
                <h4 class="text-center text-md-left text-light font-weight-light">Your Message:</h4>
@@ -29,3 +29,9 @@ export default Vue.extend({
   name: "SendCardSection"
 });
 </script>
+
+<style>
+  #amountQr > canvas {
+    width: 100%;
+  }
+</style>
