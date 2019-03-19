@@ -57,6 +57,8 @@
     "vue-loader": "^15.7.0",
     "vue-popperjs": "^2.0.3",
     "vue-pose": "^0.5.0",
+    "vue-qrcode-component": "^2.1.1",
+    "vue-qriously": "^1.1.1",
     "vue-router": "^3.0.2",
     "vue-socket.io": "^3.0.7",
     "vue-socket.io-extended": "^3.2.1",
