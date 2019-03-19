@@ -14,3 +14,9 @@ class AppConfig(object):
     # Put the db file in project root
     DB_PATH = os.path.join(PROJECT_ROOT, DB_NAME)
     DATABASE = os.environ.get('DATABASE', 'sqlite:///{0}'.format(DB_PATH))
+    # Node Info
+    NODE_URL = '[::1]'
+    NODE_IP = 7072
+    # Our account info
+    MONKEYTALKS_ACCOUNT='ban_123456'
+    MONKEYTALKS_FEE=1000000000000000000000000000000 # 10 BANANO
