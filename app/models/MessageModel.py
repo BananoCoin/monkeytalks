@@ -5,6 +5,7 @@ import peewee
 from app.database import db
 
 class Message(db.Model):
+    address = peewee.CharField()
     message_in_raw = peewee.CharField()
     created_by = peewee.CharField()
     created_at = peewee.DateTimeField(default=datetime.datetime.utcnow())

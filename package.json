@@ -54,6 +54,7 @@
     "uglifyjs-webpack-plugin": "^1.2.5",
     "utf-8-validate": "^4.0.2",
     "vue": "^2.6.8",
+    "vue-linkify": "^1.0.1",
     "vue-loader": "^15.7.0",
     "vue-popperjs": "^2.0.3",
     "vue-pose": "^0.5.0",
