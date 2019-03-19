@@ -72,9 +72,6 @@ import ChatListItem from "./ChatListItem.vue";
 import FaucetSection from "./FaucetSection.vue";
 import TransitionExpand from "./TransitionExpand.vue";
 import SendCardSection from "./SendCardSection.vue";
-import VeeValidate from "vee-validate";
-
-Vue.use(VeeValidate)
 
 // Dummy data
 const messages = [
