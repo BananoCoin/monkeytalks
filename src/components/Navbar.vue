@@ -7,7 +7,7 @@
             <img class="grow-3 d-none d-md-block" src="../assets/img/monkeytalks-logo.svg">
             <img class="grow-3 d-block d-md-none" src="../assets/img/monkeytalks-logo-narrow.svg">
           </a>
-          <button @click = "toggleFaucet" v-bind:class="[$store.state.showHide ? ['btn-secondary', 'text-light', 'glow-purple'] : ['btn-primary', 'text-dark', 'glow-green'] ]"
+          <button @click = "toggleFaucet" v-bind:class="[$store.state.showHideFaucet ? ['btn-secondary', 'text-light', 'glow-purple'] : ['btn-primary', 'text-dark', 'glow-green'] ]"
             class="btn btn-lg px-4 px-md-5"
           >Faucet</button>
         </div>
@@ -22,7 +22,7 @@ import Vue from "vue";
 export default Vue.extend({
   methods: {
     toggleFaucet(){
-      this.$store.state.showHide = !this.$store.state.showHide;
+      this.$store.state.showHideFaucet = !this.$store.state.showHideFaucet;
     },
   },
   name: "Navbar",

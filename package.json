@@ -59,6 +59,7 @@
     "vue-pose": "^0.5.0",
     "vue-socket.io": "^3.0.7",
     "vue-socket.io-extended": "^3.2.1",
+    "vue-style-loader": "^4.1.2",
     "vue-template-compiler": "^2.6.8",
     "vue2-animate": "^2.1.0",
     "vuex": "^3.1.0",

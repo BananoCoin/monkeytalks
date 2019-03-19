@@ -5,19 +5,20 @@
     <!-- NAVBAR END -->
     <!-- FAUCET END -->
     <transition-expand>
-      <FaucetSection v-if="$store.state.showHide" />
+      <FaucetSection v-if="$store.state.showHideFaucet" />
     </transition-expand>
     <!-- FAUCET END -->
     <!-- ENTER MESSAGE SECTION -->
-    <div class="section py-4" id="enter-message-section">
-      <div class="container py-4 py-md-5">
+    <div class="section pt-4 pt-md-5 pb-4 px-1" id="enter-message-section">
+      <div class="container pt-4 pt-md-5">
         <div class="row align-items-center d-flex justify-content-around">
           <div class="col-12 col-md-10">
             <form>
               <div class="input-group">
                 <input
                   type="text"
-                  class="font-weight-bold textfield-primary form-control form-control-lg rounded-100 text-primary bg-transparent border-primary border-2 px-4 px-lg-5 col-12 col-md-9 mx-0 mx-md-2 ml-lg-4"
+                  class="font-weight-bold form-control form-control-lg rounded-100 bg-transparent border-2 px-4 px-lg-5 col-12 col-md-9 mx-0 mx-md-2"
+                  v-bind:class="[$store.state.showHideSendCard ? ['textfield-secondary', 'border-secondary', 'text-secondary'] : ['textfield-primary', 'border-primary', 'text-primary'] ]"
                   id="messageInput"
                   placeholder="Write a message"
                   ref="messageInputValue"
@@ -25,8 +26,9 @@
                 <span class="input-group-btn col-12 col-md-3 mt-3 mt-md-0 px-0 mx-0 mx-md-2">
                   <button
                     type="submit"
-                    class="btn btn-lg btn-primary text-dark btn-block mx-0 glow-green"
-                    @click="sendMessage"
+                    class="btn btn-lg btn-block mx-0"
+                    v-bind:class="[$store.state.showHideSendCard ? ['btn-secondary', 'text-light', 'glow-purple'] : ['btn-primary', 'text-dark', 'glow-green'] ]"
+                    @click="toggleSendCard"
                   >Send</button>
                 </span>
               </div>
@@ -36,8 +38,11 @@
       </div>
     </div>
     <!-- ENTER MESSAGE SECTION END -->
+    <transition-expand>
+      <SendCardSection v-if="$store.state.showHideSendCard" />
+    </transition-expand>
     <!-- CHAT SECTION -->
-    <div class="section" id="chat-section">
+    <div class="section my-4" id="chat-section">
       <div class="container">
         <div class="row align-items-center d-flex justify-content-between pr-3">
           <div class="col-12 col-md-10 col-lg-9 mx-auto">
@@ -56,6 +61,7 @@ import Navbar from "./components/Navbar.vue";
 import ChatListItem from "./components/ChatListItem.vue";
 import FaucetSection from "./components/FaucetSection.vue";
 import TransitionExpand from "./components/TransitionExpand.vue";
+import SendCardSection from "./components/SendCardSection.vue";
 
 // Dummy data
 const messages = [
@@ -97,13 +103,18 @@ export default Vue.extend({
         date: new Date().toString()
       });
       this.$refs.messageInputValue.value = "";
-    }
+    },
+    toggleSendCard(event){
+      event.preventDefault();
+      this.$store.state.showHideSendCard = !this.$store.state.showHideSendCard;
+    },
   },
   components: {
     Navbar,
     ChatListItem,
     FaucetSection,
-    TransitionExpand
+    TransitionExpand,
+    SendCardSection,
   },
   sockets: {
     connect: function() {

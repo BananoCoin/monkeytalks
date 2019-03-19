@@ -151,6 +151,29 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
     box-shadow: 0 0 0 4px rgba($green, 0.3);
 }
 
+.textfield-secondary::-webkit-input-placeholder {
+    /* WebKit, Blink, Edge */
+    color: rgba($color: $light-purple, $alpha: 0.5);
+}
+.textfield-secondary:-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    color: rgba($color: $light-purple, $alpha: 0.5);
+    opacity: 1;
+}
+.textfield-secondary::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    color: rgba($color: $light-purple, $alpha: 0.5);
+    opacity: 1;
+}
+.textfield-secondary:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: rgba($color: $light-purple, $alpha: 0.5);
+}
+
+.textfield-secondary:focus{
+    box-shadow: 0 0 0 4px rgba($light-purple, 0.3);
+}
+
 .border-none{
     border: none;
 }

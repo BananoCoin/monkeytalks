@@ -5,14 +5,19 @@ Vue.use(Vuex)
 
 export const store = new Vuex.Store({
      state: {
-          showHide : false
+          showHideFaucet : false,
+          showHideSendCard : false
      },
      mutations: {
-          change(state, showHide) {
-               state.showHide = showHide
+          changeFaucet(state, showHideFaucet) {
+               state.showHideFaucet = showHideFaucet
+          },
+          changeSendCard(state, showHideSendCard) {
+               state.showHideSendCard = showHideSendCard
           }
      },
      getters: {
-          showHide: state => state.showHide
+          showHideFaucet: state => state.showHideFaucet,
+          showHideSendCard: state => state.showHideSendCard
      }
 })
