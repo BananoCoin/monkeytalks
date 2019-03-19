@@ -49,7 +49,7 @@ module.exports = {
                 use: [
                     { loader: 'vue-style-loader', options: { sourceMap: true } },
                     { loader: 'css-loader', options: { sourceMap: true } },
-                    { loader: 'sass-loader', options: { sourceMap: true } }
+                    { loader: 'sass-loader', options: { sourceMap: true, precision:10 } }
                 ],
             },
             {
