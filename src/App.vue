@@ -41,7 +41,9 @@
       <div class="container">
         <div class="row align-items-center d-flex justify-content-between pr-3">
           <div class="col-12 col-md-10 col-lg-9 mx-auto">
-            <ChatListItem v-for="message in messages" :message="message" :key="message.content"/>
+            <transition-group name="list-item">
+              <ChatListItem v-for="message in messages" :message="message" :key="message.id"/>
+            </transition-group>
           </div>
         </div>
       </div>
@@ -60,22 +62,27 @@ import TransitionExpand from "./components/TransitionExpand.vue";
 // Dummy data
 const messages = [
   {
+    id: 5,
     content: "hi jungle",
     date: "3/16 02:02:02"
   },
   {
+    id: 4,
     content: "hola",
     date: "3/16 03:02:02"
   },
   {
+    id: 3,
     content: "bbedward 4 president",
     date: "3/16 04:02:02"
   },
   {
+    id: 2,
     content: "a message",
     date: "3/16 05:02:02"
   },
   {
+    id: 1,
     content: "banano to the moon",
     date: "3/16 06:02:02"
   }
@@ -93,6 +100,7 @@ export default Vue.extend({
     sendMessage(event) {
       event.preventDefault();
       messages.unshift({
+        id: messages[0].id + 1,
         content: this.$refs.messageInputValue.value,
         date: new Date().toString()
       });
@@ -120,6 +128,7 @@ export default Vue.extend({
 </style>
 
 <style>
+  /* faucet expand transition */
   .expand-enter-active,
   .expand-leave-active {
     transition-property: opacity, height;
@@ -128,5 +137,15 @@ export default Vue.extend({
   .expand-enter,
   .expand-leave-to {
     opacity: 0;
+  }
+
+  /* list item animation */
+  .list-item-enter-active, .list-item-leave-active {
+    transition: opacity 0.3s, transform 0.3s;
+    transform-origin: left center;
+  }
+  .list-item-enter, .list-item-leave-to {
+    opacity: 0;
+    transform: scale(0.5);
   }
 </style>
