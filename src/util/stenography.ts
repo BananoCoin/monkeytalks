@@ -14,14 +14,6 @@ export default class Stenography {
         return str.substr(0, index) + chr + str.substr(index + 1);
     }
 
-    static trimLeadingZerosSubstr(input : string) {
-        var xLastChr = input.length - 1, xChrIdx = 0;
-        while (input[xChrIdx] === "0" && xChrIdx < xLastChr) {
-            xChrIdx++;
-        }
-        return xChrIdx > 0 ? input.substr(xChrIdx) : input;
-    }
-
     static encodeMessage(input : string) {
         input = input.toUpperCase();
         var i = input.length;
@@ -35,12 +27,7 @@ export default class Stenography {
         while (i--) {
             encodedString = encodedString + Stenography.CHE(input.charAt(i));
         }
-        var i = input.length;
-        while (25 - i) {
-            encodedString = '00' + encodedString;
-            i++;
-        }
-        return Stenography.trimLeadingZerosSubstr(encodedString);
+        return encodedString;
     }
 
     //this will decode and display your message
