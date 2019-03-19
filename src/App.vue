@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+<<<<<<< HEAD
     <!-- NAVBAR -->
     <Navbar></Navbar>
     <!-- NAVBAR END -->
@@ -141,3 +142,8 @@ export default Vue.extend({
     opacity: 0;
   }
 </style>
+=======
+    <router-view/>
+  </div>
+</template>
+>>>>>>> 29ec5b8bca2b5a9134ae27698836d89eb5983483
