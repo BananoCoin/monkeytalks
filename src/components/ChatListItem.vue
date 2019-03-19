@@ -23,7 +23,7 @@
       class="col-7 col-md-8 col-lg-9 bg-secondary py-1 py-md-3 py-lg-4 speech-bubble mr-4 mr-md-5 grow-2 glow-purple"
     >
       <div class="row align-items-center align-middle d-flex justify-content-between py-2">
-        <h3 class="text-left text-light ml-4 font-weight-bold">{{ message.content }}</h3>
+        <h3 class="text-left text-light ml-4 font-weight-bold">{{ decodeMessage(message.content) }}</h3>
         <h5 class="text-left text-light mx-4 font-weight-light">{{ message.date }}</h5>
       </div>
     </div>
@@ -34,6 +34,7 @@
 import Vue from "vue";
 import Popper from "vue-popperjs";
 import "vue-popperjs/dist/vue-popper.css";
+import Stenography from "../util/stenography.ts";
 
 export default Vue.extend({
   name: "ChatListItem",
@@ -42,6 +43,11 @@ export default Vue.extend({
   },
   components: {
     popper: Popper
+  },
+  methods: {
+    decodeMessage(content) {
+      return Stenography.decodeMessage(content)
+    }
   }
 });
 </script>
