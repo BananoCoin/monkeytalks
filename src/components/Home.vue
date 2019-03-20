@@ -34,7 +34,8 @@
                     class="btn btn-lg btn-block mx-0"
                     @click = "toggleSendCard"
                     :disabled = "messageContent.length == 0"
-                    v-bind:class="[$store.state.showSendCard ? ['btn-secondary', 'text-light', 'glow-purple'] : ['btn-primary', 'text-dark', 'glow-green'] ]"
+                    v-bind:class = "[$store.state.showSendCard ? ['btn-secondary', 'text-light', 'glow-purple'] 
+                    : (messageContent.length == 0 ? ['btn-primary', 'text-dark'] : ['btn-primary', 'text-dark', 'glow-green', 'grow-3']) ]"
                   >{{$store.state.showSendCard ? "Close" : "Send"}}</button>
                 </span>
               </div>

@@ -25,7 +25,7 @@
               </div>
               <button
                 type="submit"
-                class="btn btn-lg btn-light btn-block mt-3 mx-auto col-12 col-md-8 col-lg-6 text-secondary glow-pink"
+                class="btn btn-lg btn-light btn-block mt-3 mx-auto col-12 col-md-8 col-lg-6 text-secondary glow-pink grow-3"
               >Send Me Some Banano</button>
             </form>
           </div>

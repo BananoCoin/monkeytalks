@@ -28,12 +28,12 @@
             </h4>
             <br>
             <button
-              class="btn btn-lg btn-light btn-block mt-3 mx-auto text-secondary glow-pink"
+              class="btn btn-lg btn-light btn-block mt-3 mx-auto text-secondary glow-pink grow-3"
             >Send with Kalium</button>
           </div>
           <!-- MOBILE END -->
 
-
+          <!-- MONKEYQR -->
           <div v-if="!$store.state.mobileDetect.mobile()" 
             class="col-10 col-md-6 col-lg-4 d-flex justify-content-center align-items-center mt-4 mt-md-0"
           >
@@ -42,26 +42,17 @@
             </div>
             <div class="position-absolute qrWidth">
               <qriously
-                value="ban_1yekta1xn94qdnbmmj1tqg76zk3apcfd31pjmuy6d879e3mr469a4o4sdhd4"
+                :value="getQrUri(messageContent)" 
                 :size="1024"
-                level="M"
+                level="H"
                 id="amountQr"
               />
             </div>
-          <div class="col-10 col-md-6 col-lg-4 d-flex justify-content-center align-items-center mt-5 mt-md-0">
-              <div class="w-100">
-                <img src="../assets/img/monkeyQR.svg">
-              </div>
-              <div class="position-absolute w-49">
-                <qriously :value="getQrUri(messageContent)" 
-                    :size="1024" 
-                    level="M" 
-                    id="amountQr"/>
-              </div>
-          </div>
         </div>
+        <!-- MONKEYQR END -->
       </div>
     </div>
+  </div>
   </div>
 </template>
 

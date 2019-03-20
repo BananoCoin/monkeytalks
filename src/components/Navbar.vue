@@ -9,7 +9,7 @@
           </a>
           <button @click = "toggleFaucet" 
             v-bind:class="[$store.state.showFaucet ? ['btn-secondary', 'text-light', 'glow-purple'] : ['btn-primary', 'text-dark', 'glow-green'] ]"
-            class="btn btn-lg px-4 px-md-5"
+            class="btn btn-lg px-4 px-md-5 grow-3"
           >{{$store.state.showFaucet ? "Close" : "Faucet"}}</button>
         </div>
       </div>
