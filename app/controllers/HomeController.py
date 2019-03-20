@@ -4,12 +4,16 @@ from flask import Blueprint, render_template, request, abort
 from app.extensions import socketio
 from app.util.rpc import RPC
 from app.models.MessageModel import Message
+from app.settings import AppConfig
 
 blueprint = Blueprint('home', __name__, static_folder='../static')
 
 @blueprint.route('/')
 def index():
-    return render_template('app.html')
+    return render_template('app.html',
+                            mt_account=AppConfig.MONKEYTALKS_ACCOUNT,
+                            fee=AppConfig.MONKEYTALKS_FEE,
+                            premium=AppConfig.MONKEYTALKS_PREMIUM_FEE)
 
 @socketio.on('connect', namespace='/mtchannel')
 def on_socket_connect():

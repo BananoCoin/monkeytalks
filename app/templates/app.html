@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 <head>
-      <meta charset="utf-8">
+  <meta charset="utf-8">
 
-  <title>{% block page_title %} 
-    {{ site_name }} - Provably Fair Dice Game for {{ currency_name }}
-    {% endblock %}
+  <title>MonkeyTalks
   </title>
 
   <link rel="icon" type="image/png" href="{{ asset_url_for('img/monkeytalks-logo.svg') }}"/>
 
   <!-- Mobile viewport optimized: h5bp.com/viewport -->
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta id="globalData" data-account="{{ mt_account }}" data-fee="{{ fee }}" data-premium="{{ premium }}" />
   {% block meta %}{% endblock %}
 
   {% block css %}{% endblock %}
