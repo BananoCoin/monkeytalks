@@ -10,7 +10,7 @@
             <br>
             <h4 class="text-center text-md-left text-light font-weight-light">
               Scan the QR code with
-              <span class="font-weight-extrabold h3 text-primary"> Kalium </span>and send<span class="font-weight-extrabold h3 text-primary"> {{ encodeMessage(messageContent) }} Banano</span> to publish the message.
+              <span class="font-weight-extrabold h3 text-primary"> Kalium </span>and send<span class="font-weight-extrabold h3 text-primary"> {{ computeWithFeeAsBanano(messageContent) }} Banano</span> to publish the message.
             </h4>
             <br>
           </div>
@@ -22,7 +22,7 @@
             <h2 class="text-center text-primary font-weight-extrabold">Hello World</h2>
             <br>
             <h4 class="text-center text-light font-weight-light">
-              Click the button below and send<span class="font-weight-extrabold h3 text-primary"> {{ encodeMessage(messageContent) }} Banano </span>with<span class="font-weight-extrabold h3 text-primary"> Kalium </span>to publish the message.
+              Click the button below and send<span class="font-weight-extrabold h3 text-primary"> {{ computeWithFeeAsBanano(messageContent) }} Banano </span>with<span class="font-weight-extrabold h3 text-primary"> Kalium </span>to publish the message.
             </h4>
             <br>
             <button
@@ -55,10 +55,11 @@
 </template>
 
 <script>
-import Vue from "vue";
-import posed from "vue-pose";
-import VueQriously from "vue-qriously";
-import Stenography from "../util/stenography.ts";
+import Vue from "vue"
+import posed from "vue-pose"
+import VueQriously from "vue-qriously"
+import Stenography from "../util/stenography.ts"
+import Conversions from "../util/conversions.ts"
 
 Vue.use(VueQriously);
 
@@ -68,11 +69,11 @@ export default Vue.extend({
     messageContent: ''
   },
   methods: {
-    encodeMessage(content) {
-      return Stenography.encodeMessage(content, this.$store.state.sikrit)
+    computeWithFeeAsBanano(content) {
+      return Conversions.rawToBanano(Conversions.computeWithFee(Stenography.encodeMessage(content, this.$store.state.sikrit), this.$store.state.fee))
     },
     getQrUri(content) {
-      return `ban:${this.$store.state.mtAccount}?amount=${Stenography.encodeMessage(content, this.$store.state.sikrit)}`
+      return `ban:${this.$store.state.mtAccount}?amount=${Conversions.computeWithFee(Stenography.encodeMessage(content, this.$store.state.sikrit), this.$store.state.fee)}`
     }
   }
 });
