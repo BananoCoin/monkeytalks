@@ -56,7 +56,7 @@ class Nanote {
     constructor(verbose=false) {
 
         this.charsets = gen_charsets();
-        this.minimum_raw = BigInt(100000000000000000000000000);    // 0.0001 Nano
+        this.minimum_raw = BigInt(0);
         this.charset_index_length = 3;
         this.verbose = verbose;
     }
@@ -278,7 +278,7 @@ class Nanote {
             return false;
         }
 
-        var nano = raw.padStart(31, '0');                   // Ensure leading zeros
+        var nano = raw.padStart(30, '0');                   // Ensure leading zeros
         nano = nano.slice(0, -29) + '.' + nano.slice(-29);  // Add decimal
         return this.decode(nano);
     }
