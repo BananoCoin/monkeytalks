@@ -118,6 +118,7 @@ export default Vue.extend({
     onMessageChanged(event) {
       // Replace characters not in the ascii range 32-96
       this.messageContent = this.messageContent.replace(/[^\x20-\x7A]+/g, "");
+      this.messageContent = this.messageContent.toLowerCase()
       Big.DP = 29
       if (Big(Stenography.encodeMessage(this.messageContent)).gt(Big(10).pow(29))) {
         this.messageContent = this.messageContent.slice(0, -1)
