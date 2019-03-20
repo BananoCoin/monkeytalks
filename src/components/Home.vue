@@ -21,7 +21,6 @@
                   id="messageInput"
                   @input="onMessageChanged"
                   v-model="messageContent"
-                  :maxlength="18"
                   placeholder="Write a message"
                   ref="messageInputValue"
                   v-bind:class="[$store.state.showSendCard ? ['textfield-secondary', 'text-secondary', 'border-secondary'] : ['textfield-primary', 'text-primary', 'border-primary'], 'text-lowercase']"
@@ -71,6 +70,8 @@ import ChatListItem from "./ChatListItem.vue";
 import FaucetSection from "./FaucetSection.vue";
 import TransitionExpand from "./TransitionExpand.vue";
 import SendCardSection from "./SendCardSection.vue";
+import Stenography from "../util/stenography.ts";
+import Big from 'big.js'
 
 // Dummy data
 const messages = [
@@ -112,6 +113,10 @@ export default Vue.extend({
     onMessageChanged(event) {
       // Replace characters not in the ascii range 32-96
       this.messageContent = this.messageContent.replace(/[^\x20-\x7A]+/g, "");
+      Big.DP = 29
+      if (Big(Stenography.encodeMessage(this.messageContent, this.$store.state.sikrit)).gt(Big(10).pow(29))) {
+        this.messageContent = this.messageContent.slice(0, -1)
+      }
     }
   },
   computed: {

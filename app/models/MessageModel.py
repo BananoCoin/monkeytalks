@@ -36,7 +36,7 @@ class Message(db.Model):
         message = Message(
             block_hash = block['hash'],
             address = block_contents['link_as_account'],
-            message_in_raw = str(int(block['amount']) - FeeModel.get_fee() if not premium else int(block['amount']) - FeeModel.get_premium_fee()),
+            message_in_raw = str(int(block['amount'])),
             created_at = datetime.datetime.utcnow(),
             premium = premium
         )
