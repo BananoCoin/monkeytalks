@@ -276,14 +276,6 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
     position: absolute;
 }
 
-#amountQr > canvas {
-    width: 100%;
-    margin-top: 56%;
-}
-.qrWidth{
-    width: 44.5%;
-}
-
 //  MEDIA QUERIES
 //––––––––––––––––––––––––––––––––––––––––––––––––––
 
@@ -322,12 +314,20 @@ $breakpoints: (
   }
 }
 
+#amountQr > canvas {
+    width: 100%;
+    margin-top: 55%;
+}
+.qrWidth{
+    width: 45.5%;
+}
+
 @include respond-above(sm){
     #amountQr > canvas {
-        margin-top: 57%;
+        margin-top: 56%;
     }
     .qrWidth{
-        width: 44%;
+        width: 45%;
     }
 }
 
@@ -337,5 +337,14 @@ $breakpoints: (
     }
     .qrWidth{
         width: 43%;
+    }
+}
+
+@include respond-above(lg){
+    #amountQr > canvas {
+        margin-top: 57%;
+    }
+    .qrWidth{
+        width: 44.5%;
     }
 }
