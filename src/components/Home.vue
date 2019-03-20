@@ -23,6 +23,7 @@
                   id="messageInput"
                   @input="onMessageChanged"
                   v-model="messageContent"
+                  :maxlength="18"
                   placeholder="Write a message"
                   ref="messageInputValue"
                   v-bind:class="[$store.state.showSendCard ? ['textfield-secondary', 'text-secondary', 'border-secondary'] : ['textfield-primary', 'text-primary', 'border-primary'], 'text-lowercase']"
@@ -32,6 +33,7 @@
                     type="submit"
                     class="btn btn-lg btn-block mx-0"
                     @click = "toggleSendCard"
+                    :disabled = "messageContent.length == 0"
                     v-bind:class="[$store.state.showSendCard ? ['btn-secondary', 'text-light', 'glow-purple'] : ['btn-primary', 'text-dark', 'glow-green'] ]"
                   >{{$store.state.showSendCard ? "Close" : "Send"}}</button>
                 </span>
@@ -45,7 +47,7 @@
 
     <!-- SEND CARD SECTION END -->
     <transition-expand>
-      <SendCardSection v-if = "$store.state.showSendCard" />
+      <SendCardSection v-if = "$store.state.showSendCard" :messageContent="messageContent"/>
     </transition-expand>
     <!-- SEND CARD SECTION END -->
 
@@ -126,7 +128,7 @@ export default Vue.extend({
     },
     onMessageChanged(event) {
       // Replace characters not in the ascii range 32-96
-      this.messageContent = this.messageContent.replace(/[^x20-x60]+/g, '')
+      this.messageContent = this.messageContent.replace(/[^\x20-\x7A]+/g, '')
     }
   },
   components: {

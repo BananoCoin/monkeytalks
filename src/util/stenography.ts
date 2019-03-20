@@ -15,6 +15,9 @@ export default class Stenography {
     }
 
     static encodeMessage(input : string) {
+        if (input.length == 0) {
+            return "0"
+        }
         input = input.toUpperCase();
         var i = input.length;
         while (i--) {
