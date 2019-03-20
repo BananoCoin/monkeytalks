@@ -139,6 +139,9 @@ export default Vue.extend({
   sockets: {
     connect: function() {
       console.log("connected to websocket");
+    },
+    new_message: function(data) {
+      console.log(data)
     }
   }
 });

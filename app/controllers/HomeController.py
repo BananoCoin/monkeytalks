@@ -1,8 +1,10 @@
 import logging
 import simplejson as json
 from flask import Blueprint, render_template, request, abort
+from flask_socketio import emit
 from app.extensions import socketio
 from app.util.rpc import RPC
+from app.util.dateutil import format_js_iso
 from app.models.MessageModel import Message
 from app.settings import AppConfig
 
@@ -41,5 +43,15 @@ def banano_callback():
         message = Message.save_block_as_message(block)
         if message is None:
             abort(500, 'server error processing message')
-        # Emit message to the UI - TODO
+        # Emit message to the UI
+        emit_message(message)
     return ('',204)
+
+def emit_message(message : Message):
+    """Emit a new chat message to the UI - Broadcasted to all clients"""
+    message_json = {
+        'id': message.id,
+        'content': message.message_in_raw,
+        'date': format_js_iso(message.created_at)
+    }
+    emit('new_message', json.dumps(message_json), namespace='/mtchannel', broadcast=True)
