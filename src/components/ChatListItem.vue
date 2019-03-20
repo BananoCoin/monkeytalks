@@ -49,7 +49,7 @@ export default Vue.extend({
   },
   methods: {
     decodeMessage(content) {
-      return Stenography.decodeMessage(content)
+      return Stenography.decodeMessage(content, this.$store.state.sikrit)
     }
   }
 });
