@@ -14,7 +14,7 @@
     <div class="section pt-4 pt-md-5 pb-4 px-1" id="enter-message-section">
       <div class="container pt-4 pt-md-5">
         <div class="row align-items-center d-flex justify-content-around">
-          <div class="col-12 col-md-10">
+          <div class="col-12 col-lg-10">
             <form>
               <div class="input-group">
                 <input
