@@ -9,7 +9,7 @@
             <br>
             <h4 class="text-center text-md-left text-light font-weight-light">
               Scan the QR code with
-              <span class="font-weight-extrabold h3 text-primary">Kalium</span> or click the button and send
+              <span class="font-weight-extrabold h3 text-primary">Kalium</span> or click the button below and send
               <span class="font-weight-extrabold h3 text-primary">10.12 Banano</span> to publish the message.
             </h4>
             <br>
