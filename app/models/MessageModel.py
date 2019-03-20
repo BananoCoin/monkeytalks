@@ -4,6 +4,7 @@ import peewee
 
 from app.database import db
 from app.settings import AppConfig
+from app.models.FeeModel import FeeModel
 
 class Message(db.Model):
     block_hash = peewee.CharField()
@@ -22,7 +23,7 @@ class Message(db.Model):
         """Ensure a block is to the appropriate destination, of the minimum amount, etc"""
         if block_contents['link_as_account'] != AppConfig.MONKEYTALKS_ACCOUNT:
             return (False, "Transaction wasnt sent to MonkeyTalks account")
-        elif int(block['amount']) - AppConfig.MONKEYTALKS_FEE <= 0:
+        elif int(block['amount']) - FeeModel.get_fee() <= 0:
             return (False, "Transaction amount wasn't enough to cover fee")
         return (True, "Valid")
 
@@ -30,12 +31,12 @@ class Message(db.Model):
     def save_block_as_message(block : dict):
         block_contents = json.loads(block['contents'])
         premium = False
-        if int(block['amount']) - (AppConfig.MONKEYTALKS_FEE + AppConfig.MONKEYTALKS_PREMIUM_FEE) > 0:
+        if int(block['amount']) - FeeModel.get_premium_fee() > 0:
             premium = True
         message = Message(
             block_hash = block['hash'],
             address = block_contents['link_as_account'],
-            message_in_raw = str(int(block['amount']) - AppConfig.MONKEYTALKS_FEE),
+            message_in_raw = str(int(block['amount']) - FeeModel.get_fee() if not premium else int(block['amount']) - FeeModel.get_premium_fee()),
             created_at = datetime.datetime.utcnow(),
             premium = premium
         )

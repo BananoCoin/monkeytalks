@@ -1,11 +1,12 @@
 import logging
 import simplejson as json
-from flask import Blueprint, render_template, request, abort
+from flask import Blueprint, render_template, request, abort, jsonify
 from flask_socketio import emit
 from app.extensions import socketio
 from app.util.rpc import RPC
 from app.util.dateutil import format_js_iso
 from app.models.MessageModel import Message
+from app.models.FeeModel import FeeModel
 from app.settings import AppConfig
 
 blueprint = Blueprint('home', __name__, static_folder='../static')
@@ -14,8 +15,8 @@ blueprint = Blueprint('home', __name__, static_folder='../static')
 def index():
     return render_template('app.html',
                             mt_account=AppConfig.MONKEYTALKS_ACCOUNT,
-                            fee=AppConfig.MONKEYTALKS_FEE,
-                            premium=AppConfig.MONKEYTALKS_PREMIUM_FEE)
+                            fee=FeeModel.get_fee(),
+                            premium=FeeModel.get_premium_fee())
 
 @socketio.on('connect', namespace='/mtchannel')
 def on_socket_connect():
@@ -46,6 +47,10 @@ def banano_callback():
         # Emit message to the UI
         emit_message(message)
     return ('',204)
+
+@blueprint.route('/fees', methods=['GET'])
+def get_fees():
+    return jsonify({'fee':str(FeeModel.get_fee()), 'premium':str(FeeModel.get_premium_fee())})
 
 def emit_message(message : Message):
     """Emit a new chat message to the UI - Broadcasted to all clients"""

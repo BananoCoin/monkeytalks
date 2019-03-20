@@ -60,6 +60,7 @@ import posed from "vue-pose"
 import VueQriously from "vue-qriously"
 import Stenography from "../util/stenography.ts"
 import Conversions from "../util/conversions.ts"
+import API from "../util/api.ts"
 
 Vue.use(VueQriously);
 
@@ -75,6 +76,14 @@ export default Vue.extend({
     getQrUri(content) {
       return `ban:${this.$store.state.mtAccount}?amount=${Conversions.computeWithFee(Stenography.encodeMessage(content, this.$store.state.sikrit), this.$store.state.fee)}`
     }
+  },
+  mounted: function() {
+    API.getFees().then((response) => {
+      if (response != null) {
+        this.$store.state.fee = response.fee
+        this.$store.state.premiumFee = response.premiumFee
+      }
+    });
   }
 });
 </script>
