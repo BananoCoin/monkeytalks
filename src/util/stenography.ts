@@ -22,6 +22,10 @@ export default class Stenography {
 
     //this will decode and display your message
     static decodeMessage(sum : string, sikrit: bigint) : string {
+        // Only consider last 29 digits
+        while (sum.length > 29) {
+            sum.substr(1)
+        }
         sum = (BigInt(sum) ^ sikrit).toString()
         return new Nanote().decode_raw(sum)
     }
