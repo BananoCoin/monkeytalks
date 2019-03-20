@@ -18,7 +18,7 @@ export default class Stenography {
         input = input.toUpperCase();
         var i = input.length;
         while (i--) {
-            if (Stenography.CHE(input.charAt(i)) > 99) {
+            if (Stenography.CHE(input.charAt(i)) > 96) {
                 input = Stenography.setCharAt(input, i, '_');
             }
         }

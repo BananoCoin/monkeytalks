@@ -32,3 +32,6 @@ pylint
 
 # Redis
 redis
+
+# HTTP requests
+requests

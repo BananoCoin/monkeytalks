@@ -21,9 +21,11 @@
                   type="text"
                   class="font-weight-bold form-control form-control-lg rounded-100 bg-transparent border-2 px-4 px-lg-5 col-12 col-md-9 mx-0 mx-md-2"
                   id="messageInput"
+                  @input="onMessageChanged"
+                  v-model="messageContent"
                   placeholder="Write a message"
                   ref="messageInputValue"
-                  v-bind:class="[$store.state.showSendCard ? ['textfield-secondary', 'text-secondary', 'border-secondary'] : ['textfield-primary', 'text-primary', 'border-primary'] ]"
+                  v-bind:class="[$store.state.showSendCard ? ['textfield-secondary', 'text-secondary', 'border-secondary'] : ['textfield-primary', 'text-primary', 'border-primary'], 'text-lowercase']"
                 >
                 <span class="input-group-btn col-12 col-md-3 mt-3 mt-md-0 px-0 mx-0 mx-md-2">
                   <button
@@ -104,8 +106,8 @@ export default Vue.extend({
   name: "Home",
   data() {
     return {
-      msg: "",
-      messages: messages
+      messages: messages,
+      messageContent: ''
     };
   },
   methods: {
@@ -122,6 +124,10 @@ export default Vue.extend({
       event.preventDefault();
       this.$store.state.showSendCard = !this.$store.state.showSendCard;
     },
+    onMessageChanged(event) {
+      // Replace characters not in the ascii range 32-96
+      this.messageContent = this.messageContent.replace(/[^x20-x60]+/g, '')
+    }
   },
   components: {
     Navbar,
