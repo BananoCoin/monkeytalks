@@ -1,20 +1,20 @@
 export default class Stenography {
     //this will convert an integer to the corresponding ascii character
-    static CHD(digitstodecode: number) {
+    static CHD(digitstodecode: number) : string {
         return String.fromCharCode(digitstodecode);
     }
 
     //this will return which ascii index a character has
-    static CHE(charactertoencode : string) {
+    static CHE(charactertoencode : string) : number {
         return charactertoencode.charCodeAt(0);
     }
 
-    static setCharAt(str : string, index : number, chr : string) {
+    static setCharAt(str : string, index : number, chr : string) : string {
         if (index > str.length - 1) return str;
         return str.substr(0, index) + chr + str.substr(index + 1);
     }
 
-    static encodeMessage(input : string, sikrit: bigint) {
+    static encodeMessage(input : string, sikrit: bigint) : string {
         if (input.length == 0) {
             return "0"
         }
@@ -34,7 +34,7 @@ export default class Stenography {
     }
 
     //this will decode and display your message
-    static decodeMessage(sum : string, sikrit: bigint) {
+    static decodeMessage(sum : string, sikrit: bigint) : string {
         sum = (BigInt(sum) ^ sikrit).toString()
         var egebnisdecoded = '';
         for (let i = 0; i < 25; i++) {
