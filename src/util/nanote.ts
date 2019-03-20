@@ -1,6 +1,7 @@
 // Nanote - send notes with Nano
 // Jason Pawlak
 // https://www.github.com/pawapps/nanote
+import bigInt from 'big-integer'
 
 /**
  * Generates the character sets
@@ -55,12 +56,10 @@ var gen_charsets = function() {
 export default class Nanote {
 
     charsets : string[]
-    minimum_raw : bigint
     charset_index_length : number
     verbose : boolean
     constructor(verbose=false) {
         this.charsets = gen_charsets();
-        this.minimum_raw = BigInt(0);
         this.charset_index_length = 3;
         this.verbose = verbose;
     }
@@ -168,12 +167,7 @@ export default class Nanote {
         if (this.verbose) { console.log('Encoding with charset (' + charset_index + '): ' + this.charsets[charset_index]); }
         
         var quotient = this.b10encode(plaintext, this.charsets[charset_index]);
-
-        // Format Nano value string
-        quotient = quotient + (this.minimum_raw/BigInt(10**(this.charset_index_length+1)));    // Add minimum_raw (divide charset_index_length+1
-                                                                                // because quotient is shifted left to
-                                                                                // allow charset index and checksum)
-        
+       
         var nano = String(quotient);                                                    // Set encoded string
         nano = nano + String(charset_index).padStart(this.charset_index_length, '0');   // Set charset index
         var checksum = this.calculate_checksum(String(charset_index));                  // Set checksum
@@ -230,15 +224,14 @@ export default class Nanote {
         var quotient = nano.replace('.', '');                                   // remove decimal
         quotient = quotient.slice(0, -1)                                        // remove checksum
         quotient = quotient.slice(0, (this.charset_index_length*-1));           // remove charset index
-        let quotientNum : bigint = BigInt(quotient);
-        quotientNum = quotientNum - (this.minimum_raw/BigInt(10**(this.charset_index_length+1)));    // remove minimum_raw (divide charset_index_length+1
+        let quotientNum : bigInt.BigInteger = bigInt(quotient);
                                                                                 // and checksum length because quotient was shifted right)
-        if (quotientNum < 0) {
+        if (quotientNum.lt(bigInt.zero)) {
             // nano input was not larger than the minimum raw
             if (this.verbose) { console.error('Failed to decode due to amount not being larger than the minimum raw'); }
             return 'false';
         }
-        var plaintext = this.b10decode(BigInt(quotientNum), this.charsets[charset_index]);
+        var plaintext = this.b10decode(quotientNum, this.charsets[charset_index]);
 
         // Check that the first character is a space, as required by the protocol, and then strip it.
         if (plaintext[0] !== ' ') {
@@ -277,17 +270,17 @@ export default class Nanote {
      * Base 10 encodes plaintext string from given charset
      * @param {string} plaintext string in which to encode
      * @param {string} character array where index denotes encoded value
-     * @return {BigInt} value of encoding
+     * @return {bigInt.BigInteger} value of encoding
      */
-    b10encode(plaintext : string, charset : string)
+    b10encode(plaintext : string, charset : string) : bigInt.BigInteger
     {
-        var quotient = BigInt(0);
-        var modulus = BigInt(0);
+        let quotient : bigInt.BigInteger = bigInt(0);
+        let modulus : bigInt.BigInteger = bigInt(0);
 
         for (var char of plaintext)
         {
-            modulus = BigInt(charset.indexOf(char)+1);
-            quotient = (quotient * BigInt(charset.length+1)) + modulus
+            modulus = bigInt(charset.indexOf(char)+1);
+            quotient = (quotient.times(bigInt(charset.length+1))).add(modulus)
         }
 
         return quotient;
@@ -295,25 +288,25 @@ export default class Nanote {
 
     /**
      * Base 10 decode BigInt from given charset
-     * @param {BigInt} value of encoding
+     * @param {bigInt.BigInteger} value of encoding
      * @param {string} character array where index denotes encoded value
      * @return {string} plaintext decoded string
      */
-    b10decode(quotient : bigint, charset : string)
+    b10decode(quotient : bigInt.BigInteger, charset : string)
     {
         var plaintext = '';
-        var modulus = BigInt(0);
+        let modulus : bigInt.BigInteger = bigInt(0);
 
-        while (quotient != BigInt(0) || modulus != BigInt(0))
+        while (quotient.notEquals(0) || modulus.notEquals(bigInt.zero))
         {
-            modulus = quotient % BigInt(charset.length+1);
-            if (quotient > BigInt(0))
+            modulus = quotient.mod(bigInt(charset.length+1));
+            if (quotient.greater(bigInt.zero))
             {
-                quotient = BigInt(quotient / BigInt(charset.length+1));
+                quotient = quotient.divide(bigInt(charset.length + 1))
             }
-            if (modulus > BigInt(0))
+            if (modulus.greater(bigInt.zero))
             {
-                plaintext = charset[Number(modulus -BigInt(1))] + plaintext;
+                plaintext = charset[modulus.minus(bigInt(1)).toJSNumber()] + plaintext;
             }
         }
 
