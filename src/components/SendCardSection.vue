@@ -5,12 +5,12 @@
         <div class="row align-items-center d-flex justify-content-center">
           <div class="col-12 col-md-5 px-4">
             <h4 class="text-center text-md-left text-light font-weight-light">Your Message:</h4>
-            <h2 class="text-center text-md-left text-primary font-weight-extrabold">Hello World</h2>
+            <h2 class="text-center text-md-left text-primary font-weight-extrabold">{{ messageContent }}</h2>
             <br>
             <h4 class="text-center text-md-left text-light font-weight-light">
               Scan the QR code with
               <span class="font-weight-extrabold h3 text-primary">Kalium</span> or click the button below and send
-              <span class="font-weight-extrabold h3 text-primary">10.12 Banano</span> to publish the message.
+              <span class="font-weight-extrabold h3 text-primary">{{ encodeMessage(messageContent) }} Banano</span> to publish the message.
             </h4>
             <br>
             <button
@@ -22,7 +22,7 @@
                 <img src="../assets/img/monkeyQR.svg">
               </div>
               <div class="position-absolute w-49">
-                <qriously value="ban_1yekta1xn94qdnbmmj1tqg76zk3apcfd31pjmuy6d879e3mr469a4o4sdhd4" 
+                <qriously :value="getQrUri(messageContent)" 
                     :size="1024" 
                     level="M" 
                     id="amountQr"/>
@@ -38,8 +38,22 @@
 import Vue from "vue";
 import posed from "vue-pose";
 import VueQriously from "vue-qriously";
+import Stenography from "../util/stenography.ts";
+
 Vue.use(VueQriously);
+
 export default Vue.extend({
-  name: "SendCardSection"
+  name: "SendCardSection",
+  props: {
+    messageContent: ''
+  },
+  methods: {
+    encodeMessage(content) {
+      return Stenography.encodeMessage(content)
+    },
+    getQrUri(content) {
+      return `ban:${this.$store.state.mtAccount}?amount=${Stenography.encodeMessage(content)}`
+    }
+  }
 });
 </script>
