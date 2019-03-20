@@ -10,7 +10,7 @@
             <br>
             <h4 class="text-center text-md-left text-light font-weight-light">
               Scan the QR code with
-              <span class="font-weight-extrabold h3 text-primary"> Kalium </span>and send<span class="font-weight-extrabold h3 text-primary"> 10.12 Banano</span> to publish the message.
+              <span class="font-weight-extrabold h3 text-primary"> Kalium </span>and send<span class="font-weight-extrabold h3 text-primary"> {{ encodeMessage(messageContent) }} Banano</span> to publish the message.
             </h4>
             <br>
           </div>
@@ -22,9 +22,7 @@
             <h2 class="text-center text-primary font-weight-extrabold">Hello World</h2>
             <br>
             <h4 class="text-center text-light font-weight-light">
-              Click the button below and send<span class="font-weight-extrabold h3 text-primary"> 10.12 Banano </span>with<span class="font-weight-extrabold h3 text-primary"> Kalium </span>to publish the message.
-              <span class="font-weight-extrabold h3 text-primary">Kalium</span> or click the button below and send
-              <span class="font-weight-extrabold h3 text-primary">{{ encodeMessage(messageContent) }} Banano</span> to publish the message.
+              Click the button below and send<span class="font-weight-extrabold h3 text-primary"> {{ encodeMessage(messageContent) }} Banano </span>with<span class="font-weight-extrabold h3 text-primary"> Kalium </span>to publish the message.
             </h4>
             <br>
             <button
