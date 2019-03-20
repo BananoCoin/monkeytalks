@@ -15,7 +15,7 @@ class Message(db.Model):
         db_table = 'messages'
     
     @staticmethod
-    def validate_block(block):
+    def validate_block(block : dict):
         block_contents = json.loads(block['contents'])
         """Ensure a block is to the appropriate destination, of the minimum amount, etc"""
         if block_contents['link_as_account'] != AppConfig.MONKEYTALKS_ACCOUNT:
@@ -25,7 +25,7 @@ class Message(db.Model):
         return (True, "Valid")
 
     @staticmethod
-    def save_block_as_message(block):
+    def save_block_as_message(block : dict):
         block_contents = json.loads(block['contents'])
         message = Message(
             block_hash = block['hash'],
