@@ -273,10 +273,10 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 
 #amountQr > canvas {
     width: 100%;
-    margin-top: 57%;
+    margin-top: 56%;
 }
-.w-49{
-    width: 42.5%;
+.qrWidth{
+    width: 44.5%;
 }
 
 //  MEDIA QUERIES
@@ -319,9 +319,18 @@ $breakpoints: (
 
 @include respond-above(sm){
     #amountQr > canvas {
+        margin-top: 57%;
+    }
+    .qrWidth{
+        width: 44%;
+    }
+}
+
+@include respond-above(md){
+    #amountQr > canvas {
         margin-top: 58%;
     }
-    .w-49{
+    .qrWidth{
         width: 43%;
     }
 }
