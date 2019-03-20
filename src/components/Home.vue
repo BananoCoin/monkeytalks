@@ -128,7 +128,7 @@ export default Vue.extend({
     },
     onMessageChanged(event) {
       // Replace characters not in the ascii range 32-96
-      this.messageContent = this.messageContent.replace(/[^\x20-x60]+/g, '')
+      this.messageContent = this.messageContent.replace(/[^\x20-\x7A]+/g, '')
     }
   },
   components: {
