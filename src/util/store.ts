@@ -5,6 +5,7 @@ Vue.use(Vuex)
 
 export const store = new Vuex.Store({
      state: {
+          sikrit : BigInt(895175784877),
           showFaucet : false,
           showSendCard : false,
           fee : null,
@@ -38,6 +39,7 @@ export const store = new Vuex.Store({
           showFee: state => state.fee,
           showPremiumFee: state => state.premiumFee,
           showMtAccount: state => state.mtAccount,
-          showMobileDetect: state => state.mobileDetect
+          showMobileDetect: state => state.mobileDetect,
+          sikrit: state => state.sikrit
      }
 })

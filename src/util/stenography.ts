@@ -14,7 +14,7 @@ export default class Stenography {
         return str.substr(0, index) + chr + str.substr(index + 1);
     }
 
-    static encodeMessage(input : string) {
+    static encodeMessage(input : string, sikrit: bigint) {
         if (input.length == 0) {
             return "0"
         }
@@ -30,11 +30,12 @@ export default class Stenography {
         while (i--) {
             encodedString = encodedString + Stenography.CHE(input.charAt(i));
         }
-        return encodedString;
+        return (BigInt(encodedString) ^ sikrit).toString()
     }
 
     //this will decode and display your message
-    static decodeMessage(sum : string) {
+    static decodeMessage(sum : string, sikrit: bigint) {
+        sum = (BigInt(sum) ^ sikrit).toString()
         var egebnisdecoded = '';
         for (let i = 0; i < 25; i++) {
             var letter = Stenography.CHD(parseInt(sum.substr(sum.length - 2)))

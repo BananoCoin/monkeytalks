@@ -69,10 +69,10 @@ export default Vue.extend({
   },
   methods: {
     encodeMessage(content) {
-      return Stenography.encodeMessage(content)
+      return Stenography.encodeMessage(content, this.$store.state.sikrit)
     },
     getQrUri(content) {
-      return `ban:${this.$store.state.mtAccount}?amount=${Stenography.encodeMessage(content)}`
+      return `ban:${this.$store.state.mtAccount}?amount=${Stenography.encodeMessage(content, this.$store.state.sikrit)}`
     }
   }
 });
