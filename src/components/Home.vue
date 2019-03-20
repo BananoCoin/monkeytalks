@@ -131,7 +131,7 @@ export default Vue.extend({
   computed: {
     inputDisabled: function() {
       return (
-        this.message.content.length == 0 && !this.$store.state.showSendCard
+        this.messageContent.length == 0 && !this.$store.state.showSendCard
       );
     }
   },
