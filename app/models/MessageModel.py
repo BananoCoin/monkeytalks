@@ -10,6 +10,8 @@ class Message(db.Model):
     address = peewee.CharField()
     message_in_raw = peewee.CharField()
     created_at = peewee.DateTimeField(default=datetime.datetime.utcnow())
+    premium = peewee.BooleanField(default=False)
+    hidden = peewee.BooleanField(default=False)
 
     class Meta:
         db_table = 'messages'
@@ -20,18 +22,22 @@ class Message(db.Model):
         """Ensure a block is to the appropriate destination, of the minimum amount, etc"""
         if block_contents['link_as_account'] != AppConfig.MONKEYTALKS_ACCOUNT:
             return (False, "Transaction wasnt sent to MonkeyTalks account")
-        elif int(block['amount']) - AppConfig.MONKEYTALKS_FEE < 0:
+        elif int(block['amount']) - AppConfig.MONKEYTALKS_FEE <= 0:
             return (False, "Transaction amount wasn't enough to cover fee")
         return (True, "Valid")
 
     @staticmethod
     def save_block_as_message(block : dict):
         block_contents = json.loads(block['contents'])
+        premium = False
+        if int(block['amount']) - (AppConfig.MONKEYTALKS_FEE + AppConfig.MONKEYTALKS_PREMIUM_FEE) > 0:
+            premium = True
         message = Message(
             block_hash = block['hash'],
             address = block_contents['link_as_account'],
             message_in_raw = str(int(block['amount']) - AppConfig.MONKEYTALKS_FEE),
-            created_at = datetime.datetime.utcnow()
+            created_at = datetime.datetime.utcnow(),
+            premium = premium
         )
         if message.save() > 0:
             return message
