@@ -53,13 +53,12 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
     margin: 0px;
 }
 
-.speech-bubble, .speech-bubble-two {
+.speech-bubble-purple, .speech-bubble-green, .speech-bubble-two {
 	position: relative;
-	background: $light-purple;
 	border-radius: 0.75em;
 }
 
-.speech-bubble:after {
+.speech-bubble-purple:after, .speech-bubble-green:after {
 	content: '';
 	position: absolute;
 	left: 2px;
@@ -67,11 +66,18 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 	width: 0;
 	height: 0;
 	border: 2rem solid transparent;
-	border-right-color: $light-purple;
 	border-left: 0;
 	border-bottom: 0;
 	margin-top: -1rem;
 	margin-left: -2rem;
+}
+
+.speech-bubble-purple:after{
+    border-right-color: $light-purple;
+}
+
+.speech-bubble-green:after{
+    border-right-color: $green;
 }
 
 .speech-bubble-two:after {

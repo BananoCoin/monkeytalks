@@ -20,11 +20,17 @@
       </popper>
     </div>
     <div
-      class="col-7 col-md-8 col-lg-9 bg-secondary py-1 py-md-3 py-lg-4 speech-bubble mr-4 mr-md-5 grow-2 glow-purple"
+      class="col-7 col-md-8 col-lg-9 py-1 py-md-3 py-lg-4 mr-4 mr-md-5"
+      v-bind:class="[message.premium ? ['bg-primary', 'grow-2', 'glow-green', 'speech-bubble-green'] : ['bg-secondary', 'grow-2', 'glow-purple', 'speech-bubble-purple'] ]"
     >
       <div class="row align-items-center align-middle d-flex justify-content-between py-2">
-        <h3 class="text-left text-light ml-4 font-weight-bold" v-linkified>{{ decodeMessage(message.content) }}</h3>
-        <h5 class="text-left text-light mx-4 font-weight-light">{{ message.date }}</h5>
+        <h3 class="text-left ml-4 font-weight-bold" 
+          v-linkified
+          v-bind:class="[message.premium ? ['text-dark'] : ['text-light'] ]"
+        >{{ decodeMessage(message.content) }}</h3>
+        <h5 class="text-left mx-4 font-weight-light"
+          v-bind:class="[message.premium ? ['text-dark'] : ['text-light'] ]"
+        >{{ message.date }}</h5>
       </div>
     </div>
   </div>
