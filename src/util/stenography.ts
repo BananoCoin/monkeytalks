@@ -1,4 +1,4 @@
-import Nanote from './nanote/nanote.js'
+import Nanote from './nanote'
 
 export default class Stenography {
     //this will convert an integer to the corresponding ascii character
