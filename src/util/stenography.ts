@@ -1,3 +1,5 @@
+import Nanote from './nanote/nanote.js'
+
 export default class Stenography {
     //this will convert an integer to the corresponding ascii character
     static CHD(digitstodecode: number) : string {
@@ -15,33 +17,12 @@ export default class Stenography {
     }
 
     static encodeMessage(input : string, sikrit: bigint) : string {
-        if (input.length == 0) {
-            return "0"
-        }
-        input = input.toUpperCase();
-        var i = input.length;
-        while (i--) {
-            if (Stenography.CHE(input.charAt(i)) > 96) {
-                input = Stenography.setCharAt(input, i, '_');
-            }
-        }
-        var encodedString = '';
-        var i = input.length;
-        while (i--) {
-            encodedString = encodedString + Stenography.CHE(input.charAt(i));
-        }
-        return (BigInt(encodedString) ^ sikrit).toString()
+        return (BigInt(new Nanote().encode_raw(input)) ^ sikrit).toString()
     }
 
     //this will decode and display your message
     static decodeMessage(sum : string, sikrit: bigint) : string {
         sum = (BigInt(sum) ^ sikrit).toString()
-        var egebnisdecoded = '';
-        for (let i = 0; i < 25; i++) {
-            var letter = Stenography.CHD(parseInt(sum.substr(sum.length - 2)))
-            egebnisdecoded = egebnisdecoded + letter;
-            sum = sum.substr(0, sum.length - 2);
-        }
-        return egebnisdecoded.toLowerCase();
+        return new Nanote().decode_raw(sum)
     }
 }

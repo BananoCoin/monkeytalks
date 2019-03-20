@@ -76,7 +76,7 @@ import SendCardSection from "./SendCardSection.vue";
 const messages = [
   {
     id: 5,
-    content: "697671034331642849",
+    content: "100000003085200062838322902",
     date: "3/16 02:02:02"
   },
   {
