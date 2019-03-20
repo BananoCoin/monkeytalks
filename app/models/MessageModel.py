@@ -10,9 +10,9 @@ class Message(db.Model):
     block_hash = peewee.CharField()
     address = peewee.CharField()
     message_in_raw = peewee.CharField()
-    created_at = peewee.DateTimeField(default=datetime.datetime.utcnow())
+    created_at = peewee.DateTimeField(default=datetime.datetime.utcnow(), index=True)
     premium = peewee.BooleanField(default=False)
-    hidden = peewee.BooleanField(default=False)
+    hidden = peewee.BooleanField(default=False, index=True)
 
     class Meta:
         db_table = 'messages'
