@@ -72,11 +72,11 @@ export default Vue.extend({
   },
   methods: {
     computeWithFeeAsBanano(content) {
-      console.log(Conversions.computeWithFee(Stenography.encodeMessage(content, this.$store.state.sikrit), this.$store.state.fee))
-      return Conversions.rawToBanano(Conversions.computeWithFee(Stenography.encodeMessage(content, this.$store.state.sikrit), this.$store.state.fee))
+      console.log(Conversions.computeWithFee(Stenography.encodeMessage(content), this.$store.state.fee))
+      return Conversions.rawToBanano(Conversions.computeWithFee(Stenography.encodeMessage(content), this.$store.state.fee))
     },
     getQrUri(content) {
-      return `ban:${this.$store.state.mtAccount}?amount=${Conversions.computeWithFee(Stenography.encodeMessage(content, this.$store.state.sikrit), this.$store.state.fee)}`
+      return `ban:${this.$store.state.mtAccount}?amount=${Conversions.computeWithFee(Stenography.encodeMessage(content), this.$store.state.fee)}`
     }
   },
   mounted: function() {
