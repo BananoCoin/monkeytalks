@@ -3,13 +3,11 @@
     <!-- NAVBAR -->
     <Navbar></Navbar>
     <!-- NAVBAR END -->
-
     <!-- FAUCET END -->
     <transition-expand>
-      <FaucetSection v-if = "$store.state.showFaucet" />
+      <FaucetSection v-if="$store.state.showFaucet"/>
     </transition-expand>
     <!-- FAUCET END -->
-
     <!-- ENTER MESSAGE SECTION -->
     <div class="section pt-4 pt-md-5 pb-4 px-1" id="enter-message-section">
       <div class="container pt-4 pt-md-5">
@@ -33,8 +31,8 @@
                     type="submit"
                     class="btn btn-lg btn-block mx-0"
                     @click = "toggleSendCard"
-                    :disabled = "messageContent.length == 0"
-                    v-bind:class = "[$store.state.showSendCard ? ['btn-secondary', 'text-light', 'glow-purple', 'grow-3'] 
+                    :disabled = "inputDisabled"
+                    v-bind:class="[$store.state.showSendCard ? ['btn-secondary', 'text-light', 'glow-purple', 'grow-3'] 
                     : (messageContent.length == 0 ? ['btn-primary', 'text-dark'] : ['btn-primary', 'text-dark', 'glow-green', 'grow-3']) ]"
                   >{{$store.state.showSendCard ? "Close" : "Send"}}</button>
                 </span>
@@ -45,13 +43,11 @@
       </div>
     </div>
     <!-- ENTER MESSAGE SECTION END -->
-
     <!-- SEND CARD SECTION END -->
     <transition-expand>
-      <SendCardSection v-if = "$store.state.showSendCard" :messageContent="messageContent"/>
+      <SendCardSection v-if="$store.state.showSendCard" :messageContent="messageContent"/>
     </transition-expand>
     <!-- SEND CARD SECTION END -->
-
     <!-- CHAT SECTION -->
     <div class="section" id="chat-section">
       <div class="container mt-4">
@@ -110,7 +106,7 @@ export default Vue.extend({
   data() {
     return {
       messages: messages,
-      messageContent: ''
+      messageContent: ""
     };
   },
   methods: {
@@ -123,13 +119,20 @@ export default Vue.extend({
       });
       this.$refs.messageInputValue.value = "";
     },
-    toggleSendCard(event){
+    toggleSendCard(event) {
       event.preventDefault();
       this.$store.state.showSendCard = !this.$store.state.showSendCard;
     },
     onMessageChanged(event) {
       // Replace characters not in the ascii range 32-96
-      this.messageContent = this.messageContent.replace(/[^\x20-\x7A]+/g, '')
+      this.messageContent = this.messageContent.replace(/[^\x20-\x7A]+/g, "");
+    }
+  },
+  computed: {
+    inputDisabled: function() {
+      return (
+        this.message.content.length == 0 && !this.$store.state.showSendCard
+      );
     }
   },
   components: {
@@ -137,44 +140,45 @@ export default Vue.extend({
     ChatListItem,
     FaucetSection,
     TransitionExpand,
-    SendCardSection,
+    SendCardSection
   },
   sockets: {
     connect: function() {
       console.log("connected to websocket");
     },
     new_message: function(data) {
-      console.log(data)
+      console.log(data);
     }
-  },
+  }
 });
-
 </script>
 
 <style lang="scss">
-  @import '../assets/css/atten_font.css';
-  @import '../assets/css/main.scss';
+@import "../assets/css/atten_font.css";
+@import "../assets/css/main.scss";
 </style>
 
 <style>
-  /* faucet expand transition */
-  .expand-enter-active,
-  .expand-leave-active {
-    transition-property: opacity, height;
-  }
+/* faucet expand transition */
+.expand-enter-active,
+.expand-leave-active {
+  transition-property: opacity, height;
+}
 
-  .expand-enter,
-  .expand-leave-to {
-    opacity: 0;
-  }
+.expand-enter,
+.expand-leave-to {
+  opacity: 0;
+}
 
-  /* list item animation */
-  .list-item-enter-active, .list-item-leave-active {
-    transition: opacity 0.3s, transform 0.3s;
-    transform-origin: left center;
-  }
-  .list-item-enter, .list-item-leave-to {
-    opacity: 0;
-    transform: scale(0.5);
-  }
+/* list item animation */
+.list-item-enter-active,
+.list-item-leave-active {
+  transition: opacity 0.3s, transform 0.3s;
+  transform-origin: left center;
+}
+.list-item-enter,
+.list-item-leave-to {
+  opacity: 0;
+  transform: scale(0.5);
+}
 </style>
