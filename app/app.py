@@ -29,7 +29,6 @@ def register_extensions(app):
     scheduler.start()
     with app.app_context():
         scheduler.run_job('missingcheck')
-        scheduler.run_job('testmessagejob')
     return None
 
 def register_blueprints(app):

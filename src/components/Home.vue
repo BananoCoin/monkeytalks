@@ -13,21 +13,29 @@
       <div class="container pt-4 pt-md-5">
         <div class="row align-items-center d-flex justify-content-around">
           <div class="col-12 col-lg-10">
-            <div class="emojiPicker" v-show="showEmojiMenu">
-              <ul style="
-                  position: absolute;
-                  top: auto;
-                  bottom: 100%;
-                  background-color: white;
-                  margin: 0;
-                  left: 5em;
-                  width: 30%">
-                  <li>Emoji</li>
-                  <li>Emoji</li>
-                </ul>              
-            </div>
             <form>
               <div class="input-group">
+                <div class="emojiPicker" v-show="showEmojiMenu">
+                  <ul
+                    class="list-unstyled bg-primary rounded-1 emoji-menu position-absolute px-5 mx-4 mt-2"
+                  >
+                    <li class="my-4 h4 mx-3">
+                      <img class="emoji" src="../assets/img/bebe.png"> :beb
+                    </li>
+                    <li class="my-4 h4 mx-3">
+                      <img class="emoji" src="../assets/img/coolstorybro.png"> :csb
+                    </li>
+                    <li class="my-4 h4 mx-3">
+                      <img class="emoji" src="../assets/img/hng.svg"> :hng
+                    </li>
+                    <li class="my-4 h4 mx-3">
+                      <img class="emoji" src="../assets/img/raugh.png"> :rau
+                    </li>
+                    <li class="my-4 h4 mx-3">
+                      <img class="emoji" src="../assets/img/smug.svg"> :smg
+                    </li>
+                  </ul>
+                </div>
                 <input
                   type="text"
                   class="font-weight-bold form-control form-control-lg rounded-100 bg-transparent border-2 px-4 px-lg-5 col-12 col-md-9 mx-0 mx-md-2"
@@ -42,8 +50,8 @@
                   <button
                     type="submit"
                     class="btn btn-lg btn-block mx-0"
-                    @click = "toggleSendCard"
-                    :disabled = "inputDisabled"
+                    @click="toggleSendCard"
+                    :disabled="inputDisabled"
                     v-bind:class="[$store.state.showSendCard ? ['btn-secondary', 'text-light', 'glow-purple', 'grow-3'] 
                     : (messageContent.length == 0 ? ['btn-primary', 'text-dark'] : ['btn-primary', 'text-dark', 'glow-green', 'grow-3']) ]"
                   >{{$store.state.showSendCard ? "Close" : "Send"}}</button>
@@ -80,13 +88,13 @@
 <script>
 import Vue from "vue";
 import Navbar from "./Navbar.vue";
-import ChatListItem from "./ChatListItem.vue"
-import FaucetSection from "./FaucetSection.vue"
-import TransitionExpand from "./TransitionExpand.vue"
-import SendCardSection from "./SendCardSection.vue"
-import Stenography from "../util/stenography.ts"
-import API from "../util/api.ts"
-import Big from 'big.js'
+import ChatListItem from "./ChatListItem.vue";
+import FaucetSection from "./FaucetSection.vue";
+import TransitionExpand from "./TransitionExpand.vue";
+import SendCardSection from "./SendCardSection.vue";
+import Stenography from "../util/stenography.ts";
+import API from "../util/api.ts";
+import Big from "big.js";
 
 export default Vue.extend({
   name: "Home",
@@ -112,25 +120,30 @@ export default Vue.extend({
       this.$store.state.showSendCard = !this.$store.state.showSendCard;
     },
     onMessageChanged(event) {
-      if (this.$refs.messageInputValue.selectionStart > 0 && this.messageContent.charAt(this.$refs.messageInputValue.selectionStart - 1) == ':') {
-        this.showEmojiMenu = true
+      if (
+        this.$refs.messageInputValue.selectionStart > 0 &&
+        this.messageContent.charAt(
+          this.$refs.messageInputValue.selectionStart - 1
+        ) == ":"
+      ) {
+        this.showEmojiMenu = true;
       } else {
-        this.showEmojiMenu = false
+        this.showEmojiMenu = false;
       }
       // Replace characters not in the ascii range 32-96
       this.messageContent = this.messageContent.replace(/[^\x20-\x7A]+/g, "");
-      this.messageContent = this.messageContent.toLowerCase()
-      Big.DP = 29
-      while (Big(Stenography.encodeMessage(this.messageContent)).gt(Big(10).pow(29))) {
-        this.messageContent = this.messageContent.slice(0, -1)
+      this.messageContent = this.messageContent.toLowerCase();
+      Big.DP = 29;
+      while (
+        Big(Stenography.encodeMessage(this.messageContent)).gt(Big(10).pow(29))
+      ) {
+        this.messageContent = this.messageContent.slice(0, -1);
       }
     }
   },
   computed: {
     inputDisabled: function() {
-      return (
-        this.messageContent.length == 0 && !this.$store.state.showSendCard
-      );
+      return this.messageContent.length == 0 && !this.$store.state.showSendCard;
     }
   },
   components: {
@@ -145,17 +158,17 @@ export default Vue.extend({
       console.log("connected to websocket");
     },
     new_message: function(data) {
-      let message = JSON.parse(data)
-      this.messages.unshift(message)
+      let message = JSON.parse(data);
+      this.messages.unshift(message);
     }
   },
   mounted: function() {
-    API.getMessages().then((response) => {
+    API.getMessages().then(response => {
       if (response != null) {
-        this.messages = []
+        this.messages = [];
         response.forEach(element => {
           if (Stenography.decodeMessage(element.content) !== false) {
-            this.messages.push(element)
+            this.messages.push(element);
           }
         });
       }
