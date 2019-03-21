@@ -1,5 +1,5 @@
 <template>
-  <div class="section px-3 mt-1 mb-5" id="sendCard-section">
+  <div class="section px-3" id="sendCard-section">
     <div class="container px-0 px-md-4">
       <div class="container bg-secondary py-5 rounded-1 col-12 col-lg-10">
         <div class="row align-items-center d-flex justify-content-center">
@@ -72,7 +72,6 @@ export default Vue.extend({
   },
   methods: {
     computeWithFeeAsBanano(content) {
-      console.log(Conversions.computeWithFee(Stenography.encodeMessage(content), this.$store.state.fee))
       return Conversions.rawToBanano(Conversions.computeWithFee(Stenography.encodeMessage(content), this.$store.state.fee))
     },
     getQrUri(content) {

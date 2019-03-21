@@ -1,15 +1,15 @@
 <template>
   <div id="home-section">
     <!-- NAVBAR -->
-    <Navbar></Navbar>
+    <Navbar class="mb-1"></Navbar>
     <!-- NAVBAR END -->
     <!-- FAUCET END -->
     <transition-expand>
-      <FaucetSection v-if="$store.state.showFaucet"/>
+      <FaucetSection v-show="$store.state.showFaucet"/>
     </transition-expand>
     <!-- FAUCET END -->
     <!-- ENTER MESSAGE SECTION -->
-    <div class="section pt-4 pt-md-5 pb-4 px-1" id="enter-message-section">
+    <div class="section pt-4 pt-md-5 pb-4 px-1 my-1" id="enter-message-section">
       <div class="container pt-4 pt-md-5">
         <div class="row align-items-center d-flex justify-content-around">
           <div class="col-12 col-lg-10">
@@ -44,11 +44,11 @@
     <!-- ENTER MESSAGE SECTION END -->
     <!-- SEND CARD SECTION END -->
     <transition-expand>
-      <SendCardSection v-if="$store.state.showSendCard" :messageContent="messageContent"/>
+      <SendCardSection v-show="$store.state.showSendCard" :messageContent="messageContent"/>
     </transition-expand>
     <!-- SEND CARD SECTION END -->
     <!-- CHAT SECTION -->
-    <div class="section" id="chat-section">
+    <div class="section mt-5" id="chat-section">
       <div class="container mt-4">
         <div class="row align-items-center d-flex justify-content-between pr-3">
           <div class="col-12 col-md-10 col-lg-9 mx-auto">
