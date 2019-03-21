@@ -20,19 +20,19 @@
                     class="list-unstyled bg-primary rounded-1 emoji-menu position-absolute px-5 mx-4 mt-2"
                   >
                     <li class="my-4 h4 mx-3">
-                      <img class="emoji" src="../assets/img/bebe.png"> :beb
+                      <img class="emoji mr-3" src="../assets/img/bebe.png">:beb
                     </li>
                     <li class="my-4 h4 mx-3">
-                      <img class="emoji" src="../assets/img/coolstorybro.png"> :csb
+                      <img class="emoji mr-3" src="../assets/img/coolstorybro.png">:csb
                     </li>
                     <li class="my-4 h4 mx-3">
-                      <img class="emoji" src="../assets/img/hng.svg"> :hng
+                      <img class="emoji mr-3" src="../assets/img/hng.svg">:hng
                     </li>
                     <li class="my-4 h4 mx-3">
-                      <img class="emoji" src="../assets/img/raugh.png"> :rau
+                      <img class="emoji mr-3" src="../assets/img/raugh.png">:rau
                     </li>
                     <li class="my-4 h4 mx-3">
-                      <img class="emoji" src="../assets/img/smug.svg"> :smg
+                      <img class="emoji mr-3" src="../assets/img/smug.svg">:smg
                     </li>
                   </ul>
                 </div>
