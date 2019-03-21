@@ -20,7 +20,7 @@ export default Vue.extend({
           /* eslint-disable no-param-reassign */
           element.style.width = width;
           element.style.position = `absolute`;
-          element.style.visibility = `gone`;
+          element.style.visibility = `hidden`;
           element.style.height = `auto`;
           /* eslint-enable */
 
