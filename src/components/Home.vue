@@ -80,7 +80,8 @@ export default Vue.extend({
   data() {
     return {
       messages: null,
-      messageContent: ""
+      messageContent: "",
+      showEmojiMenu: false
     };
   },
   methods: {
@@ -98,6 +99,11 @@ export default Vue.extend({
       this.$store.state.showSendCard = !this.$store.state.showSendCard;
     },
     onMessageChanged(event) {
+      if (this.$refs.messageInputValue.selectionStart > 0 && this.messageContent.charAt(this.$refs.messageInputValue.selectionStart - 1) == ':') {
+        this.showEmojiMenu = true
+      } else {
+        this.showEmojiMenu = false
+      }
       // Replace characters not in the ascii range 32-96
       this.messageContent = this.messageContent.replace(/[^\x20-\x7A]+/g, "");
       this.messageContent = this.messageContent.toLowerCase()
