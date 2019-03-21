@@ -110,10 +110,10 @@ export default class Nanote {
      * @param {string} string of digits
      * @return {string} checksum value as string. false if error.
      */
-    calculate_checksum(digits : string) : string {
+    calculate_checksum(digits : string) : string | boolean {
         // Validate input
         if (!digits.match(/^\d+$/)) {
-            return 'false';
+            return false;
         }
         var sum = 0;
         for (var digit of digits) {
@@ -152,7 +152,7 @@ export default class Nanote {
      * @param {string} plaintext string to encode
      * @return {string} formatted string as Nano value. false if error.
      */
-    encode(plaintext : string) : string {
+    encode(plaintext : string) : string | boolean {
         // Prepend space. This space acts as a checksum for discerning nanote messages.
         // A space is the "least expensive" character
         plaintext = ' '+plaintext;
@@ -162,7 +162,7 @@ export default class Nanote {
         {
             // No charset found
             if (this.verbose) { console.error('Failed to encode due to no available charset'); }
-            return 'false';
+            return false;
         }
         if (this.verbose) { console.log('Encoding with charset (' + charset_index + '): ' + this.charsets[charset_index]); }
         
@@ -171,9 +171,9 @@ export default class Nanote {
         var nano = String(quotient);                                                    // Set encoded string
         nano = nano + String(charset_index).padStart(this.charset_index_length, '0');   // Set charset index
         var checksum = this.calculate_checksum(String(charset_index));                  // Set checksum
-        if (checksum === 'false') {
+        if (checksum === false) {
             if (this.verbose) { console.error('Failed to encode due to failed checksum calculation'); }
-            return 'false';
+            return false;
         }
         nano = nano + checksum;     // Set checksum
         nano = nano.padStart(30, '0');                      // Ensure leading zeros
@@ -187,12 +187,15 @@ export default class Nanote {
      * @param {string} plaintext string to encode
      * @return {string} formatted string as Nano raw value.  false if error
      */
-    encode_raw(plaintext : string) : string {
-        var nano = this.encode(plaintext);
-        if (nano === 'false') {
-            return 'false';
+    encode_raw(plaintext : string) : string | boolean {
+        let nano = this.encode(plaintext);
+        if (nano === false) {
+            return false;
         }
-        return nano.replace('.', '');
+        if (typeof nano === 'string') {
+            return nano.replace('.', '');
+        }
+        return false
     }
 
     /**
@@ -200,22 +203,22 @@ export default class Nanote {
      * @param {string} nano value as string
      * @return {string} plaintext decoded string. false if error.
      */
-    decode(nano : string) : string
+    decode(nano : string) : string | boolean
     {
         if (nano.match(/^\d+\.\d{29}/) == null) {
             if (this.verbose) { console.error('Failed to decode due to regex mismatch'); }
-            return 'false';
+            return false;
         }
         try {
             var checksum = nano.slice(-1,);
             var charset_index = Number(nano.slice((this.charset_index_length*-1)-1, -1));
         } catch(err) {
             if (this.verbose) { console.error('Failed to decode due to amount parsing exception'); }
-            return 'false';
+            return false;
         }
         if (this.validate_checksum(String(charset_index), checksum) === false) {
             if (this.verbose) { console.error('Failed to decode due to invalid checksum'); }
-            return 'false';
+            return false;
         }
 
         if (this.verbose) { console.log('Decoding with charset (' + charset_index + '): ' + this.charsets[charset_index]); }
@@ -229,14 +232,14 @@ export default class Nanote {
         if (quotientNum.lt(bigInt.zero)) {
             // nano input was not larger than the minimum raw
             if (this.verbose) { console.error('Failed to decode due to amount not being larger than the minimum raw'); }
-            return 'false';
+            return false;
         }
         var plaintext = this.b10decode(quotientNum, this.charsets[charset_index]);
 
         // Check that the first character is a space, as required by the protocol, and then strip it.
         if (plaintext[0] !== ' ') {
             if (this.verbose) { console.error('Failed to decode due to decoded string not beginning with a space character'); }
-            return 'false';
+            return false;
         }
         plaintext = plaintext.slice(1,);
 
@@ -248,17 +251,17 @@ export default class Nanote {
      * @param {string} nano raw value as string
      * @return {string} plaintext decoded string. false if error
      */
-    decode_raw(raw : string) : string
+    decode_raw(raw : string) : string | boolean
     {
         // Input validation
         if (typeof raw != 'string') {
             if (this.verbose) { console.error('Failed to decode due to non string input'); }
-            return 'false';
+            return false;
         }
         if (raw.length <= (this.charset_index_length + 1)) {
             // +1 for checksum
             if (this.verbose) { console.error('Failed to decode due to too short of string length'); }
-            return 'false';
+            return false;
         }
 
         var nano = raw.padStart(30, '0');                   // Ensure leading zeros

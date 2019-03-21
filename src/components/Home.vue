@@ -132,7 +132,12 @@ export default Vue.extend({
   mounted: function() {
     API.getMessages().then((response) => {
       if (response != null) {
-        this.messages = response
+        this.messages = []
+        response.forEach(element => {
+          if (Stenography.decodeMessage(element.content) !== false) {
+            this.messages.push(element)
+          }
+        });
       }
     });
   }
