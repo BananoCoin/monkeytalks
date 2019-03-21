@@ -15,27 +15,7 @@
           <div class="col-12 col-lg-10">
             <form>
               <div class="input-group">
-                <div class="emojiPicker" v-show="showEmojiMenu">
-                  <ul
-                    class="list-unstyled bg-primary rounded-1 emoji-menu position-absolute px-5 mx-4 mt-2"
-                  >
-                    <li class="my-4 h4 mx-3">
-                      <img class="emoji mr-3" src="../assets/img/bebe.png">:beb
-                    </li>
-                    <li class="my-4 h4 mx-3">
-                      <img class="emoji mr-3" src="../assets/img/coolstorybro.png">:csb
-                    </li>
-                    <li class="my-4 h4 mx-3">
-                      <img class="emoji mr-3" src="../assets/img/hng.svg">:hng
-                    </li>
-                    <li class="my-4 h4 mx-3">
-                      <img class="emoji mr-3" src="../assets/img/raugh.png">:rau
-                    </li>
-                    <li class="my-4 h4 mx-3">
-                      <img class="emoji mr-3" src="../assets/img/smug.svg">:smg
-                    </li>
-                  </ul>
-                </div>
+                <EmojiPicker v-show="showEmojiMenu"/>
                 <input
                   type="text"
                   class="font-weight-bold form-control form-control-lg rounded-100 bg-transparent border-2 px-4 px-lg-5 col-12 col-md-9 mx-0 mx-md-2"
@@ -91,6 +71,7 @@ import Navbar from "./Navbar.vue";
 import ChatListItem from "./ChatListItem.vue";
 import FaucetSection from "./FaucetSection.vue";
 import TransitionExpand from "./TransitionExpand.vue";
+import EmojiPicker from "./EmojiPicker.vue";
 import SendCardSection from "./SendCardSection.vue";
 import Stenography from "../util/stenography.ts";
 import API from "../util/api.ts";
@@ -151,7 +132,8 @@ export default Vue.extend({
     ChatListItem,
     FaucetSection,
     TransitionExpand,
-    SendCardSection
+    SendCardSection,
+    EmojiPicker
   },
   sockets: {
     connect: function() {
