@@ -35,3 +35,6 @@ redis
 
 # HTTP requests
 requests
+
+# Task scheduler
+flask-apscheduler

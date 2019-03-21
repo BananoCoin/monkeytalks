@@ -10,6 +10,8 @@ def check_missings():
     pass
 
 rd = redis.Redis()
+import random
+items = ['896856724645', '896854539429', '898212557420', '893918905817', '898279242968']
 def send_fake_messages():
     id = 10
     if rd.get('mttestid') is None:
@@ -19,7 +21,7 @@ def send_fake_messages():
         rd.set('mttestid', str(id))
     message_json = {
         'id': id,
-        'content': '3085200816947056507',
+        'content': random.choice(items),
         'date': format_js_iso(datetime.datetime.utcnow()),
         'premium': False if id % 2 == 0 else True
     }
