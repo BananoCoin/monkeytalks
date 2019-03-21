@@ -6,7 +6,7 @@ from app import commands
 from app.settings import AppConfig
 from app.controllers import HomeController
 from app.database import db
-from app.extensions import webpack, socketio, cors
+from app.extensions import webpack, socketio, cors, scheduler
 from werkzeug.contrib.fixers import ProxyFix
 
 def create_app(config_object=AppConfig):
@@ -25,6 +25,11 @@ def register_extensions(app):
     webpack.init_app(app)
     socketio.init_app(app, message_queue='redis://')
     db.init_app(app)
+    scheduler.init_app(app)
+    scheduler.start()
+    with app.app_context():
+        scheduler.run_job('missingcheck')
+        scheduler.run_job('testmessagejob')
     return None
 
 def register_blueprints(app):

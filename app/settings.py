@@ -21,3 +21,19 @@ class AppConfig(object):
     MONKEYTALKS_ACCOUNT='ban_123456'
     MONKEYTALKS_DEFAULT_FEE=1000000000000000000000000000000 # 10 BANANO
     MONKEYTALKS_DEFAULT_PREMIUM_FEE=1000000000000000000000000000000 # 10 BANANO for premium message
+    # Periodic Jobs
+    JOBS = [
+		{
+ 			'id': 'missingcheck',
+ 			'func': 'app.cron.CronJobs:check_missings',
+			'trigger': 'interval',
+			'minutes': 30
+		},
+		{
+ 			'id': 'testmessagejob',
+ 			'func': 'app.cron.CronJobs:send_fake_messages',
+			'trigger': 'interval',
+			'seconds': 30
+		},
+    ]
+    SCHEDULER_API_ENABLED = True

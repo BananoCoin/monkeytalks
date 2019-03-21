@@ -126,7 +126,8 @@ export default Vue.extend({
       console.log("connected to websocket");
     },
     new_message: function(data) {
-      console.log(data);
+      let message = JSON.parse(data)
+      this.messages.unshift(message)
     }
   },
   mounted: function() {
