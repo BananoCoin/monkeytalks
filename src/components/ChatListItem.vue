@@ -46,10 +46,18 @@ import Util from '../util/util.ts'
 
 // Emojis/Images
 // IMG Assets for replacing html
-import monkey from '../assets/img/placeholder-monkey.svg'
-let monkeyHtml = `<img src=${monkey} width=50 height=50 />`
+import hng from '../assets/img/hng.svg'
+import smug from '../assets/img/smug.svg'
+import bebe from '../assets/img/bebe.png'
+import raugh from '../assets/img/raugh.png'
+import coolstorybro from '../assets/img/coolstorybro.png'
+let hngHtml = `<img src=${hng} width=50 height=50 />`
+let smugHtml = `<img src=${smug} width=50 height=50 />`
+let bebeHtml = `<img src=${bebe} width=50 height=50 />`
+let raughHtml = `<img src=${raugh} width=50 height=50 />`
+let coolstorybroHtml = `<img src=${coolstorybro} width=50 height=50 />`
 
-let toReplace = {"hello": monkeyHtml}
+let toReplace = {":hng": hngHtml, ":smg": smugHtml, ":beb": bebeHtml, ":rau": raughHtml, ":csb": coolstorybroHtml, }
 
 Vue.directive('linkified', linkify)
 
