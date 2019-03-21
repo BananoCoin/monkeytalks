@@ -52,11 +52,23 @@ def banano_callback():
 def get_fees():
     return jsonify({'fee':str(FeeModel.get_fee()), 'premium':str(FeeModel.get_premium_fee())})
 
-def emit_message(message : Message):
-    """Emit a new chat message to the UI - Broadcasted to all clients"""
+@blueprint.route('/messages', methods=['GET'])
+def get_messages():
+    """Load initial messages"""
+    message_response = []
+    for m in Message.select().where(Message.hidden == False).order_by(Message.created_at.desc()).limit(100):
+        message_response.append(format_message(m))
+    return jsonify(message_response)
+
+def format_message(message : Message):
     message_json = {
         'id': message.id,
         'content': message.message_in_raw,
-        'date': format_js_iso(message.created_at)
+        'date': format_js_iso(message.created_at),
+        'premium': message.premium
     }
-    emit('new_message', json.dumps(message_json), namespace='/mtchannel', broadcast=True)
+    return message_json
+
+def emit_message(message : Message):
+    """Emit a new chat message to the UI - Broadcasted to all clients"""
+    emit('new_message', json.dumps(format_message(message)), namespace='/mtchannel', broadcast=True)

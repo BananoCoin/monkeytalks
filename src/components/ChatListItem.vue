@@ -30,18 +30,19 @@
         >{{ decodeMessage(message.content) }}</h3>
         <h5 class="text-left mx-4 font-weight-light"
           v-bind:class="[message.premium ? ['text-dark'] : ['text-light'] ]"
-        >{{ message.date }}</h5>
+        >{{ formatDate(message.date) }}</h5>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import Vue from "vue";
-import Popper from "vue-popperjs";
-import "vue-popperjs/dist/vue-popper.css";
-import Stenography from "../util/stenography.ts";
+import Vue from "vue"
+import Popper from "vue-popperjs"
+import "vue-popperjs/dist/vue-popper.css"
+import Stenography from "../util/stenography.ts"
 import linkify from 'vue-linkify'
+import Conversions from '../util/conversions.ts'
 
 Vue.directive('linkified', linkify)
 
@@ -56,6 +57,9 @@ export default Vue.extend({
   methods: {
     decodeMessage(content) {
       return Stenography.decodeMessage(content)
+    },
+    formatDate(dateStr) {
+      return Conversions.formatDateStr(dateStr)
     }
   }
 });

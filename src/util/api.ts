@@ -11,4 +11,13 @@ export default class API {
             return null;
         }
     }
+
+    static async getMessages() : Promise<any> {
+        try {
+            let messageData = await Axios(API_LOCATION + '/messages')
+            return messageData.data
+        } catch (e) {
+            return null;
+        }
+    }
 }

@@ -52,9 +52,10 @@
       <div class="container mt-4">
         <div class="row align-items-center d-flex justify-content-between pr-3">
           <div class="col-12 col-md-10 col-lg-9 mx-auto">
-            <transition-group name="list-item">
+            <transition-group name="list-item" v-if="messages">
               <ChatListItem v-for="message in messages" :message="message" :key="message.id"/>
             </transition-group>
+            <h1 v-else>Loading...</h1>
           </div>
         </div>
       </div>
@@ -66,38 +67,19 @@
 <script>
 import Vue from "vue";
 import Navbar from "./Navbar.vue";
-import ChatListItem from "./ChatListItem.vue";
-import FaucetSection from "./FaucetSection.vue";
-import TransitionExpand from "./TransitionExpand.vue";
-import SendCardSection from "./SendCardSection.vue";
-import Stenography from "../util/stenography.ts";
+import ChatListItem from "./ChatListItem.vue"
+import FaucetSection from "./FaucetSection.vue"
+import TransitionExpand from "./TransitionExpand.vue"
+import SendCardSection from "./SendCardSection.vue"
+import Stenography from "../util/stenography.ts"
+import API from "../util/api.ts"
 import Big from 'big.js'
-
-// Dummy data
-const messages = [
-  {
-    id: 5,
-    content: "3085200816947056507",
-    date: "3/16 02:02:02",
-    premium : true
-  },
-  {
-    id: 4,
-    content: "34602775138082315",
-    date: "3/16 03:02:02",
-  },
-  {
-    id: 3,
-    content: "3085200816947056507",
-    date: "3/16 02:02:02",
-  }
-];
 
 export default Vue.extend({
   name: "Home",
   data() {
     return {
-      messages: messages,
+      messages: null,
       messageContent: ""
     };
   },
@@ -146,6 +128,13 @@ export default Vue.extend({
     new_message: function(data) {
       console.log(data);
     }
+  },
+  mounted: function() {
+    API.getMessages().then((response) => {
+      if (response != null) {
+        this.messages = response
+      }
+    });
   }
 });
 </script>
