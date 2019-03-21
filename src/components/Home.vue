@@ -13,6 +13,19 @@
       <div class="container pt-4 pt-md-5">
         <div class="row align-items-center d-flex justify-content-around">
           <div class="col-12 col-lg-10">
+            <div class="emojiPicker" v-show="showEmojiMenu">
+              <ul style="
+                  position: absolute;
+                  top: auto;
+                  bottom: 100%;
+                  background-color: white;
+                  margin: 0;
+                  left: 5em;
+                  width: 30%">
+                  <li>Emoji</li>
+                  <li>Emoji</li>
+                </ul>              
+            </div>
             <form>
               <div class="input-group">
                 <input
