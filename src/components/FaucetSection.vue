@@ -18,14 +18,16 @@
               <div class="input-group">
                 <input
                   type="text"
-                  class="font-weight-bold textfield-light form-control form-control-lg rounded-100 text-light bg-transparent border-light border-2 mt-3 px-4 px-lg-5"
+                  :class="['font-weight-bold', 'textfield-light', 'form-control', 'form-control-lg', 'rounded-100', isValidAddress ? 'text-white' : 'text-light', 'bg-transparent', 'border-light', 'border-2', 'mt-3', 'px-4', 'px-lg-5']"
                   id="addressInput"
                   placeholder="ban_address"
+                  v-model="addressValue"
+                  @input="onAddressChanged"
                 >
               </div>
               <button
                 type="submit"
-                class="btn btn-lg btn-light btn-block mt-3 mx-auto col-12 col-md-8 col-lg-6 text-secondary glow-pink grow-3"
+                :class="['btn', 'btn-lg', isValidAddress ? ['btn-primary', 'glow-green'] : ['btn-light', 'glow-pink'], 'btn-block', 'mt-3', 'mx-auto', 'col-12', 'col-md-8', 'col-lg-6', 'text-secondary', 'grow-3']"
               >Send Me Some Banano</button>
             </form>
           </div>
@@ -36,9 +38,31 @@
 </template>
 
 <script>
-import Vue from "vue";
-import posed from 'vue-pose';
+import Vue from "vue"
+import Util from "../util/util.ts"
+
 export default Vue.extend({
   name: "FaucetSection",
+  data() {
+    return {
+      addressValue: '',
+      isValidAddress: false
+    }
+  },
+  methods: {
+    onAddressChanged(event) {
+      if (this.addressValue.length < 64) {
+        this.isValidAddress = false
+      } else {
+        let parsed = Util.validateAddress(this.addressValue)
+        if (parsed !== false) {
+          this.isValidAddress = true
+          this.addressValue = parsed
+        } else {
+          this.isValidAddress = false
+        }
+      }
+    }
+  }
 });
 </script>
