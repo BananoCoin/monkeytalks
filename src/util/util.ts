@@ -2,11 +2,10 @@ import Big from 'big.js'
 
 const BANANO_RAW = Big(10).pow(29)
 
-export default class Conversions {
+export default class Util {
     static rawToBanano(rawAmount : string) : string {
         Big.DP = 29
         let rawAsBig = Big(rawAmount)
-        console.log(rawAsBig.div(BANANO_RAW).toString())
         return rawAsBig.div(BANANO_RAW).toString()
     } 
 
@@ -27,4 +26,13 @@ export default class Conversions {
         retTime += hours + ':' + minutesStr + ' ' + ampm;
         return retTime;       
     }
+
+    static escapeHtml(unsafe : string) : string {
+        return unsafe
+             .replace(/&/g, "&amp;")
+             .replace(/</g, "&lt;")
+             .replace(/>/g, "&gt;")
+             .replace(/"/g, "&quot;")
+             .replace(/'/g, "&#039;");
+     }
 }

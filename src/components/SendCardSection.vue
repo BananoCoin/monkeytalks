@@ -60,7 +60,7 @@ import Vue from "vue"
 import posed from "vue-pose"
 import VueQriously from "vue-qriously"
 import Stenography from "../util/stenography.ts"
-import Conversions from "../util/conversions.ts"
+import Util from "../util/util.ts"
 import API from "../util/api.ts"
 
 Vue.use(VueQriously);
@@ -72,10 +72,10 @@ export default Vue.extend({
   },
   methods: {
     computeWithFeeAsBanano(content) {
-      return Conversions.rawToBanano(Conversions.computeWithFee(Stenography.encodeMessage(content), this.$store.state.fee))
+      return Util.rawToBanano(Util.computeWithFee(Stenography.encodeMessage(content), this.$store.state.fee))
     },
     getQrUri(content) {
-      return `ban:${this.$store.state.mtAccount}?amount=${Conversions.computeWithFee(Stenography.encodeMessage(content), this.$store.state.fee)}`
+      return `ban:${this.$store.state.mtAccount}?amount=${Util.computeWithFee(Stenography.encodeMessage(content), this.$store.state.fee)}`
     }
   },
   mounted: function() {

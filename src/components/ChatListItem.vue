@@ -27,7 +27,7 @@
         <h3 class="text-left ml-4 font-weight-bold" 
           v-linkified
           v-bind:class="[message.premium ? ['text-dark'] : ['text-light'] ]"
-        >{{ decodeMessage(message.content) }}</h3>
+          v-html="decodeMessage(message.content)"></h3>
         <h5 class="text-left mx-4 font-weight-light"
           v-bind:class="[message.premium ? ['text-dark'] : ['text-light'] ]"
         >{{ formatDate(message.date) }}</h5>
@@ -42,7 +42,14 @@ import Popper from "vue-popperjs"
 import "vue-popperjs/dist/vue-popper.css"
 import Stenography from "../util/stenography.ts"
 import linkify from 'vue-linkify'
-import Conversions from '../util/conversions.ts'
+import Util from '../util/util.ts'
+
+// Emojis/Images
+// IMG Assets for replacing html
+import monkey from '../assets/img/placeholder-monkey.svg'
+let monkeyHtml = `<img src=${monkey} width=50 height=50 />`
+
+let toReplace = {"hello": monkeyHtml}
 
 Vue.directive('linkified', linkify)
 
@@ -56,10 +63,16 @@ export default Vue.extend({
   },
   methods: {
     decodeMessage(content) {
-      return Stenography.decodeMessage(content)
+      let decodedMessage =  Stenography.decodeMessage(content)
+      // Process emojis/images
+      decodedMessage = Util.escapeHtml(decodedMessage)
+      Object.keys(toReplace).forEach(function(key) {
+        decodedMessage = decodedMessage.replace(key, toReplace[key])
+      })
+      return decodedMessage
     },
     formatDate(dateStr) {
-      return Conversions.formatDateStr(dateStr)
+      return Util.formatDateStr(dateStr)
     }
   }
 });
