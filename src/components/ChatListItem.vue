@@ -1,5 +1,5 @@
 <template>
-  <div class="row align-items-center d-flex justify-content-around my-2 my-md-3">
+  <div class="row align-items-center d-flex justify-content-around my-3 my-md-4 pr-3">
     <div class="col z-index-100">
       <popper
         :options="{
@@ -20,17 +20,17 @@
       </popper>
     </div>
     <div
-      class="col-7 col-md-8 col-lg-9 py-1 py-md-3 py-lg-4 mr-4 mr-md-5"
+      class="col-7 col-md-8 col-lg-9 py-2 py-md-3 py-lg-4 px-4 mr-3 mr-md-4 mr-lg-5"
       v-bind:class="[message.premium ? ['bg-primary', 'grow-2', 'glow-green', 'speech-bubble-green'] : ['bg-secondary', 'grow-2', 'glow-purple', 'speech-bubble-purple'] ]"
     >
       <div class="row align-items-center align-middle d-flex justify-content-between py-2">
-        <h3 class="text-left ml-4 font-weight-bold" 
+        <h3 class="col-12 text-left col-md-6 font-weight-bold" 
           v-linkified
           v-bind:class="[message.premium ? ['text-dark'] : ['text-light'] ]"
           v-html="decodeMessage(message.content)"></h3>
-        <h5 class="text-left mx-4 font-weight-light"
+        <h6 class="col-12 text-left mt-1 col-md-6 text-md-right mt-md-0 font-weight-light "
           v-bind:class="[message.premium ? ['text-dark'] : ['text-light'] ]"
-        >{{ formatDate(message.date) }}</h5>
+        >{{ formatDate(message.date) }}</h6>
       </div>
     </div>
   </div>
