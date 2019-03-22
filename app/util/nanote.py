@@ -48,6 +48,6 @@ class Nanote():
             int(message)
         except ValueError:
             return False
-        expected = int(message[:-1])
+        expected = int(message[-1:])
         charset_index = int(message[-4:-1])
         return cls.validate_checksum(charset_index, expected)
