@@ -134,11 +134,14 @@ export default Vue.extend({
         }
       }
     },
+    hideEmojiMenu() {
+      this.showEmojiMenu = false
+      this.emojiIndexStart = -1
+      this.emojiIndexEnd = -1
+      this.emojiSearchText = ''
+    },
     onMessageUnfocus(event) {
-        this.showEmojiMenu = false
-        this.emojiIndexStart = -1
-        this.emojiIndexEnd = -1
-        this.emojiSearchText = ''
+      setTimeout(this.hideEmojiMenu, 400);
     },
     onMessageChanged(event) {
       if (!this.showEmojiMenu &&
@@ -156,10 +159,7 @@ export default Vue.extend({
           if (this.messageContent.charAt(
               this.$refs.messageInputValue.selectionStart - 1) == " "
               || this.messageContent.length == 0) {
-            this.showEmojiMenu = false
-            this.emojiIndexStart = -1
-            this.emojiIndexEnd = -1
-            this.emojiSearchText = ''
+            this.hideEmojiMenu()
           } else {
             this.emojiIndexEnd = this.$refs.messageInputValue.selectionStart
             this.emojiSearchText = this.messageContent.substring(this.emojiIndexStart, this.emojiIndexEnd)
