@@ -53,10 +53,19 @@
       <div class="container mt-4">
         <div class="row align-items-center d-flex justify-content-between pr-3">
           <div class="col-12 col-md-10 col-lg-9 mx-auto">
-            <transition-group name="list-item" v-if="messages">
+            <transition-group name="list-item" v-if= "messages" >
               <ChatListItem v-for="message in messages" :message="message" :key="message.id"/>
             </transition-group>
-            <h1 v-else>Loading...</h1>
+            <div v-else>
+              <ChatListItemDummy/>
+              <ChatListItemDummy/>
+              <ChatListItemDummy/>
+              <ChatListItemDummy/>
+              <ChatListItemDummy/>
+              <ChatListItemDummy/>
+              <ChatListItemDummy/>
+              <ChatListItemDummy/>
+            </div>
           </div>
         </div>
       </div>
@@ -69,6 +78,7 @@
 import Vue from "vue";
 import Navbar from "./Navbar.vue";
 import ChatListItem from "./ChatListItem.vue";
+import ChatListItemDummy from "./ChatListItemDummy.vue";
 import FaucetSection from "./FaucetSection.vue";
 import TransitionExpand from "./TransitionExpand.vue";
 import EmojiPicker from "./EmojiPicker.vue";
@@ -130,6 +140,7 @@ export default Vue.extend({
   components: {
     Navbar,
     ChatListItem,
+    ChatListItemDummy,
     FaucetSection,
     TransitionExpand,
     SendCardSection,
