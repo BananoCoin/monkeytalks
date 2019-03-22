@@ -37,27 +37,12 @@
 </template>
 
 <script>
-import Vue from "vue"
+import Vue from 'vue';
 import Popper from "vue-popperjs"
 import "vue-popperjs/dist/vue-popper.css"
 import Stenography from "../util/stenography.ts"
 import linkify from 'vue-linkify'
 import Util from '../util/util.ts'
-
-// Emojis/Images
-// IMG Assets for replacing html
-import hng from '../assets/img/hng.svg'
-import smug from '../assets/img/smug.svg'
-import bebe from '../assets/img/bebe.png'
-import raugh from '../assets/img/raugh.png'
-import coolstorybro from '../assets/img/coolstorybro.png'
-let hngHtml = `<img src=${hng} width=50 height=50 />`
-let smugHtml = `<img src=${smug} width=50 height=50 />`
-let bebeHtml = `<img src=${bebe} width=50 height=50 />`
-let raughHtml = `<img src=${raugh} width=50 height=50 />`
-let coolstorybroHtml = `<img src=${coolstorybro} width=50 height=50 />`
-
-let toReplace = {":hng": hngHtml, ":smg": smugHtml, ":beb": bebeHtml, ":rau": raughHtml, ":csb": coolstorybroHtml, }
 
 Vue.directive('linkified', linkify)
 
@@ -72,10 +57,11 @@ export default Vue.extend({
   methods: {
     decodeMessage(content) {
       let decodedMessage =  Stenography.decodeMessage(content)
+      let emojiMap = this.$store.state.emojiMap
       // Process emojis/images
       decodedMessage = Util.escapeHtml(decodedMessage)
-      Object.keys(toReplace).forEach(function(key) {
-        decodedMessage = decodedMessage.replace(key, toReplace[key])
+      Object.keys(emojiMap).forEach(function(key) {
+        decodedMessage = decodedMessage.replace(key, `<img src=${emojiMap[key]} height="50" width="50" />`)
       })
       return decodedMessage
     },

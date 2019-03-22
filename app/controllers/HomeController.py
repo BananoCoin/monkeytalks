@@ -56,7 +56,7 @@ def get_fees():
 def get_messages():
     """Load initial messages"""
     message_response = []
-    for m in Message.select().where(Message.hidden == False).order_by(Message.created_at.desc()).limit(100):
+    for m in Message.select().where(Message.hidden == False).order_by(Message.id.desc()).limit(100):
         message_response.append(format_message(m))
     return jsonify(message_response)
 

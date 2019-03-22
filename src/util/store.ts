@@ -1,6 +1,20 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+/** Emojis  **/
+import hng from '../assets/img/hng.svg'
+import smug from '../assets/img/smug.svg'
+import bebe from '../assets/img/bebe.png'
+import raugh from '../assets/img/raugh.png'
+import coolstorybro from '../assets/img/coolstorybro.png'
+let hngHtml = `<img src=${hng} width=50 height=50 />`
+let smugHtml = `<img src=${smug} width=50 height=50 />`
+let bebeHtml = `<img src=${bebe} width=50 height=50 />`
+let raughHtml = `<img src=${raugh} width=50 height=50 />`
+let coolstorybroHtml = `<img src=${coolstorybro} width=50 height=50 />`
+let emojiMap = {":hng": hng, ":smg": smug, ":beb": bebe, ":rau": raugh, ":csb": coolstorybro}
+/** END Emojis */
+
 Vue.use(Vuex)
 
 export const store = new Vuex.Store({
@@ -10,7 +24,8 @@ export const store = new Vuex.Store({
           fee : null,
           premiumFee: null,
           mtAccount: null,
-          mobileDetect: null
+          mobileDetect: null,
+          emojiMap: emojiMap
      },
      mutations: {
           changeFaucet(state, showFaucet) {
@@ -38,6 +53,7 @@ export const store = new Vuex.Store({
           showFee: state => state.fee,
           showPremiumFee: state => state.premiumFee,
           showMtAccount: state => state.mtAccount,
-          showMobileDetect: state => state.mobileDetect
+          showMobileDetect: state => state.mobileDetect,
+          showEmojiMap: state => state.emojiMap
      }
 })
