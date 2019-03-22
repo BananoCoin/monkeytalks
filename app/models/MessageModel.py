@@ -5,6 +5,7 @@ import peewee
 from app.database import db
 from app.settings import AppConfig
 from app.models.FeeModel import FeeModel
+from app.util.nanote import Nanote
 
 class Message(db.Model):
     block_hash = peewee.CharField()
@@ -25,6 +26,8 @@ class Message(db.Model):
             return (False, "Transaction wasnt sent to MonkeyTalks account")
         elif int(block['amount']) - FeeModel.get_fee() <= 0:
             return (False, "Transaction amount wasn't enough to cover fee")
+        elif not Nanote.validate_message(block['amount']):
+            return (False, "Message has invalid checksum - can't be decoded")
         return (True, "Valid")
 
     @staticmethod
