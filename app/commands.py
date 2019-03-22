@@ -24,6 +24,8 @@ def testmessage():
         'content': random.choice(items),
         'date': format_js_iso(datetime.datetime.utcnow()),
         'premium': random.choice([False, True]),
-        'test': True
+        'test': True,
+        'count':1,
+        'address':'ban_3jb1fp4diu79wggp7e171jdpxp95auji4moste6gmc55pptwerfjqu48okse'
     }
     emit('new_message', json.dumps(message_json), namespace='/mtchannel', broadcast=True)
