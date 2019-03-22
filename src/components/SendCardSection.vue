@@ -6,7 +6,7 @@
           <!-- DESKTOP -->
           <div v-if="!$store.state.mobileDetect.mobile()" class="col-12 col-md-5 px-4">
             <h4 class="text-center text-md-left text-light font-weight-light">Your Message:</h4>
-            <h2 class="text-center text-md-left text-primary font-weight-extrabold">{{ messageContent }}</h2>
+            <h2 class="text-center text-md-left text-primary font-weight-extrabold" v-html="emojify(messageContent)" />
             <br>
             <h4 class="text-center text-md-left text-light font-weight-light">
               Scan the QR code with
@@ -76,6 +76,14 @@ export default Vue.extend({
     },
     getQrUri(content) {
       return `ban:${this.$store.state.mtAccount}?amount=${Util.computeWithFee(Stenography.encodeMessage(content), this.$store.state.fee)}`
+    },
+    emojify(content) {
+      let emojiMap = this.$store.state.emojiMap
+      // Process emojis/images
+      Object.keys(emojiMap).forEach(function(key) {
+        content = content.replace(key, `<img src=${emojiMap[key]} height="30" width="30" />`)
+      })
+      return content
     }
   },
   mounted: function() {

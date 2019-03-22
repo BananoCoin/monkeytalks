@@ -8,11 +8,8 @@
         }"
       >
         <div class="popper bg-secondary p-3 speech-bubble-two">
-          <h3 class="text-left text-primary font-weight-bold">Messages: 12</h3>
-          <p class="text-left text-light font-weight-light">ban_1yekta1xn94qdnbmmj
-            <br>1tqg76zk3apcfd31pjmuy6
-            <br>d879e3mr469a4o4sdhd4
-          </p>
+          <h3 class="text-left text-primary font-weight-bold">Messages: {{ message.count }}</h3>
+          <p class="text-left text-light font-weight-light" v-html="threeLineAddress(message.address)" />
         </div>
         <button slot="reference" class="btn-primary bg-transparent border-none rounded-100 px-0">
           <img class="w-100 grow" src="../assets/img/placeholder-monkey.svg">
@@ -67,6 +64,12 @@ export default Vue.extend({
     },
     formatDate(dateStr) {
       return Util.formatDateStr(dateStr)
+    },
+    threeLineAddress(address) {
+      if (address.length < 64) {
+        return address;
+      }
+      return `${address.substring(0, 22)}<br />${address.substring(22, 43)}<br />${address.substring(43, 64)}`
     }
   }
 });

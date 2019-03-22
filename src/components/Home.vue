@@ -203,6 +203,11 @@ export default Vue.extend({
       if (this.messages == null) {
         this.loadingMessages.unshift(message)
       } else {
+        this.messages.forEach((m) => {
+          if (m.address == message.address) {
+            m.count = message.count
+          }
+        })
         this.messages.unshift(message);
       }
     }
