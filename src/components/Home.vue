@@ -92,6 +92,7 @@ export default Vue.extend({
   data() {
     return {
       messages: null,
+      loadingMessages: [],
       messageContent: "",
       showEmojiMenu: false
     };
@@ -152,7 +153,14 @@ export default Vue.extend({
     },
     new_message: function(data) {
       let message = JSON.parse(data);
-      this.messages.unshift(message);
+      if (message.test && this.messages != null) {
+        message.id = this.messages[0].id + 1
+      }
+      if (this.messages == null) {
+        this.loadingMessages.unshift(message)
+      } else {
+        this.messages.unshift(message);
+      }
     }
   },
   mounted: function() {
@@ -163,7 +171,12 @@ export default Vue.extend({
           if (Stenography.decodeMessage(element.content) !== false) {
             this.messages.push(element);
           }
-        });
+        })
+        this.loadingMessages.forEach(element => {
+          if (Stenography.decodeMessage(element.content) !== false) {
+            this.messages.push(element)
+          }
+        })
       }
     });
   }
