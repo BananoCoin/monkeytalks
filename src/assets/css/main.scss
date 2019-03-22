@@ -296,9 +296,8 @@ $breakpoints: (
 }
 
 .opacity-animation {
-    opacity: 0.5;
     animation-name: opacity-keyframes;
-    animation-duration: 1s;
+    animation-duration: 1.2s;
     animation-iteration-count: infinite;
     animation-timing-function: ease-in-out;
 }
@@ -306,6 +305,20 @@ $breakpoints: (
 /* The animation code */
 @keyframes opacity-keyframes {
     0% {opacity: 0.2;}
-    50% {opacity: 0.8;}
+    50% {opacity: 0.7;}
     100% {opacity: 0.2;}
+}
+
+.opacity-animation-2{
+    animation-name: opacity-keyframes-2;
+    animation-duration: 1.2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+
+/* The animation code */
+@keyframes opacity-keyframes-2 {
+    0% {opacity: 0.6;}
+    50% {opacity: 1.0;}
+    100% {opacity: 0.6;}
 }
