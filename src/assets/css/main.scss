@@ -212,12 +212,15 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 }
 
 .glow-green{
-    @include box-shadow(0 0 0 rgba(green, 0));
+    -moz-box-shadow:    0 0 0rem rgba($green, 0);
+    -webkit-box-shadow: 0 0 0rem rgba($green, 0);
+    box-shadow:         0 0 0rem rgba($green, 0);
 }
 
 .glow-green:hover{
-    @include box-shadow(inset 0 0.1rem 0.1rem rgba(0, 0, 0, 0.075), 0 0 0 0.1rem rgba(169, 168, 165, 0.25) !important);
-        @include font-size(15px);
+    -moz-box-shadow:    0 0 0.8rem rgba($green, 0.8);
+    -webkit-box-shadow: 0 0 0.8rem rgba($green, 0.8);
+    box-shadow:         0 0 0.8rem rgba($green, 0.8);
 }
 
 .glow-purple{
