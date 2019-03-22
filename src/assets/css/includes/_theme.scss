@@ -1,0 +1,20 @@
+/*! Colors START */
+$green: #3DF291;
+$dark-purple: #2A1052;
+$light-purple: #643BA2; 
+$pink: #D1A4FF;
+/*! Colors END */
+
+/*! Color Variables START */
+$theme-colors: (
+  "primary": $green,
+  "secondary": $light-purple,
+  "info": $green,
+  "dark": $dark-purple,
+  "success": $green,
+  "light": $pink,
+  "danger": $green
+); /*! Color Variables END */
+
+/*! Fonts START */
+$font-family-sans-serif: "atten-round-new", sans-serif;

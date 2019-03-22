@@ -2,30 +2,11 @@
    App specific SCSS file.
    ========================================================================== */
 
-@import "includes/mixins";
-
-/*! Colors START */
-$green: #3DF291;
-$dark-purple: #2A1052;
-$light-purple: #643BA2; 
-$pink: #D1A4FF;
-/*! Colors END */
-
-/*! Color Variables START */
-$theme-colors: (
-  "primary": $green,
-  "secondary": $light-purple,
-  "info": $green,
-  "dark": $dark-purple,
-  "success": $green,
-  "light": $pink,
-  "danger": $green
-); /*! Color Variables END */
-
-/*! Fonts START */
-$font-family-sans-serif: "atten-round-new", sans-serif;
-
+@import "./includes/theme";
 @import "~bootstrap/scss/bootstrap";
+
+// Import mixins after bootstrap because bootstrap has some that conflict
+@import "./includes/mixins";
 
 @function asset-url($path) {
     @return url('~!file-loader!' + $path);
@@ -34,6 +15,7 @@ $font-family-sans-serif: "atten-round-new", sans-serif;
 body{
     background: $dark-purple;
 }
+
 /*! Buttons (Custom) START */
 .btn-lg{
     border-radius: 50rem;
@@ -133,7 +115,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 }
 
 .textfield-light:focus{
-    box-shadow: 0 0 0 4px rgba($pink, 0.3);
+    @include box-shadow(0 0 0 4px rgba($pink, 0.3));
 }
 
 .textfield-primary::-webkit-input-placeholder {
@@ -156,7 +138,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 }
 
 .textfield-primary:focus{
-    box-shadow: 0 0 0 4px rgba($green, 0.3);
+    @include box-shadow(0 0 0 4px rgba($green, 0.3));
 }
 
 .textfield-secondary::-webkit-input-placeholder {
@@ -179,7 +161,7 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 }
 
 .textfield-secondary:focus{
-    box-shadow: 0 0 0 4px rgba($light-purple, 0.3);
+    @include box-shadow(0 0 0 4px rgba($light-purple, 0.3));
 }
 
 .border-none{
@@ -199,52 +181,40 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
     @include transform(scale(1));
     @include transition(all 0.15s ease-out);
 }
-.grow-2:hover{
+.grow-2:hover {
     @include transform(scale(1.06));
 }
 
-.grow-3{
+.grow-3 {
     @include transform(scale(1));
     @include transition(all 0.15s ease-out);
 }
-.grow-3:hover{
+.grow-3:hover {
     @include transform(scale(1.06));
 }
 
-.glow-green{
-    -moz-box-shadow:    0 0 0rem rgba($green, 0);
-    -webkit-box-shadow: 0 0 0rem rgba($green, 0);
-    box-shadow:         0 0 0rem rgba($green, 0);
+.glow-green {
+    @include box-shadow(0 0 0rem rgba($green, 0));
 }
 
 .glow-green:hover{
-    -moz-box-shadow:    0 0 0.8rem rgba($green, 0.8);
-    -webkit-box-shadow: 0 0 0.8rem rgba($green, 0.8);
-    box-shadow:         0 0 0.8rem rgba($green, 0.8);
+    @include box-shadow(0 0 0.8rem rgba($green, 0.8));
 }
 
 .glow-purple{
-    -moz-box-shadow:    0 0 0rem rgba($light-purple, 0);
-    -webkit-box-shadow: 0 0 0rem rgba($light-purple, 0);
-    box-shadow:         0 0 0rem rgba($light-purple, 0);
+    @include box-shadow(0 0 0rem rgba($light-purple, 0));
 }
 
 .glow-purple:hover{
-    -moz-box-shadow:    0 0 0.8rem rgba($light-purple, 1);
-    -webkit-box-shadow: 0 0 0.8rem rgba($light-purple, 1);
-    box-shadow:         0 0 0.8rem rgba($light-purple, 1);
+    @include box-shadow(0 0 0.8rem rgba($light-purple, 1));
 }
 
 .glow-pink{
-    -moz-box-shadow:    0 0 0rem rgba($pink, 0);
-    -webkit-box-shadow: 0 0 0rem rgba($pink, 0);
-    box-shadow:         0 0 0rem rgba($pink, 0);
+    @include box-shadow(0 0 0rem rgba($pink, 0));
 }
 
 .glow-pink:hover{
-    -moz-box-shadow:    0 0 0.8rem rgba($pink, 0.8);
-    -webkit-box-shadow: 0 0 0.8rem rgba($pink, 0.8);
-    box-shadow:         0 0 0.8rem rgba($pink, 0.8);
+    @include box-shadow(0 0 0.8rem rgba($pink, 0.8))
 }
 
 .font-weight-extrabold{
@@ -273,33 +243,6 @@ $breakpoints: (
   md: 992px,
   lg: 1200px
 );
-
-
-//
-//  RESPOND ABOVE
-//––––––––––––––––––––––––––––––––––––––––––––––––––
-
-// @include respond-above(sm) {}
-@mixin respond-above($breakpoint) {
-
-  // If the breakpoint exists in the map.
-  @if map-has-key($breakpoints, $breakpoint) {
-
-    // Get the breakpoint value.
-    $breakpoint-value: map-get($breakpoints, $breakpoint);
-
-    // Write the media query.
-    @media (min-width: $breakpoint-value) {
-      @content;
-    }
-  
-  // If the breakpoint doesn't exist in the map.
-  } @else {
-
-    // Log a warning.
-    @warn 'Invalid breakpoint: #{$breakpoint}.';
-  }
-}
 
 #amountQr > canvas {
     width: 100%;
@@ -340,9 +283,7 @@ $breakpoints: (
     z-index: 200;
     left: 0%;
     top: 3rem;
-    -moz-box-shadow:    0 1.5em 3em 0 rgba($dark-purple, 1);
-    -webkit-box-shadow: 0 1.5em 3em 0 rgba($dark-purple, 1);
-    box-shadow:         0 1.5em 3em 0 rgba($dark-purple, 1);
+    @include box-shadow(0 1.5em 3em 0 rgba($dark-purple, 1));
 }
 
 .emojiPicker {
