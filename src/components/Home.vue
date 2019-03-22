@@ -15,7 +15,7 @@
           <div class="col-12 col-lg-10">
             <form>
               <div class="input-group">
-                <EmojiPicker v-show="showEmojiMenu"/>
+                <EmojiPicker v-show="showEmojiMenu" :searchText="emojiSearchText" :itemClicked="emojiClicked"/>
                 <input
                   type="text"
                   class="font-weight-bold form-control form-control-lg rounded-100 bg-transparent border-2 px-4 px-lg-5 col-12 col-md-9 mx-0 mx-md-2"
@@ -24,6 +24,7 @@
                   v-model="messageContent"
                   placeholder="Write a message"
                   ref="messageInputValue"
+                  autocomplete="off"
                   v-bind:class="[$store.state.showSendCard ? ['textfield-secondary', 'text-secondary', 'border-secondary'] : ['textfield-primary', 'text-primary', 'border-primary'], 'text-lowercase']"
                 >
                 <span class="input-group-btn col-12 col-md-3 mt-3 mt-md-0 px-0 mx-0 mx-md-2">
@@ -94,7 +95,10 @@ export default Vue.extend({
       messages: null,
       loadingMessages: [],
       messageContent: "",
-      showEmojiMenu: false
+      showEmojiMenu: false,
+      emojiIndexStart: -1,
+      emojiIndexEnd: -1,
+      emojiSearchText: ''
     };
   },
   methods: {
@@ -111,16 +115,49 @@ export default Vue.extend({
       event.preventDefault();
       this.$store.state.showSendCard = !this.$store.state.showSendCard;
     },
+    emojiClicked(key, event) {
+      if (this.showEmojiMenu && key != null) {
+        let newPotentialMessage = this.messageContent.slice(0, -1 * (this.emojiIndexEnd - this.emojiIndexStart)) + key
+        let encodedValue = Stenography.encodeMessage(newPotentialMessage)
+        if (encodedValue == false || Big(Stenography.encodeMessage(newPotentialMessage)).gt(Big(10).pow(29))) {
+          this.showEmojiMenu = false
+          this.emojiIndexStart = -1
+          this.emojiIndexEnd = -1
+          this.emojiSearchText = ''
+        } else {
+          this.messageContent = newPotentialMessage
+          this.showEmojiMenu = false
+          this.emojiIndexStart = -1
+          this.emojiIndexEnd = -1
+          this.emojiSearchText = ''
+        }
+      }
+    },
     onMessageChanged(event) {
-      if (
+      if (!this.showEmojiMenu &&
         this.$refs.messageInputValue.selectionStart > 0 &&
         this.messageContent.charAt(
           this.$refs.messageInputValue.selectionStart - 1
         ) == ":"
       ) {
         this.showEmojiMenu = true;
+        this.emojiIndexStart = this.$refs.messageInputValue.selectionStart - 1
+        this.emojiIndexEnd = this.$refs.messageInputValue.selectionStart
+        this.emojiSearchText = ':'
       } else {
-        this.showEmojiMenu = false;
+        if (this.showEmojiMenu) {
+          if (this.messageContent.charAt(
+              this.$refs.messageInputValue.selectionStart - 1) == " "
+              || this.messageContent.length == 0) {
+            this.showEmojiMenu = false
+            this.emojiIndexStart = -1
+            this.emojiIndexEnd = -1
+            this.emojiSearchText = ''
+          } else {
+            this.emojiIndexEnd = this.$refs.messageInputValue.selectionStart
+            this.emojiSearchText = this.messageContent.substring(this.emojiIndexStart, this.emojiIndexEnd)
+          }
+        }
       }
       // Replace characters not in the ascii range 32-96
       this.messageContent = this.messageContent.replace(/[^\x20-\x7A]+/g, "");
