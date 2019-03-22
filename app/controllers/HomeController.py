@@ -60,7 +60,7 @@ def get_messages():
         message_response.append(format_message(m))
     return jsonify(message_response)
 
-def format_message(message : Message):
+def format_message(message : Message) -> dict:
     message_json = {
         'id': message.id,
         'content': message.message_in_raw,

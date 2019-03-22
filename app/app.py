@@ -4,13 +4,13 @@ eventlet.monkey_patch()
 from flask import Flask
 from flask.helpers import get_debug_flag
 from app import commands
-from app.settings import AppConfig
+from app.settings import AppConfig, ProdConfig
 from app.controllers import HomeController
 from app.database import db
 from app.extensions import webpack, socketio, cors, scheduler
 from werkzeug.contrib.fixers import ProxyFix
 
-def create_app(config_object=AppConfig):
+def create_app(config_object : AppConfig = ProdConfig) -> Flask:
     """Application Factory Pattern"""
     app = Flask(__name__.split('.')[0])
     app.config.from_object(config_object)
@@ -31,12 +31,10 @@ def register_extensions(app):
         scheduler.start()
         with app.app_context():
             scheduler.run_job('missingcheck')
-    return None
 
 def register_blueprints(app):
     """Register Flask blueprints."""
     app.register_blueprint(HomeController.blueprint)
-    return None
 
 def register_commands(app):
     """Register Click commands."""

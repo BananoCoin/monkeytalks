@@ -19,7 +19,7 @@ class Message(db.Model):
         db_table = 'messages'
     
     @staticmethod
-    def validate_block(block : dict):
+    def validate_block(block : dict) -> tuple:
         block_contents = json.loads(block['contents'])
         """Ensure a block is to the appropriate destination, of the minimum amount, etc"""
         if block_contents['link_as_account'] != AppConfig.MONKEYTALKS_ACCOUNT:
