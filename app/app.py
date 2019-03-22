@@ -2,6 +2,7 @@ import eventlet
 eventlet.monkey_patch()
 
 from flask import Flask
+from flask.helpers import get_debug_flag
 from app import commands
 from app.settings import AppConfig
 from app.controllers import HomeController
@@ -25,10 +26,11 @@ def register_extensions(app):
     webpack.init_app(app)
     socketio.init_app(app, message_queue='redis://')
     db.init_app(app)
-    scheduler.init_app(app)
-    scheduler.start()
-    with app.app_context():
-        scheduler.run_job('missingcheck')
+    if not get_debug_flag():
+        scheduler.init_app(app)
+        scheduler.start()
+        with app.app_context():
+            scheduler.run_job('missingcheck')
     return None
 
 def register_blueprints(app):
