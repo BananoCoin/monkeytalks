@@ -2,6 +2,8 @@
    App specific SCSS file.
    ========================================================================== */
 
+@import "includes/mixins";
+
 /*! Colors START */
 $green: #3DF291;
 $dark-purple: #2A1052;
@@ -185,55 +187,37 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 }
 
 .grow{
-    -webkit-transform: scale(1); 
-      -ms-transform: scale(1); 
-          transform: scale(1); 
-    -webkit-transition: all 0.2s ease-out;  /* Android 2.1+, Chrome 1-25, iOS 3.2-6.1, Safari 3.2-6  */
-          transition: all 0.2s ease-out; 
+    @include transform(scale(1));
+    @include transition(all 0.2s ease-out);
 }
 .grow:hover{
-    -webkit-transform: scale(1.15); 
-      -ms-transform: scale(1.15); 
-          transform: scale(1.15); 
+    @include transform(scale(1.15));
 }
 
 .grow-2{
     transform-origin: 15% 50%;
-    -webkit-transform: scale(1); 
-      -ms-transform: scale(1); 
-          transform: scale(1); 
-    -webkit-transition: all 0.15s ease-out;  /* Android 2.1+, Chrome 1-25, iOS 3.2-6.1, Safari 3.2-6  */
-          transition: all 0.15s ease-out; 
+    @include transform(scale(1));
+    @include transition(all 0.15s ease-out);
 }
 .grow-2:hover{
-    -webkit-transform: scale(1.06); 
-      -ms-transform: scale(1.06); 
-          transform: scale(1.06); 
+    @include transform(scale(1.06));
 }
 
 .grow-3{
-    -webkit-transform: scale(1); 
-      -ms-transform: scale(1); 
-          transform: scale(1); 
-    -webkit-transition: all 0.15s ease-out;  /* Android 2.1+, Chrome 1-25, iOS 3.2-6.1, Safari 3.2-6  */
-          transition: all 0.15s ease-out; 
+    @include transform(scale(1));
+    @include transition(all 0.15s ease-out);
 }
 .grow-3:hover{
-    -webkit-transform: scale(1.06); 
-      -ms-transform: scale(1.06); 
-          transform: scale(1.06); 
+    @include transform(scale(1.06));
 }
 
 .glow-green{
-    -moz-box-shadow:    0 0 0rem rgba($green, 0);
-    -webkit-box-shadow: 0 0 0rem rgba($green, 0);
-    box-shadow:         0 0 0rem rgba($green, 0);
+    @include box-shadow(0 0 0 rgba(green, 0));
 }
 
 .glow-green:hover{
-    -moz-box-shadow:    0 0 0.8rem rgba($green, 0.8);
-    -webkit-box-shadow: 0 0 0.8rem rgba($green, 0.8);
-    box-shadow:         0 0 0.8rem rgba($green, 0.8);
+    @include box-shadow(inset 0 0.1rem 0.1rem rgba(0, 0, 0, 0.075), 0 0 0 0.1rem rgba(169, 168, 165, 0.25) !important);
+        @include font-size(15px);
 }
 
 .glow-purple{
