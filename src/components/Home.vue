@@ -21,6 +21,7 @@
                   class="font-weight-bold form-control form-control-lg rounded-100 bg-transparent border-2 px-4 px-lg-5 col-12 col-md-9 mx-0 mx-md-2"
                   id="messageInput"
                   @input="onMessageChanged"
+                  @blur="onMessageUnfocus"
                   v-model="messageContent"
                   placeholder="Write a message"
                   ref="messageInputValue"
@@ -132,6 +133,12 @@ export default Vue.extend({
           this.emojiSearchText = ''
         }
       }
+    },
+    onMessageUnfocus(event) {
+        this.showEmojiMenu = false
+        this.emojiIndexStart = -1
+        this.emojiIndexEnd = -1
+        this.emojiSearchText = ''
     },
     onMessageChanged(event) {
       if (!this.showEmojiMenu &&
