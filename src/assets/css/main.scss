@@ -323,17 +323,17 @@ $breakpoints: (
     100% {opacity: 0.6;}
 }
 
-a.text-primary:link, a.text-primary:visited {
+.text-primary > a {
     color: map-get($theme-colors, primary);
 }
 
-a.text-secondary:link, a.text-secondary:visited {
+.text-secondary > a {
     color: map-get($theme-colors, secondary);
 }
-a.text-light:link, a.text-light:visited {
+.text-light > a {
     color: map-get($theme-colors, light);
 }
 
-a.text-dark:link, a.text-dark:visited {
+.text-dark > a {
     color: map-get($theme-colors, dark);
 }
