@@ -43,7 +43,7 @@
               <qriously
                 :value="getQrUri(messageContent)" 
                 :size="1024"
-                level="H"
+                level="L"
                 id="amountQr"
               />
             </div>
