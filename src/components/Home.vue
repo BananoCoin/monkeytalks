@@ -54,7 +54,7 @@
     <div class="section mt-5" id="chat-section">
       <div class="container mt-4">
         <div class="row align-items-center d-flex justify-content-between">
-          <div class="col-12 col-md-10 col-lg-9 mx-auto">
+          <div class="col-12 col-md-11 col-lg-9 mx-auto">
             <transition-group name="list-item" v-if= "messages" >
               <ChatListItem v-for="message in messages" :message="message" :key="message.id"/>
             </transition-group>
