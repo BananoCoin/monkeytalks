@@ -286,6 +286,24 @@ $breakpoints: (
     @include box-shadow(0 1.5em 3em 0 rgba($dark-purple, 1));
 }
 
+.emoji-menu > li {
+    cursor: pointer;
+}
+
+.emoji-menu > li:first-child {
+    border-top-right-radius: 0.75rem;
+    border-top-left-radius: 0.75rem;
+}
+
+.emoji-menu > li:last-child {
+    border-bottom-right-radius: 0.75rem;
+    border-bottom-left-radius: 0.75rem;
+}
+
+.emoji-menu > li:hover {
+    background-color: darken($green, 10%);
+}
+
 .emojiPicker {
     z-index: 199;
 }

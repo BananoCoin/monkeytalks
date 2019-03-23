@@ -136,6 +136,7 @@ export default Vue.extend({
       }
     },
     hideEmojiMenu() {
+      return
       this.showEmojiMenu = false
       this.emojiIndexStart = -1
       this.emojiIndexEnd = -1
