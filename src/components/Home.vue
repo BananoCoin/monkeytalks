@@ -132,6 +132,7 @@ export default Vue.extend({
           this.emojiIndexEnd = -1
           this.emojiSearchText = ''
         }
+        this.$refs.messageInputValue.focus()
       }
     },
     hideEmojiMenu() {
