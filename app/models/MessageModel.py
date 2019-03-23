@@ -39,10 +39,11 @@ class Message(db.Model):
             premium = True
         message = Message(
             block_hash = block['hash'],
-            address = block_contents['link_as_account'],
+            destination = block_contents['link_as_account'],
             message_in_raw = str(int(block['amount'])),
             created_at = datetime.datetime.utcnow(),
-            premium = premium
+            premium = premium,
+            address = block_contents['account']
         )
         if message.save() > 0:
             return message
