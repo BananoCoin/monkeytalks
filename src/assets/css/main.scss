@@ -301,7 +301,8 @@ $breakpoints: (
 }
 
 .emoji-menu > li:hover {
-    background-color: darken($green, 10%);
+    background-color: map-get($theme-colors, secondary);
+    color: map-get($theme-colors, light);
 }
 
 .emojiPicker {

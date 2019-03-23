@@ -4,10 +4,12 @@ import Vuex from 'vuex'
 /** Emojis  **/
 import hng from '../assets/img/hng.svg'
 import smug from '../assets/img/smug.svg'
+import chibi from '../assets/img/chibi.svg'
+import aww from '../assets/img/aww.svg'
 import bebe from '../assets/img/bebe.png'
 import raugh from '../assets/img/raugh.png'
 import coolstorybro from '../assets/img/coolstorybro.png'
-let emojiMap = {":hng": hng, ":smg": smug, ":beb": bebe, ":rau": raugh, ":csb": coolstorybro}
+let emojiMap = {":hng": hng, ":smg": smug, ":beb": bebe, ":rau": raugh, ":csb": coolstorybro, ":chb": chibi, ":aww": aww}
 /** END Emojis */
 
 Vue.use(Vuex)
