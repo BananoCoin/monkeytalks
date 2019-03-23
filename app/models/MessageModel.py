@@ -14,6 +14,7 @@ class Message(db.Model):
     created_at = peewee.DateTimeField(default=datetime.datetime.utcnow(), index=True)
     premium = peewee.BooleanField(default=False)
     hidden = peewee.BooleanField(default=False, index=True)
+    destination = peewee.CharField()
 
     class Meta:
         db_table = 'messages'
