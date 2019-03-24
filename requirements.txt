@@ -38,3 +38,7 @@ requests
 
 # Task scheduler
 flask-apscheduler
+
+# Tests
+pytest
+webtest

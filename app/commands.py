@@ -1,6 +1,7 @@
 import click
 import datetime
 import random
+import os
 import simplejson as json
 from flask_socketio import emit
 from flask.cli import with_appcontext
@@ -8,11 +9,22 @@ from flask.cli import with_appcontext
 from app.models.MessageModel import Message
 from app.util.dateutil import format_js_iso
 
+HERE = os.path.abspath(os.path.dirname(__file__))
+PROJECT_ROOT = os.path.join(HERE, os.pardir)
+TEST_PATH = os.path.join(PROJECT_ROOT, 'tests')
+@click.command()
+def test():
+	"""Run the tests."""
+	import pytest
+	rv = pytest.main([TEST_PATH, '--verbose'])
+	exit(rv)
+
+
 @click.command()
 @with_appcontext
 def dbinit():
     """Create database tables"""
-    Message.create_table(fail_silently=True)
+    Message.create_table(safe=True)
 
 @click.command()
 @with_appcontext

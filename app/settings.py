@@ -18,6 +18,7 @@ class AppConfig(object):
     MONKEYTALKS_DEFAULT_PREMIUM_FEE=1000000000000000000000000000000 # 10 BANANO for premium message
 
 class DevConfig(AppConfig):
+    ENV = 'dev'
     # DB
     DB_NAME = 'dev.db'
     # Put the db file in project root
@@ -25,6 +26,8 @@ class DevConfig(AppConfig):
     DATABASE = os.environ.get('DATABASE', 'sqlite:///{0}'.format(DB_PATH))
 
 class ProdConfig(AppConfig):
+    ENV = 'prod'
+    DEBUG = False
     # Periodic Jobs
     JOBS = [
 		{
@@ -41,4 +44,21 @@ class ProdConfig(AppConfig):
 		},
     ]
     SCHEDULER_API_ENABLED = True
-    # TODO - Postgres database
+    # Postgres for production
+    DB_USER = 'monkeytalks'
+    DB_PASS = os.getenv("MONKEYTALKS_DB_PASSWORD", "password")
+    DB_HOST = '127.0.0.1'
+    DB_NAME = 'monkeytalks'
+    DATABASE = f'postgresext+pool://{DB_USER}:{DB_PASS}@{DB_HOST}/{DB_NAME}?max_connections=70&stale_timeout=300&autorollback=True'
+
+class TestConfig(AppConfig):
+    """Test configuration."""
+    TESTING = True
+    DEBUG = True
+    # DB
+    DB_NAME = 'dev.db'
+    # Put the db file in project root
+    DB_PATH = os.path.join(AppConfig.PROJECT_ROOT, DB_NAME)
+    DATABASE = os.environ.get('DATABASE', 'sqlite:///{0}'.format(DB_PATH))
+    BCRYPT_LOG_ROUNDS = 4  # For faster tests; needs at least 4 to avoid "ValueError: Invalid rounds"
+    WTF_CSRF_ENABLED = False  # Allows form testing
