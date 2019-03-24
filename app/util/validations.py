@@ -5,13 +5,15 @@ from hashlib import blake2b
 
 class Validations():
 
-    def validate_address(self, address : str) -> bool:
+    @classmethod
+    def validate_address(cls, address : str) -> bool:
         """Return true if a valid address for currency is found, false otherwise"""
         if address is None:
             return False
-        return self.validate_checksum_xrb(address)
+        return cls.validate_checksum_xrb(address)
 
-    def get_banano_address(self, input_text : str) -> str:
+    @classmethod
+    def get_banano_address(cls, input_text : str) -> str:
         """Extract a banano address from a string using regex"""
         address_regex = '(?:ban)(?:_)(?:1|3)(?:[13456789abcdefghijkmnopqrstuwxyz]{59})'
         matches = re.findall(address_regex, input_text)
@@ -19,7 +21,8 @@ class Validations():
             return matches[0]
         return None
 
-    def validate_checksum_xrb(self, address : str) -> bool:
+    @classmethod
+    def validate_checksum_xrb(cls, address : str) -> bool:
         """Given an xrb/nano/ban address validate the checksum. Return true if valid, false otherwise"""
         if len(address) == 64 and address[:4] == 'ban_':
             # Populate 32-char account index

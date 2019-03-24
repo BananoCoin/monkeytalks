@@ -15,7 +15,7 @@ blueprint = Blueprint('home', __name__, static_folder='../static')
 def index():
     return render_template('app.html',
                             mt_account=AppConfig.MONKEYTALKS_ACCOUNT,
-                            fee=FeeModel().get_fee(),
+                            fee=FeeModel.get_fee(),
                             premium=FeeModel().get_premium_fee())
 
 @socketio.on('connect', namespace='/mtchannel')
@@ -37,11 +37,11 @@ def banano_callback():
         else:
             block['hash'] = callback_json['hash']
         # Validate message
-        is_valid, message = Message().validate_block(block)
+        is_valid, message = Message.validate_block(block)
         if not is_valid:
             abort(400, message)
         # Save message to database
-        message = Message().save_block_as_message(block)
+        message = Message.save_block_as_message(block)
         if message is None:
             abort(500, 'server error processing message')
         # Emit message to the UI
@@ -50,8 +50,7 @@ def banano_callback():
 
 @blueprint.route('/fees', methods=['GET'])
 def get_fees():
-    fees = FeeModel()
-    return jsonify({'fee':str(fees.get_fee()), 'premium':str(fees.get_premium_fee())})
+    return jsonify({'fee':str(FeeModel.get_fee()), 'premium':str(FeeModel.get_premium_fee())})
 
 @blueprint.route('/messages', methods=['GET'])
 def get_messages():

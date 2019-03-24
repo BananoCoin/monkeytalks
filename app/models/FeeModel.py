@@ -9,8 +9,10 @@ class FeeModel():
     DEFAULT_FEE = AppConfig.MONKEYTALKS_DEFAULT_FEE
     DEFAULT_PREMIUM_FEE = AppConfig.MONKEYTALKS_DEFAULT_PREMIUM_FEE + AppConfig.MONKEYTALKS_DEFAULT_FEE
 
-    def get_fee(self) -> int:
-        return self.DEFAULT_FEE if rd.get(self.FEE_KEY) is None else int(rd.get(self.FEE_KEY).decode('utf-8'))
+    @classmethod
+    def get_fee(cls) -> int:
+        return cls.DEFAULT_FEE if rd.get(cls.FEE_KEY) is None else int(rd.get(cls.FEE_KEY).decode('utf-8'))
 
-    def get_premium_fee(self) -> int:
-        return self.DEFAULT_PREMIUM_FEE if rd.get(self.FEE_PREMIUM_KEY) is None else int(rd.get(self.FEE_PREMIUM_KEY).decode('utf-8'))
+    @classmethod
+    def get_premium_fee(cls) -> int:
+        return cls.DEFAULT_PREMIUM_FEE if rd.get(cls.FEE_PREMIUM_KEY) is None else int(rd.get(cls.FEE_PREMIUM_KEY).decode('utf-8'))

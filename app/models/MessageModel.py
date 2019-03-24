@@ -24,18 +24,20 @@ class Message(db.Model):
     class Meta:
         db_table = 'messages'
     
-    def validate_block(self, block : dict) -> tuple:
+    @staticmethod
+    def validate_block(block : dict) -> tuple:
         block_contents = json.loads(block['contents'])
         """Ensure a block is to the appropriate destination, of the minimum amount, etc"""
         if block_contents['link_as_account'] != AppConfig.MONKEYTALKS_ACCOUNT:
             return (False, "Transaction wasnt sent to MonkeyTalks account")
-        elif int(block_contents['amount']) - FeeModel().get_fee() <= 0:
+        elif int(block_contents['amount']) - FeeModel.get_fee() <= 0:
             return (False, "Transaction amount wasn't enough to cover fee")
         elif not Nanote().validate_message(block_contents['amount']):
             return (False, "Message has invalid checksum - can't be decoded")
         return (True, "Valid")
 
-    def save_block_as_message(self, block : dict):
+    @staticmethod
+    def save_block_as_message(block : dict):
         block_contents = json.loads(block['contents'])
         premium = False
         if int(block['amount']) - FeeModel().get_premium_fee() > 0:
