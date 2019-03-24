@@ -7,6 +7,7 @@ from flask_socketio import emit
 from flask.cli import with_appcontext
 
 from app.models.MessageModel import Message
+from app.models.FaucetModel import FaucetPayment
 from app.util.dateutil import format_js_iso
 
 HERE = os.path.abspath(os.path.dirname(__file__))
@@ -25,6 +26,7 @@ def test():
 def dbinit():
     """Create database tables"""
     Message.create_table(safe=True)
+    FaucetPayment.create_table(safe=True)
 
 @click.command()
 @with_appcontext
