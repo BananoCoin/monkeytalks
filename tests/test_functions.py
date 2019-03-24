@@ -45,8 +45,7 @@ class TestUtil:
         # Test length (too short)
         assert(Validations.validate_address('ban_1ph8tfwan1jd91pcettzn8rg448pooin1tz9juhsq1wbhsijebgcho411ku') == False)
 
-    def test_block_validation(self):
-        app = create_app(config_object=TestConfig)
+    def test_block_validation(self, app):
         fee = app.config['MONKEYTALKS_DEFAULT_FEE']
         block_contents = {
             'link_as_account':app.config['MONKEYTALKS_ACCOUNT'],
