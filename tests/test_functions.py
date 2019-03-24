@@ -1,10 +1,11 @@
+import redis
 import simplejson as json
 
 from app.app import create_app
 from app.settings import TestConfig
 from app.util.nanote import Nanote
 from app.util.validations import Validations
-from app.models.MessageModel import Message
+from app.models.MessageModel import Message, RD_COUNT_KEY
 
 class TestAPI:
     def test_messages_api(self, testapp):
@@ -67,3 +68,10 @@ class TestUtil:
         block_contents['link_as_account'] = 'ban_1ph8tfwan1jd91pcettzn8rg448pooin1tz9juhsq1wbhsijebgcho411kum'
         resp, reason = Message.validate_block({'contents':json.dumps(block_contents)})
         assert(resp == False)
+
+    def test_message_count(self):
+        rd = redis.Redis()
+        rd.hdel('ban_1ph8tfwan1jd91pcettzn8rg448pooin1tz9juhsq1wbhsijebgcho411kum', RD_COUNT_KEY)
+        assert(Message.get_message_count('ban_1ph8tfwan1jd91pcettzn8rg448pooin1tz9juhsq1wbhsijebgcho411kum') == 0)
+        assert(Message.inc_message_count('ban_1ph8tfwan1jd91pcettzn8rg448pooin1tz9juhsq1wbhsijebgcho411kum') == 1)
+        assert(Message.get_message_count('ban_1ph8tfwan1jd91pcettzn8rg448pooin1tz9juhsq1wbhsijebgcho411kum') == 1)
