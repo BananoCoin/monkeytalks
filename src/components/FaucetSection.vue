@@ -28,6 +28,7 @@
               <button
                 type="submit"
                 :class="['btn', 'btn-lg', isValidAddress ? ['btn-primary', 'glow-green'] : ['btn-light', 'glow-pink'], 'btn-block', 'mt-3', 'mx-auto', 'col-12', 'col-md-8', 'col-lg-6', 'text-secondary', 'grow-3']"
+                :disabled="!isValidAddress"
               >Send Me Some Banano</button>
             </form>
           </div>
