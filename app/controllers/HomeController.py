@@ -67,7 +67,7 @@ def format_message(message : Message) -> dict:
         'date': format_js_iso(message.created_at),
         'premium': message.premium,
         'address': message.address,
-        'count': Message.select().where(Message.address == message.address).count()
+        'count': Message.get_message_count(message.address)
     }
     return message_json
 

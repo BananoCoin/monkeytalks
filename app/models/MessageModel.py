@@ -1,11 +1,16 @@
 import datetime
 import simplejson as json
 import peewee
+import redis
 
 from app.database import db
 from app.settings import AppConfig
 from app.models.FeeModel import FeeModel
 from app.util.nanote import Nanote
+
+# Redis stores message counts, because postgres count is a slow operation
+RD_COUNT_KEY = 'mtcount'
+rd = redis.Redis()
 
 class Message(db.Model):
     block_hash = peewee.CharField()
@@ -31,8 +36,8 @@ class Message(db.Model):
             return (False, "Message has invalid checksum - can't be decoded")
         return (True, "Valid")
 
-    @staticmethod
-    def save_block_as_message(block : dict):
+    @classmethod
+    def save_block_as_message(cls, block : dict):
         block_contents = json.loads(block['contents'])
         premium = False
         if int(block['amount']) - FeeModel.get_premium_fee() > 0:
@@ -46,5 +51,28 @@ class Message(db.Model):
             address = block_contents['account']
         )
         if message.save() > 0:
+            cls.inc_message_count(block_contents['account'])
             return message
         return None
+
+    @classmethod
+    def inc_message_count(cls, account : str) -> int:
+        """Increment message count for a particular account and
+        return the new count"""
+        old_count = rd.hget(account, RD_COUNT_KEY)
+        if old_count is None:
+            rd.hset(account, RD_COUNT_KEY, '1')
+            return 1
+        else:
+            old_count = int(old_count.decode('utf-8'))
+            old_count += 1
+            rd.hset(account, RD_COUNT_KEY, str(old_count))
+            return old_count
+
+    @classmethod
+    def get_message_count(cls, account : str) -> int:
+        """Retrieve message count for a particular account"""
+        count = rd.hget(account, RD_COUNT_KEY)
+        if count is None:
+            return 0
+        return int(count.decode('utf-8'))
