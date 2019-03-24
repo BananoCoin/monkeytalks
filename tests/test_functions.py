@@ -25,8 +25,9 @@ class TestAPI:
 
 class TestUtil:
     def test_checksum_validation(self):
-        assert(Nanote.validate_message('1473211653') == False)
-        assert(Nanote.validate_message('3085200816947056507') == True)
+        nanote = Nanote()
+        assert(nanote.validate_message('1473211653') == False)
+        assert(nanote.validate_message('3085200816947056507') == True)
 
     def test_address_validations(self):
         raw_string = 'abbcddfasdban_1ph8tfwan1jd91pcettzn8rg448pooin1tz9juhsq1wbhsijebgcho411kum242134143'
@@ -71,6 +72,7 @@ class TestUtil:
     def test_message_count(self):
         rd = redis.Redis()
         rd.hdel('ban_1ph8tfwan1jd91pcettzn8rg448pooin1tz9juhsq1wbhsijebgcho411kum', RD_COUNT_KEY)
-        assert(Message.get_message_count('ban_1ph8tfwan1jd91pcettzn8rg448pooin1tz9juhsq1wbhsijebgcho411kum') == 0)
-        assert(Message.inc_message_count('ban_1ph8tfwan1jd91pcettzn8rg448pooin1tz9juhsq1wbhsijebgcho411kum') == 1)
-        assert(Message.get_message_count('ban_1ph8tfwan1jd91pcettzn8rg448pooin1tz9juhsq1wbhsijebgcho411kum') == 1)
+        msg = Message(address='ban_1ph8tfwan1jd91pcettzn8rg448pooin1tz9juhsq1wbhsijebgcho411kum')
+        assert(msg.get_message_count() == 0)
+        assert(msg.inc_message_count() == 1)
+        assert(msg.get_message_count() == 1)

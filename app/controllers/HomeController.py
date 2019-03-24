@@ -16,7 +16,7 @@ def index():
     return render_template('app.html',
                             mt_account=AppConfig.MONKEYTALKS_ACCOUNT,
                             fee=FeeModel.get_fee(),
-                            premium=FeeModel.get_premium_fee())
+                            premium=FeeModel().get_premium_fee())
 
 @socketio.on('connect', namespace='/mtchannel')
 def on_socket_connect():
@@ -67,7 +67,7 @@ def format_message(message : Message) -> dict:
         'date': format_js_iso(message.created_at),
         'premium': message.premium,
         'address': message.address,
-        'count': Message.get_message_count(message.address)
+        'count': message.get_message_count()
     }
     return message_json
 
