@@ -42,3 +42,6 @@ flask-apscheduler
 # Tests
 pytest
 webtest
+
+# Crypto
+bitstring
