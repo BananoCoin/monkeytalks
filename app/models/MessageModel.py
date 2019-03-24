@@ -30,9 +30,9 @@ class Message(db.Model):
         """Ensure a block is to the appropriate destination, of the minimum amount, etc"""
         if block_contents['link_as_account'] != AppConfig.MONKEYTALKS_ACCOUNT:
             return (False, "Transaction wasnt sent to MonkeyTalks account")
-        elif int(block['amount']) - FeeModel.get_fee() <= 0:
+        elif int(block_contents['amount']) - FeeModel.get_fee() <= 0:
             return (False, "Transaction amount wasn't enough to cover fee")
-        elif not Nanote.validate_message(block['amount']):
+        elif not Nanote.validate_message(block_contents['amount']):
             return (False, "Message has invalid checksum - can't be decoded")
         return (True, "Valid")
 

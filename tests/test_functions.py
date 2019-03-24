@@ -1,7 +1,10 @@
 import simplejson as json
 
+from app.app import create_app
+from app.settings import TestConfig
 from app.util.nanote import Nanote
 from app.util.validations import Validations
+from app.models.MessageModel import Message
 
 class TestAPI:
     def test_messages_api(self, testapp):
@@ -40,3 +43,27 @@ class TestUtil:
         assert(Validations.validate_address('ban_1ph8tfwan1jd91pcettzn8rg448pooin1tz9juhsq1wbhsijebgcho411kumk') == False)
         # Test length (too short)
         assert(Validations.validate_address('ban_1ph8tfwan1jd91pcettzn8rg448pooin1tz9juhsq1wbhsijebgcho411ku') == False)
+
+    def test_block_validation(self):
+        app = create_app(config_object=TestConfig)
+        fee = app.config['MONKEYTALKS_DEFAULT_FEE']
+        block_contents = {
+            'link_as_account':app.config['MONKEYTALKS_ACCOUNT'],
+            'amount':str(fee)                
+        }
+        # Test with invalid message (checksum)
+        resp, reason = Message.validate_block({'contents':json.dumps(block_contents)})
+        assert(resp == False)
+        # Test with valid message
+        block_contents['amount'] = str(int(block_contents['amount']) + 3085200816947056507)
+        resp, reason = Message.validate_block({'contents':json.dumps(block_contents)})
+        assert(resp == True)
+        # Test with invalid fee
+        block_contents['amount'] = str(int(block_contents['amount']) - fee)
+        resp, reason = Message.validate_block({'contents':json.dumps(block_contents)})
+        assert(resp == False)
+        # Test with invalid link
+        block_contents['amount'] = str(int(block_contents['amount']) + fee)
+        block_contents['link_as_account'] = 'ban_1ph8tfwan1jd91pcettzn8rg448pooin1tz9juhsq1wbhsijebgcho411kum'
+        resp, reason = Message.validate_block({'contents':json.dumps(block_contents)})
+        assert(resp == False)
