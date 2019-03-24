@@ -1,6 +1,7 @@
 # Flask
 Flask
 Flask-CORS
+flask-dotenv
 MarkupSafe
 Werkzeug
 Jinja2
@@ -19,7 +20,7 @@ gunicorn
 flask-webpack
 
 # SocketIO
-flask-socketio==3.1.2
+flask-socketio
 #eventlet
 # Temporary fix for: https://github.com/eventlet/eventlet/issues/551
 #git+https://github.com/erickj00001/eventlet.git@select-fix 

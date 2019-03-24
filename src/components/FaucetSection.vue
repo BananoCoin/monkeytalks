@@ -31,13 +31,12 @@
                   @expired="onCaptchaExpired"
                   size="invisible"
                   theme="dark"
-                  sitekey="6Lfxq5kUAAAAAEFflKdG_ajIT5WLxnvoQHt_ker1">
+                  sitekey="6Lfxq5kUAAAAAEFflKdG_ajIT5WLxnvoQHt_ker1" />
                 <button
                   :class="['btn', 'btn-lg', isValidAddress ? ['btn-primary', 'glow-green'] : ['btn-light', 'glow-pink'], 'btn-block', 'mt-3', 'mx-auto', 'col-12', 'col-md-8', 'col-lg-6', 'text-secondary', 'grow-3']"
                   :disabled="!isValidAddress"
                   @click="onFaucetSubmit"
                 >Send Me Some Banano</button>
-              </vue-recaptcha>
             </form>
           </div>
         </div>
@@ -85,7 +84,9 @@ export default Vue.extend({
     },
     onFaucetSubmit(event) {
       event.preventDefault()
-      this.$refs.recaptcha.execute();
+      if (this.isValidAddress) {
+        this.$refs.recaptcha.execute();
+      }
     },
     onCaptchaVerified: function (recaptchaToken) {
       this.requestStarted = true

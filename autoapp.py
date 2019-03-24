@@ -1,6 +1,3 @@
-import eventlet
-eventlet.monkey_patch()
-
 from flask.helpers import get_debug_flag
 
 from app.app import create_app
@@ -11,5 +8,5 @@ CONFIG = DevConfig if get_debug_flag() else ProdConfig
 
 app = create_app(CONFIG)
 
-if __name__ == '__main__':
+if __name__ == '__main__' and get_debug_flag():
     socketio.run(app)
