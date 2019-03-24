@@ -16,6 +16,8 @@ class AppConfig(object):
     MONKEYTALKS_ACCOUNT='xrb_1monkeyt1f1ihea3iz4wmgpizfk5k938jyj15xmd414bdb94kz7n4rmgo3iy'
     MONKEYTALKS_DEFAULT_FEE=1000000000000000000000000000000 # 10 BANANO
     MONKEYTALKS_DEFAULT_PREMIUM_FEE=1000000000000000000000000000000 # 10 BANANO for premium message
+    # Recaptcha Secret
+    RECAPTCHA_SECRET=os.getenv("MONKEYTALKS_CAPTCHA_SECRET", "password")
 
 class DevConfig(AppConfig):
     ENV = 'dev'

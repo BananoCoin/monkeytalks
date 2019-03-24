@@ -20,4 +20,16 @@ export default class API {
             return null;
         }
     }
+
+    static async postFaucet(recaptchaToken: string, address: string) : Promise<any> {
+        try {
+            let faucetResponse = await Axios.post(API_LOCATION + '/faucetClaim', {
+                address: address,
+                recaptchaToken: recaptchaToken
+            })
+            return faucetResponse
+        } catch (e) {
+            return null;
+        }
+    }
 }

@@ -25,25 +25,27 @@ class TestAPI:
 
 class TestUtil:
     def test_checksum_validation(self):
-        assert(Nanote.validate_message('1473211653') == False)
-        assert(Nanote.validate_message('3085200816947056507') == True)
+        nanote = Nanote()
+        assert(nanote.validate_message('1473211653') == False)
+        assert(nanote.validate_message('3085200816947056507') == True)
 
     def test_address_validations(self):
         raw_string = 'abbcddfasdban_1ph8tfwan1jd91pcettzn8rg448pooin1tz9juhsq1wbhsijebgcho411kum242134143'
-        extracted = Validations.get_banano_address(raw_string)
+        validator = Validations()
+        extracted = validator.get_banano_address(raw_string)
         assert(extracted == 'ban_1ph8tfwan1jd91pcettzn8rg448pooin1tz9juhsq1wbhsijebgcho411kum')
         # Test valid address
-        assert(Validations.validate_address(extracted) == True)
+        assert(validator.validate_address(extracted) == True)
         # Test invalid character (l)
-        assert(Validations.validate_address('ban_1ph8tfwan1jd91pcettzn8rg448pooin1tz9juhsq1wbhsijebgcho411kul') == False)
+        assert(validator.validate_address('ban_1ph8tfwan1jd91pcettzn8rg448pooin1tz9juhsq1wbhsijebgcho411kul') == False)
         # Test bad checksum
-        assert(Validations.validate_address('ban_1ph8tfwan1jd91pcettzn8rg448pooin1tz9juhsq1wbhsijebgcho411kuk') == False)
+        assert(validator.validate_address('ban_1ph8tfwan1jd91pcettzn8rg448pooin1tz9juhsq1wbhsijebgcho411kuk') == False)
         # Test wrong prefix
-        assert(Validations.validate_address('xrb_1ph8tfwan1jd91pcettzn8rg448pooin1tz9juhsq1wbhsijebgcho411kum') == False)
+        assert(validator.validate_address('xrb_1ph8tfwan1jd91pcettzn8rg448pooin1tz9juhsq1wbhsijebgcho411kum') == False)
         # Test length (too long)
-        assert(Validations.validate_address('ban_1ph8tfwan1jd91pcettzn8rg448pooin1tz9juhsq1wbhsijebgcho411kumk') == False)
+        assert(validator.validate_address('ban_1ph8tfwan1jd91pcettzn8rg448pooin1tz9juhsq1wbhsijebgcho411kumk') == False)
         # Test length (too short)
-        assert(Validations.validate_address('ban_1ph8tfwan1jd91pcettzn8rg448pooin1tz9juhsq1wbhsijebgcho411ku') == False)
+        assert(validator.validate_address('ban_1ph8tfwan1jd91pcettzn8rg448pooin1tz9juhsq1wbhsijebgcho411ku') == False)
 
     def test_block_validation(self, app):
         fee = app.config['MONKEYTALKS_DEFAULT_FEE']
@@ -51,26 +53,28 @@ class TestUtil:
             'link_as_account':app.config['MONKEYTALKS_ACCOUNT'],
             'amount':str(fee)                
         }
+        msg = Message()
         # Test with invalid message (checksum)
-        resp, reason = Message.validate_block({'contents':json.dumps(block_contents)})
+        resp, reason = msg.validate_block({'contents':json.dumps(block_contents)})
         assert(resp == False)
         # Test with valid message
         block_contents['amount'] = str(int(block_contents['amount']) + 3085200816947056507)
-        resp, reason = Message.validate_block({'contents':json.dumps(block_contents)})
+        resp, reason = msg.validate_block({'contents':json.dumps(block_contents)})
         assert(resp == True)
         # Test with invalid fee
         block_contents['amount'] = str(int(block_contents['amount']) - fee)
-        resp, reason = Message.validate_block({'contents':json.dumps(block_contents)})
+        resp, reason = msg.validate_block({'contents':json.dumps(block_contents)})
         assert(resp == False)
         # Test with invalid link
         block_contents['amount'] = str(int(block_contents['amount']) + fee)
         block_contents['link_as_account'] = 'ban_1ph8tfwan1jd91pcettzn8rg448pooin1tz9juhsq1wbhsijebgcho411kum'
-        resp, reason = Message.validate_block({'contents':json.dumps(block_contents)})
+        resp, reason = msg.validate_block({'contents':json.dumps(block_contents)})
         assert(resp == False)
 
     def test_message_count(self):
         rd = redis.Redis()
         rd.hdel('ban_1ph8tfwan1jd91pcettzn8rg448pooin1tz9juhsq1wbhsijebgcho411kum', RD_COUNT_KEY)
-        assert(Message.get_message_count('ban_1ph8tfwan1jd91pcettzn8rg448pooin1tz9juhsq1wbhsijebgcho411kum') == 0)
-        assert(Message.inc_message_count('ban_1ph8tfwan1jd91pcettzn8rg448pooin1tz9juhsq1wbhsijebgcho411kum') == 1)
-        assert(Message.get_message_count('ban_1ph8tfwan1jd91pcettzn8rg448pooin1tz9juhsq1wbhsijebgcho411kum') == 1)
+        msg = Message(address='ban_1ph8tfwan1jd91pcettzn8rg448pooin1tz9juhsq1wbhsijebgcho411kum')
+        assert(msg.get_message_count() == 0)
+        assert(msg.inc_message_count() == 1)
+        assert(msg.get_message_count() == 1)

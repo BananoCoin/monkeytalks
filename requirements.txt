@@ -22,7 +22,9 @@ flask-webpack
 flask-socketio==3.1.2
 #eventlet
 # Temporary fix for: https://github.com/eventlet/eventlet/issues/551
-git+https://github.com/erickj00001/eventlet.git@select-fix 
+#git+https://github.com/erickj00001/eventlet.git@select-fix 
+gevent
+gevent-websocket
 
 # Latest JSON lib
 simplejson

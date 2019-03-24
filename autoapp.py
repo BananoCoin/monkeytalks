@@ -1,3 +1,6 @@
+import eventlet
+eventlet.monkey_patch()
+
 from flask.helpers import get_debug_flag
 
 from app.app import create_app

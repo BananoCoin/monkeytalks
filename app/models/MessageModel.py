@@ -24,23 +24,21 @@ class Message(db.Model):
     class Meta:
         db_table = 'messages'
     
-    @staticmethod
-    def validate_block(block : dict) -> tuple:
+    def validate_block(self, block : dict) -> tuple:
         block_contents = json.loads(block['contents'])
         """Ensure a block is to the appropriate destination, of the minimum amount, etc"""
         if block_contents['link_as_account'] != AppConfig.MONKEYTALKS_ACCOUNT:
             return (False, "Transaction wasnt sent to MonkeyTalks account")
-        elif int(block_contents['amount']) - FeeModel.get_fee() <= 0:
+        elif int(block_contents['amount']) - FeeModel().get_fee() <= 0:
             return (False, "Transaction amount wasn't enough to cover fee")
-        elif not Nanote.validate_message(block_contents['amount']):
+        elif not Nanote().validate_message(block_contents['amount']):
             return (False, "Message has invalid checksum - can't be decoded")
         return (True, "Valid")
 
-    @classmethod
-    def save_block_as_message(cls, block : dict):
+    def save_block_as_message(self, block : dict):
         block_contents = json.loads(block['contents'])
         premium = False
-        if int(block['amount']) - FeeModel.get_premium_fee() > 0:
+        if int(block['amount']) - FeeModel().get_premium_fee() > 0:
             premium = True
         message = Message(
             block_hash = block['hash'],
@@ -51,28 +49,26 @@ class Message(db.Model):
             address = block_contents['account']
         )
         if message.save() > 0:
-            cls.inc_message_count(block_contents['account'])
+            message.inc_message_count()
             return message
         return None
 
-    @classmethod
-    def inc_message_count(cls, account : str) -> int:
+    def inc_message_count(self) -> int:
         """Increment message count for a particular account and
         return the new count"""
-        old_count = rd.hget(account, RD_COUNT_KEY)
+        old_count = rd.hget(self.address, RD_COUNT_KEY)
         if old_count is None:
-            rd.hset(account, RD_COUNT_KEY, '1')
+            rd.hset(self.address, RD_COUNT_KEY, '1')
             return 1
         else:
             old_count = int(old_count.decode('utf-8'))
             old_count += 1
-            rd.hset(account, RD_COUNT_KEY, str(old_count))
+            rd.hset(self.address, RD_COUNT_KEY, str(old_count))
             return old_count
 
-    @classmethod
-    def get_message_count(cls, account : str) -> int:
+    def get_message_count(self) -> int:
         """Retrieve message count for a particular account"""
-        count = rd.hget(account, RD_COUNT_KEY)
+        count = rd.hget(self.address, RD_COUNT_KEY)
         if count is None:
             return 0
         return int(count.decode('utf-8'))

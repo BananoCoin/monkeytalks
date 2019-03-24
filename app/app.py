@@ -1,11 +1,8 @@
-import eventlet
-eventlet.monkey_patch()
-
 from flask import Flask
 from flask.helpers import get_debug_flag
 from app import commands
 from app.settings import AppConfig, ProdConfig
-from app.controllers import HomeController
+from app.controllers import HomeController, FaucetController
 from app.database import db
 from app.extensions import webpack, socketio, cors, scheduler
 from werkzeug.contrib.fixers import ProxyFix
@@ -35,6 +32,7 @@ def register_extensions(app):
 def register_blueprints(app):
     """Register Flask blueprints."""
     app.register_blueprint(HomeController.blueprint)
+    app.register_blueprint(FaucetController.blueprint)
 
 def register_commands(app):
     """Register Click commands."""
