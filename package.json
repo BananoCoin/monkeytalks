@@ -44,7 +44,6 @@
     "fs": "0.0.1-security",
     "ignore-loader": "^0.1.2",
     "jquery": "^3.3.1",
-    "manifest-revision-webpack-plugin": "github:bbedward/manifest-revision-webpack-plugin#master",
     "mini-css-extract-plugin": "^0.5.0",
     "mobile-detect": "^1.4.3",
     "node-sass": "^4.11.0",

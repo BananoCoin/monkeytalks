@@ -113,6 +113,7 @@ export default Vue.extend({
           this.isValidAddress = false;
         }
       }
+      event.target.value = this.addressValue
     },
     onFaucetSubmit(event) {
       event.preventDefault();

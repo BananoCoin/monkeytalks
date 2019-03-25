@@ -16,7 +16,7 @@ Psycopg2-binary
 gunicorn
 
 # Webpack
-flask-webpack
+flask-webpack-fork
 
 # SocketIO
 flask-socketio

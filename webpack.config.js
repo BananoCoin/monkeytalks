@@ -4,8 +4,7 @@ const webpack = require('webpack');
 /*
  * Webpack Plugins
  */
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const ManifestRevisionPlugin = require('manifest-revision-webpack-plugin');
+const ManifestPlugin = require('webpack-manifest-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 // take debug mode from the environment
@@ -83,10 +82,7 @@ module.exports = {
     plugins: [
         new webpack.ProvidePlugin({$: 'jquery', jQuery: 'jquery'}),
         new webpack.ProvidePlugin({io: 'socket.io-client'}),
-        new ManifestRevisionPlugin(path.join(__dirname, 'app', 'webpack', 'manifest.json'), {
-            rootAssetPath: rootAssetPath,
-            ignorePaths: ['/js', '/css', /.*\.DS_Store/],
-        }),
+        new ManifestPlugin({fileName: path.join(__dirname, 'app', 'webpack', 'manifest.json')}),
         new VueLoaderPlugin()
     ].concat(debug ? [] : [
         // production webpack plugins go here

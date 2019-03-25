@@ -176,6 +176,7 @@ export default Vue.extend({
       ) {
         this.messageContent = this.messageContent.slice(0, -1);
       }
+      event.target.value = this.messageContent
     }
   },
   computed: {
