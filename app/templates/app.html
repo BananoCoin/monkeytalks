@@ -1,12 +1,62 @@
 <!DOCTYPE html>
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+
 <head>
   <meta charset="utf-8">
+  <!-- Google Image -->
+  <script type="application/ld+json">
+        {"@context" : "http://schema.org",
+         "@type" : "Organization",  
+          "name" : "MonkeyTalks",
+          "url" : "https://monkeytalks.cc", 
+          "logo": "https://monkeytalks.cc{{asset_url_for('assets/img/preview')}}" }
+        </script>
+  <!-- Google Image END -->
 
-  <title>MonkeyTalks
-  </title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>MonkeyTalks | On-chain Messaging for Banano</title>
+  <meta name="description" content="Join other monKeys to talk about extremely important subjects that will definitely save the world.">
 
-  <link rel="icon" type="image/png" href="{{ asset_url_for('img/monkeytalks-logo.svg') }}"/>
+  <!-- Google / Search Engine Tags -->
+  <meta itemprop="name" content="MonkeyTalks | On-chain Messaging for Banano">
+  <meta itemprop="description" content="Join other monKeys to talk about extremely important subjects that will definitely save the world.">
+  <meta itemprop="image" content="https://monkeytalks.cc{{asset_url_for('assets/img/preview')}}">
+
+  <!-- Facebook Meta Tags -->
+  <meta property="og:url" content="https://monkeytalks.cc">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="MonkeyTalks | On-chain Messaging for Banano">
+  <meta property="og:description" content="Join other monKeys to talk about extremely important subjects that will definitely save the world.">
+  <meta property="og:image" content="https://monkeytalks.cc{{asset_url_for('assets/img/preview')}}">
+
+  <!-- Twitter Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="MonkeyTalks | On-chain Messaging for Banano">
+  <meta name="twitter:description" content="Join other monKeys to talk about extremely important subjects that will definitely save the world.">
+  <meta name="twitter:image" content="https://monkeytalks.cc{{asset_url_for('assets/img/preview')}}">
+
+  <!-- Favicons -->
+  <link rel="apple-touch-icon" sizes="57x57" href="{{asset_url_for('assets/img/favicon/apple-icon-57x57.png')}}">
+  <link rel="apple-touch-icon" sizes="60x60" href="{{asset_url_for('assets/img/favicon/apple-icon-60x60.png')}}">
+  <link rel="apple-touch-icon" sizes="72x72" href="{{asset_url_for('assets/img/favicon/apple-icon-72x72.png)}}">
+  <link rel="apple-touch-icon" sizes="76x76" href="{{asset_url_for('assets/img/favicon/apple-icon-76x76.png')}}">
+  <link rel="apple-touch-icon" sizes="114x114" href="{{asset_url_for('assets/img/favicon/apple-icon-114x114.png')}}">
+  <link rel="apple-touch-icon" sizes="120x120" href="{{asset_url_for('assets/img/favicon/apple-icon-120x120.png')}}">
+  <link rel="apple-touch-icon" sizes="144x144" href="{{asset_url_for('assets/img/favicon/apple-icon-144x144.png')}}">
+  <link rel="apple-touch-icon" sizes="152x152" href="{{asset_url_for('assets/img/favicon/apple-icon-152x152.png')}}">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{asset_url_for('assets/img/favicon/apple-icon-180x180.png')}}">
+  <link rel="icon" type="image/png" sizes="192x192" href="{{asset_url_for('assets/img/favicon/android-icon-192x192.png')}}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{asset_url_for('assets/img/favicon/favicon-32x32.png')}}">
+  <link rel="icon" type="image/png" sizes="96x96" href="{{asset_url_for('assets/img/favicon/favicon-96x96.png')}}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{asset_url_for('assets/img/favicon/favicon-16x16.png')}}">
+  <meta name="msapplication-TileImage" content="ms-icon-144x144.png">
+  <meta name="msapplication-TileColor" content="#3DF291">
+  <meta name="theme-color" content="#3DF291">
+  <meta name="apple-mobile-web-app-status-bar-style" content="#2A1052">
 
   <!-- Mobile viewport optimized: h5bp.com/viewport -->
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -15,12 +65,14 @@
 
   {% block css %}{% endblock %}
 </head>
+
 <body>
-    <div id="app"></div>
-  
-    <!-- JavaScript at the bottom for fast page loading -->
-    {{ javascript_tag('app_js') | safe }}
-    <script src="https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit" async defer></script>
-    <!-- end scripts -->
+  <div id="app"></div>
+
+  <!-- JavaScript at the bottom for fast page loading -->
+  {{ javascript_tag('app_js') | safe }}
+  <script src="https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit" async defer></script>
+  <!-- end scripts -->
 </body>
+
 </html>
