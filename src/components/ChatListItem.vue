@@ -1,5 +1,5 @@
 <template>
-  <div class="row align-items-center d-flex justify-content-around my-3 my-md-4 pr-3">
+  <div class="row align-items-center d-flex justify-content-around my-3 my-md-4">
     <div class="col z-index-100">
       <popper
         :options="{
@@ -11,13 +11,13 @@
           <h3 class="text-left text-primary font-weight-bold">Messages: {{ message.count }}</h3>
           <p class="text-left text-light font-weight-light" v-html="threeLineAddress(message.address)" />
         </div>
-        <button slot="reference" class="btn-primary bg-transparent border-none rounded-100 px-0">
+        <button slot="reference" class="btn-primary bg-transparent border-none rounded-100 px-0 ml-ng-1">
           <img class="w-100 grow" :src="`https://monkeys.appditto.com?address=${message.address}`">
         </button>
       </popper>
     </div>
     <div
-      class="col-7 col-md-8 col-xl-9 py-2 py-md-3 py-lg-4 px-4 mr-3 mr-md-4 mr-lg-5"
+      class="col-8 col-md-8 col-xl-9 py-2 py-md-3 py-lg-4 px-4 mr-3 mr-md-4 mr-lg-5"
       v-bind:class="[message.premium ? ['bg-primary', 'grow-2', 'glow-green', 'speech-bubble-green'] : ['bg-secondary', 'grow-2', 'glow-purple', 'speech-bubble-purple'] ]"
     >
       <div class="row align-items-center align-middle d-flex justify-content-between py-2">

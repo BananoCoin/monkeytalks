@@ -361,3 +361,13 @@ $breakpoints: (
 .grecaptcha-badge { 
     visibility: hidden;
 }
+
+.ml-ng-1 {
+    margin-left: -1.2em;
+}
+
+@include respond-above(sm){
+    .ml-ng-1 {
+        margin-left: 0;
+    }
+}
