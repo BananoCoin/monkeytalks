@@ -4,7 +4,6 @@ from app.settings import AppConfig
 
 class Captcha():
     def verify(self, token : str) -> bool:
-        import requests
         """Verify a recaptcha request, return True if valid False otherwise"""
         formattedUrl = "https://www.google.com/recaptcha/api/siteverify"
         try:

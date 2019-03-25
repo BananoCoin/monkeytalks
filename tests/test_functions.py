@@ -49,24 +49,20 @@ class TestUtil:
     def test_block_validation(self, app):
         fee = app.config['MONKEYTALKS_DEFAULT_FEE']
         block_contents = {
-            'link_as_account':app.config['MONKEYTALKS_ACCOUNT'],
-            'amount':str(fee)                
+            'link_as_account':app.config['MONKEYTALKS_ACCOUNT']
         }
         # Test with invalid message (checksum)
-        resp, reason = Message.validate_block({'contents':json.dumps(block_contents)})
+        resp, reason = Message.validate_block({'amount':str(fee), 'contents':json.dumps(block_contents)})
         assert(resp == False)
         # Test with valid message
-        block_contents['amount'] = str(int(block_contents['amount']) + 3085200816947056507)
-        resp, reason = Message.validate_block({'contents':json.dumps(block_contents)})
+        resp, reason = Message.validate_block({'amount':str(fee + 3085200816947056507), 'contents':json.dumps(block_contents)})
         assert(resp == True)
         # Test with invalid fee
-        block_contents['amount'] = str(int(block_contents['amount']) - fee)
-        resp, reason = Message.validate_block({'contents':json.dumps(block_contents)})
+        resp, reason = Message.validate_block({'amount':str(fee + 3085200816947056507 - fee), 'contents':json.dumps(block_contents)})
         assert(resp == False)
         # Test with invalid link
-        block_contents['amount'] = str(int(block_contents['amount']) + fee)
         block_contents['link_as_account'] = 'ban_1ph8tfwan1jd91pcettzn8rg448pooin1tz9juhsq1wbhsijebgcho411kum'
-        resp, reason = Message.validate_block({'contents':json.dumps(block_contents)})
+        resp, reason = Message.validate_block({'amount':str(fee + 3085200816947056507),'contents':json.dumps(block_contents)})
         assert(resp == False)
 
     def test_message_count(self):

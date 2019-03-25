@@ -22,7 +22,6 @@
                   id="messageInput"
                   @input="onMessageChanged"
                   @blur="onMessageUnfocus"
-                  v-model="messageContent"
                   placeholder="Write a message"
                   ref="messageInputValue"
                   autocomplete="off"
@@ -145,6 +144,7 @@ export default Vue.extend({
       setTimeout(this.hideEmojiMenu, 400);
     },
     onMessageChanged(event) {
+      this.messageContent = event.target.value
       if (!this.showEmojiMenu &&
         this.$refs.messageInputValue.selectionStart > 0 &&
         this.messageContent.charAt(
@@ -176,6 +176,7 @@ export default Vue.extend({
       ) {
         this.messageContent = this.messageContent.slice(0, -1);
       }
+      event.target.value = this.messageContent
     }
   },
   computed: {
@@ -194,7 +195,7 @@ export default Vue.extend({
   },
   sockets: {
     connect: function() {
-      console.log("connected to websocket");
+     //console.log("connected to websocket");
     },
     new_message: function(data) {
       let message = JSON.parse(data);

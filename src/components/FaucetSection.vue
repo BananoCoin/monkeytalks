@@ -21,7 +21,6 @@
                     :class="['font-weight-bold', 'textfield-light', 'form-control', 'form-control-lg', 'rounded-100', isValidAddress ? 'text-white' : 'text-light', 'bg-transparent', 'border-light', 'border-2', 'mt-3', 'px-4', 'px-lg-5']"
                     id="addressInput"
                     placeholder="ban_address"
-                    v-model="addressValue"
                     @input="onAddressChanged"
                   >
                 </div>
@@ -45,7 +44,7 @@
         <!-- FAUCET FIRST STEP END -->
 
         <!-- FAUCET LOADING -->
-        <div id="faucet-loading" v-else-if="requestResponse == /null/">
+        <div id="faucet-loading" v-else-if="requestResponse == null">
           <div class="row align-items-center d-flex justify-content-around">
             <div class="col-12">
               <h3
@@ -85,16 +84,16 @@ export default Vue.extend({
       addressValue: "",
       isValidAddress: false,
       defaultOptions: { animationData: animationData },
-      animationSpeed: 1
+      animationSpeed: 1,
+      addressValue: "",
+      isValidAddress: false,
+      requestStarted: false,
+      requestResponse: null,
+      requestError: false,      
     };
   },
   components: {
-    lottie: Lottie,
-    addressValue: "",
-    isValidAddress: false,
-    requestStarted: false,
-    requestResponse: null,
-    requestError: false,
+    Lottie,
     VueRecaptcha
   },
   methods: {
@@ -102,6 +101,7 @@ export default Vue.extend({
       this.anim = anim;
     },
     onAddressChanged(event) {
+      this.addressValue = event.target.value
       if (this.addressValue.length < 64) {
         this.isValidAddress = false;
       } else {
@@ -113,6 +113,7 @@ export default Vue.extend({
           this.isValidAddress = false;
         }
       }
+      event.target.value = this.addressValue
     },
     onFaucetSubmit(event) {
       event.preventDefault();

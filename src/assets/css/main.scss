@@ -356,3 +356,8 @@ $breakpoints: (
 .text-dark > a {
     color: map-get($theme-colors, dark);
 }
+
+/* Hide recaptcha badge */
+.grecaptcha-badge { 
+    visibility: hidden;
+}

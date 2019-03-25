@@ -11,7 +11,7 @@
             <h4 class="text-center text-md-left text-light font-weight-light">
               Scan the QR code with
               <span class="font-weight-extrabold h4 text-primary"> Kalium </span>and send
-              <span class="font-weight-extrabold h4 text-primary"> {{ computeWithFeeAsBanano(messageContent).split('.')[0] + "." + computeWithFeeAsBanano(messageContent).split('.')[1].substring(0, 2) + "~"}} Banano</span> to publish the message.
+              <span class="font-weight-extrabold h4 text-primary"> {{ computeWithFeeAsBanano(messageContent).split('.')[0] + "." + computeWithFeeAsBanano(messageContent).split('.')[1].substring(0, 4) + "~"}} Banano</span> to publish the message.
             </h4>
             <br>
           </div>
@@ -20,15 +20,16 @@
           <!-- MOBILE -->
           <div v-if="$store.state.mobileDetect.mobile()" class="col-12 col-md-5 px-4">
             <h4 class="text-center text-light font-weight-light">Your Message:</h4>
-            <h2 class="text-center text-primary font-weight-extrabold">Hello World</h2>
+            <h2 class="text-center text-primary font-weight-extrabold" v-html="emojify(messageContent)" />
             <br>
             <h4 class="text-center text-light font-weight-light">
-              Click the button below and send<span class="font-weight-extrabold h3 text-primary"> {{ computeWithFeeAsBanano(messageContent).split('.')[0] + "." + computeWithFeeAsBanano(messageContent).split('.')[1].substring(0, 6) + "~"}} Banano </span>with<span class="font-weight-extrabold h3 text-primary"> Kalium </span>to publish the message.
+              Click the button below and send<span class="font-weight-extrabold h3 text-primary"> {{ computeWithFeeAsBanano(messageContent).split('.')[0] + "." + computeWithFeeAsBanano(messageContent).split('.')[1].substring(0, 4) + "~"}} Banano </span>with<span class="font-weight-extrabold h3 text-primary"> Kalium </span>to publish the message.
             </h4>
             <br>
-            <button
+            <a
               class="btn btn-lg btn-light btn-block mt-3 mx-auto text-secondary glow-pink grow-3"
-            >Send with Kalium</button>
+              :href="getQrUri(messageContent)"
+            >Send with Kalium</a>
           </div>
           <!-- MOBILE END -->
 

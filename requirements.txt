@@ -1,7 +1,6 @@
 # Flask
 Flask
 Flask-CORS
-flask-dotenv
 MarkupSafe
 Werkzeug
 Jinja2
@@ -17,15 +16,13 @@ Psycopg2-binary
 gunicorn
 
 # Webpack
-flask-webpack
+flask-webpack-fork
 
 # SocketIO
 flask-socketio
 #eventlet
 # Temporary fix for: https://github.com/eventlet/eventlet/issues/551
-#git+https://github.com/erickj00001/eventlet.git@select-fix 
-gevent
-gevent-websocket
+git+https://github.com/erickj00001/eventlet.git@select-fix 
 
 # Latest JSON lib
 simplejson
