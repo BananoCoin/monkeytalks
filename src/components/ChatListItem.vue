@@ -7,7 +7,7 @@
           modifiers: { offset: { offset: '0,10px' } },   
         }"
       >
-        <div class="popper bg-secondary p-3 speech-bubble-two">
+        <div class="popper bg-secondary p-3 pop-up">
           <h3 class="text-left text-primary font-weight-bold">Messages: {{ message.count }}</h3>
           <p class="text-left text-light font-weight-light" v-html="threeLineAddress(message.address)" />
         </div>
