@@ -21,7 +21,6 @@
                     :class="['font-weight-bold', 'textfield-light', 'form-control', 'form-control-lg', 'rounded-100', isValidAddress ? 'text-white' : 'text-light', 'bg-transparent', 'border-light', 'border-2', 'mt-3', 'px-4', 'px-lg-5']"
                     id="addressInput"
                     placeholder="ban_address"
-                    v-model="addressValue"
                     @input="onAddressChanged"
                   >
                 </div>
@@ -102,6 +101,7 @@ export default Vue.extend({
       this.anim = anim;
     },
     onAddressChanged(event) {
+      this.addressValue = event.target.value
       if (this.addressValue.length < 64) {
         this.isValidAddress = false;
       } else {

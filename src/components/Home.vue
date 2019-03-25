@@ -22,7 +22,6 @@
                   id="messageInput"
                   @input="onMessageChanged"
                   @blur="onMessageUnfocus"
-                  v-model="messageContent"
                   placeholder="Write a message"
                   ref="messageInputValue"
                   autocomplete="off"
@@ -145,6 +144,7 @@ export default Vue.extend({
       setTimeout(this.hideEmojiMenu, 400);
     },
     onMessageChanged(event) {
+      this.messageContent = event.target.value
       if (!this.showEmojiMenu &&
         this.$refs.messageInputValue.selectionStart > 0 &&
         this.messageContent.charAt(
