@@ -16,7 +16,7 @@ def index():
     return render_template('app.html',
                             mt_account=AppConfig.MONKEYTALKS_ACCOUNT,
                             fee=FeeModel.get_fee(),
-                            premium=FeeModel().get_premium_fee())
+                            premium=FeeModel.get_premium_fee())
 
 @socketio.on('connect', namespace='/mtchannel')
 def on_socket_connect():
