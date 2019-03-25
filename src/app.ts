@@ -1,10 +1,11 @@
-// View
 import Vue from 'vue'
 import App from './App.vue'
 import { store } from './util/store'
 import router from './router/index'
 import VueSocketio from 'vue-socket.io-extended'
 import MobileDetect from 'mobile-detect'
+// Load all assets
+import './assets/img/index.js'
 
 // Socket.io
 var channel = '/mtchannel'

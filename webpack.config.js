@@ -13,8 +13,6 @@ const debug = (process.env.NODE_ENV !== 'production');
 // Development asset host (webpack dev server)
 const publicHost = debug ? 'http://localhost:2992' : '';
 
-const rootAssetPath = path.join(__dirname, 'src');
-
 module.exports = {
     // configuration
     context: __dirname,
@@ -53,7 +51,11 @@ module.exports = {
             },
             {
                 test: /\.(ttf|eot|svg|png|jpe?g|gif|ico|woff)(\?.*)?$/i,
-                loader: `file-loader?context=${rootAssetPath}&name=[path][name].[hash].[ext]`
+                loader: 'file-loader',
+                options: {
+                    context: path.join(__dirname, 'src'),
+                    name: '[path][name].[hash].[ext]',
+                }
             },
             {
                 test: /\.js$/,
