@@ -15,13 +15,12 @@
           <div class="col-12 col-lg-10">
             <form>
               <div class="input-group">
-                <EmojiPicker v-show="showEmojiMenu" :searchText="emojiSearchText" :itemClicked="emojiClicked"/>
+                <EmojiPicker v-show="showEmojiMenu" :searchText="emojiSearchText" :itemClicked="emojiClicked" v-closable="{handler: 'hideEmojiMenu'}"/>
                 <input
                   type="text"
                   class="font-weight-bold form-control form-control-lg rounded-100 bg-transparent border-2 px-4 px-lg-5 col-12 col-md-9 mx-0 mx-md-2"
                   id="messageInput"
                   @input="onMessageChanged"
-                  @blur="onMessageUnfocus"
                   placeholder="Write a message"
                   ref="messageInputValue"
                   autocomplete="off"
@@ -76,17 +75,18 @@
 </template>
 
 <script>
-import Vue from "vue";
-import Navbar from "./Navbar.vue";
-import ChatListItem from "./ChatListItem.vue";
-import ChatListItemDummy from "./ChatListItemDummy.vue";
-import FaucetSection from "./FaucetSection.vue";
-import TransitionExpand from "./TransitionExpand.vue";
-import EmojiPicker from "./EmojiPicker.vue";
-import SendCardSection from "./SendCardSection.vue";
-import Stenography from "../util/stenography.ts";
-import API from "../util/api.ts";
-import Big from "big.js";
+import Vue from "vue"
+import Navbar from "./Navbar.vue"
+import ChatListItem from "./ChatListItem.vue"
+import ChatListItemDummy from "./ChatListItemDummy.vue"
+import FaucetSection from "./FaucetSection.vue"
+import TransitionExpand from "./TransitionExpand.vue"
+import EmojiPicker from "./EmojiPicker.vue"
+import SendCardSection from "./SendCardSection.vue"
+import Stenography from "../util/stenography.ts"
+import Closable from '../directives/closable'
+import API from "../util/api.ts"
+import Big from "big.js"
 
 export default Vue.extend({
   name: "Home",
@@ -126,6 +126,7 @@ export default Vue.extend({
           this.emojiSearchText = ''
         } else {
           this.messageContent = newPotentialMessage
+          this.$refs.messageInputValue.value = this.messageContent
           this.showEmojiMenu = false
           this.emojiIndexStart = -1
           this.emojiIndexEnd = -1
@@ -139,9 +140,6 @@ export default Vue.extend({
       this.emojiIndexStart = -1
       this.emojiIndexEnd = -1
       this.emojiSearchText = ''
-    },
-    onMessageUnfocus(event) {
-      setTimeout(this.hideEmojiMenu, 400);
     },
     onMessageChanged(event) {
       this.messageContent = event.target.value
