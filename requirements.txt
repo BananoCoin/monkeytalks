@@ -6,6 +6,7 @@ Werkzeug
 Jinja2
 itsdangerous
 click
+python-dotenv
 
 # Database
 peewee
