@@ -1,4 +1,5 @@
 import Big from 'big.js'
+import bigInt from 'big-integer'
 import { blake2b } from 'blakejs'
 
 const BANANO_RAW = Big(10).pow(29)
@@ -12,7 +13,7 @@ export default class Util {
     } 
 
     static computeWithFee(rawAmount : string, fee : string) : string {
-        return (Big(rawAmount).add(Big(fee))).toString()
+        return (bigInt(rawAmount).add(bigInt(fee))).toString()
     }
 
     static formatDateStr(rawDate : string) : string {
