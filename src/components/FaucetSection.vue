@@ -44,7 +44,7 @@
         <!-- FAUCET FIRST STEP END -->
 
         <!-- FAUCET LOADING -->
-        <div id="faucet-loading" v-else-if="requestResponse == /null/">
+        <div id="faucet-loading" v-else-if="requestResponse == null">
           <div class="row align-items-center d-flex justify-content-around">
             <div class="col-12">
               <h3
@@ -84,16 +84,16 @@ export default Vue.extend({
       addressValue: "",
       isValidAddress: false,
       defaultOptions: { animationData: animationData },
-      animationSpeed: 1
+      animationSpeed: 1,
+      addressValue: "",
+      isValidAddress: false,
+      requestStarted: false,
+      requestResponse: null,
+      requestError: false,      
     };
   },
   components: {
-    lottie: Lottie,
-    addressValue: "",
-    isValidAddress: false,
-    requestStarted: false,
-    requestResponse: null,
-    requestError: false,
+    Lottie,
     VueRecaptcha
   },
   methods: {

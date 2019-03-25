@@ -82,7 +82,7 @@ module.exports = {
     plugins: [
         new webpack.ProvidePlugin({$: 'jquery', jQuery: 'jquery'}),
         new webpack.ProvidePlugin({io: 'socket.io-client'}),
-        new ManifestPlugin({fileName: path.join(__dirname, 'app', 'webpack', 'manifest.json')}),
+        new ManifestPlugin({fileName: path.join(__dirname, 'app', 'webpack', 'manifest.json'), writeToFileEmit: debug}),
         new VueLoaderPlugin()
     ].concat(debug ? [] : [
         // production webpack plugins go here
