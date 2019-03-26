@@ -35,7 +35,6 @@ class FaucetPayment(db.Model):
                         .where(((FaucetPayment.destination == account) | (FaucetPayment.ip_address == ip)) 
                             & (FaucetPayment.created_at > since_ts)))
             for payment in payment_24h:
-                next_available = (payment.created_at + datetime.timedelta(days=1)) - payment.created_at
                 diff = relativedelta(payment.created_at + datetime.timedelta(days=1), payment.created_at)
                 diffstr = ""
                 if diff.hours > 0:
@@ -46,7 +45,7 @@ class FaucetPayment(db.Model):
                     diffstr += str(diff.seconds) + " seconds"
                 else:
                     diffstr += str(diff.seconds)
-                return (None, f"You've already stocked up recently - why don't you come back in {diff.hours}:{diff.minutes}:{diff.seconds}")
+                return (None, f"You've already stocked up recently - why don't you come back in {diffstr}")
             # Calculate payment amount in raw
             rpc = RPC()
             balance = rpc.account_balance(current_app.config['MONKEYTALKS_ACCOUNT'])
