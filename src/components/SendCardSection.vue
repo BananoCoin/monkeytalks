@@ -14,6 +14,9 @@
               <span class="font-weight-extrabold h4 text-primary"> {{ computeWithFeeAsBanano(messageContent).split('.')[0] + "." + computeWithFeeAsBanano(messageContent).split('.')[1].substring(0, 4) + "~"}} Banano</span> to publish the message.
             </h4>
             <br>
+            <div class="row pl-3 d-flex justify-content-center">
+              <input type="checkbox" name="premium-checkbox"><span class="font-weight-extrabold h4 text-primary ml-0 col-12 mt-3 text-center col-md text-md-left mt-md-0">Pimp my message</span>
+            </div>
           </div>
           <!-- DESKTOP END -->
 
