@@ -2,6 +2,8 @@ import datetime
 import redis
 import peewee
 
+from dateutil.relativedelta import relativedelta
+
 from flask import current_app
 
 from app.database import db
@@ -33,9 +35,18 @@ class FaucetPayment(db.Model):
                         .where(((FaucetPayment.destination == account) | (FaucetPayment.ip_address == ip)) 
                             & (FaucetPayment.created_at > since_ts)))
             for payment in payment_24h:
-                next_available = datetime.datetime.utcnow() - payment.created_at
-                diff_minutes = int(next_available.seconds * 60)
-                return (None, f"You've already stocked up recently - why don't you come back in {diff_minutes} minutes?")
+                next_available = (payment.created_at + datetime.timedelta(days=1)) - payment.created_at
+                diff = relativedelta(payment.created_at + datetime.timedelta(days=1), payment.created_at)
+                diffstr = ""
+                if diff.hours > 0:
+                    diffstr += str(diff.hours) + ":"
+                if diff.minutes > 0:
+                    diffstr += str(diff.minutes) + ":"
+                if diff.hours <= 0 and diff.minutes <= 0:
+                    diffstr += str(diff.seconds) + " seconds"
+                else:
+                    diffstr += str(diff.seconds)
+                return (None, f"You've already stocked up recently - why don't you come back in {diff.hours}:{diff.minutes}:{diff.seconds}")
             # Calculate payment amount in raw
             rpc = RPC()
             balance = rpc.account_balance(current_app.config['MONKEYTALKS_ACCOUNT'])
