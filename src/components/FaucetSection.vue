@@ -136,7 +136,7 @@ export default Vue.extend({
             this.requestResponse = "Something went wrong. Try again later.";
           }
         } else {
-          if ("error" in response.date) {
+          if ("error" in response.data) {
             this.requestError = true
             this.requestResponse = response.data.error
           } else {
