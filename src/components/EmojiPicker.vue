@@ -26,14 +26,14 @@ export default Vue.extend({
         return
       }
       let charCode = e.which || e.keyCode;
-      if (charCode == 9) {
+      if (charCode == 9 || charCode == 40) {
         e.preventDefault()
         if (navigationService.getFocusElementInFocus() == null) {
           let el = navigationService.getFocusElementById(Object.keys(this.emojiMap)[0]);
           if (el != null) {
             el.focus()
           }
-        } else {
+        } else if (charCode != 40) {
           this.focusNextElement()
         }
       } else if (charCode == 13) {
