@@ -6,6 +6,8 @@
           placement: 'left',
           modifiers: { offset: { offset: '0,10px' } },   
         }"
+        ref="popperT"
+        v-closable="{handler: 'hidePopper'}"
       >
         <div class="popper bg-secondary p-3 pop-up">
           <h3 class="text-left text-primary font-weight-bold">Messages: {{ message.count }}</h3>
@@ -50,6 +52,13 @@ export default Vue.extend({
   components: {
     popper: Popper
   },
+  created () {
+    if ($this.store.state.mobileDetect.mobile()) {
+      window.addEventListener('scroll', () => {
+        this.hidePopper()
+      });
+    }
+  },
   methods: {
     decodeMessage(content) {
       let decodedMessage =  Stenography.decodeMessage(content)
@@ -60,6 +69,9 @@ export default Vue.extend({
         decodedMessage = decodedMessage.replace(key, `<img src=${emojiMap[key]} class="emoji" />`)
       })
       return decodedMessage
+    },
+    hidePopper() {
+      this.$refs.popperT.showPopper = false
     },
     formatDate(dateStr) {
       return Util.formatDateStr(dateStr)
