@@ -15,7 +15,7 @@
             </h4>
             <br>
             <div class="row pl-3 d-flex justify-content-center">
-              <input type="checkbox" name="premium-checkbox"><span class="font-weight-extrabold h4 text-primary ml-0 col-12 mt-3 text-center col-md text-md-left mt-md-0">Pimp my message</span>
+              <input type="checkbox" name="premium-checkbox" v-model="isPremium"><span class="font-weight-extrabold h4 text-primary ml-0 col-12 mt-3 text-center col-md text-md-left mt-md-0">Pimp my message</span>
             </div>
           </div>
           <!-- DESKTOP END -->
@@ -70,15 +70,20 @@ Vue.use(VueQriously);
 
 export default Vue.extend({
   name: "SendCardSection",
+  data() {
+    return {
+      isPremium: false
+    }
+  },
   props: {
     messageContent: ''
   },
   methods: {
     computeWithFeeAsBanano(content) {
-      return Util.rawToBanano(Util.computeWithFee(Stenography.encodeMessage(content), this.$store.state.fee))
+      return Util.rawToBanano(Util.computeWithFee(Stenography.encodeMessage(content), this.isPremium ? this.$store.state.premiumFee : this.$store.state.fee))
     },
     getQrUri(content) {
-      return `ban:${this.$store.state.mtAccount}?amount=${Util.computeWithFee(Stenography.encodeMessage(content), this.$store.state.fee)}`
+      return `ban:${this.$store.state.mtAccount}?amount=${Util.computeWithFee(Stenography.encodeMessage(content), this.isPremium ? this.$store.state.premiumFee : this.$store.state.fee)}`
     },
     emojify(content) {
       let emojiMap = this.$store.state.emojiMap
@@ -93,7 +98,7 @@ export default Vue.extend({
     API.getFees().then((response) => {
       if (response != null) {
         this.$store.state.fee = response.fee
-        this.$store.state.premiumFee = response.premiumFee
+        this.$store.state.premiumFee = response.premium
       }
     });
   }
