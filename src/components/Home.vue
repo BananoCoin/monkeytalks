@@ -15,7 +15,7 @@
           <div class="col-12 col-lg-10">
             <form>
               <div class="input-group">
-                <EmojiPicker v-show="showEmojiMenu" :searchText="emojiSearchText" :itemClicked="emojiClicked" v-closable="{handler: 'hideEmojiMenu'}"/>
+                <EmojiPicker v-show="showEmojiMenu" :visible="showEmojiMenu" :searchText="emojiSearchText" :itemClicked="emojiClicked" v-closable="{handler: 'hideEmojiMenu'}"/>
                 <input
                   type="text"
                   class="font-weight-bold form-control form-control-lg rounded-100 bg-transparent border-2 px-4 px-lg-5 col-12 col-md-9 mx-0 mx-md-2"
