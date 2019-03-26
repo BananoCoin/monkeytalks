@@ -136,9 +136,7 @@ export default Vue.extend({
             this.requestResponse = "Something went wrong. Try again later.";
           }
         } else {
-          this.requestResponse = `You've been sent ${
-            response.data.amount
-          } BANANO. Recaptcha result is ${response.data.captcha_verified}`;
+          this.requestResponse = response.data.toString()
         }
       });
     },
