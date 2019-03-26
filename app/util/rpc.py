@@ -22,7 +22,31 @@ class RPC():
             "hash": hash
         }
         resp = self.communicate_wallet(action)
-        if 'contents' in resp:
+        if resp is not None and 'contents' in resp:
             return resp
-        else:
-            return None
+        return None
+
+    def account_balance(self, account : str) -> int:
+        """Return account balance as integer, None if error"""
+        action = {
+            "action": "account_balance",
+            "account": account
+        }
+        resp = self.communicate_wallet(action)
+        if resp is not None and 'balance' in resp:
+            return int(resp['balance'])
+        return None
+
+    def send(self, destination: str, amount_raw : str) -> str:
+        """Send amount to destination, return hash. None if failed"""
+        action = {
+            "action": "send",
+            "wallet": AppConfig.WALLET_ID,
+            "source": AppConfig.MONKEYTALKS_ACCOUNT,
+            "destination": destination,
+            "amount": amount_raw
+        }
+        resp = self.communicate_wallet(action)
+        if resp is not None and 'block' in resp:
+            return resp['block']
+        return None

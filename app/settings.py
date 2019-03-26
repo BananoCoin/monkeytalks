@@ -17,6 +17,7 @@ class AppConfig(object):
     MONKEYTALKS_ACCOUNT='ban_3monkeyt9xfksbhm17pgq6tgh8kmzbfetz6npzsiw8mzppm7bwnjg5tnjy3q'
     MONKEYTALKS_DEFAULT_FEE=1000000000000000000000000000000 # 10 BANANO
     MONKEYTALKS_DEFAULT_PREMIUM_FEE=1000000000000000000000000000000 # 10 BANANO for premium message
+    PAYOUT_FACTOR=0.001 # Pay out 0.1% of account balance
     # Recaptcha Secret
     RECAPTCHA_SECRET=os.getenv("RECAPTCHA_SECRET", "password")
 

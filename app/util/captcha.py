@@ -3,7 +3,8 @@ import requests
 from app.settings import AppConfig
 
 class Captcha():
-    def verify(self, token : str) -> bool:
+    @staticmethod
+    def verify(token : str) -> bool:
         """Verify a recaptcha request, return True if valid False otherwise"""
         formattedUrl = "https://www.google.com/recaptcha/api/siteverify"
         try:
