@@ -11,7 +11,7 @@
           <h3 class="text-left text-primary font-weight-bold">Messages: {{ message.count }}</h3>
           <p class="text-left text-light font-weight-light" v-html="threeLineAddress(message.address)" />
         </div>
-        <button slot="reference" class="btn-primary bg-transparent border-none rounded-100 px-0 ml-ng-1">
+        <button slot="reference" class="btn-primary bg-transparent border-none rounded-100 px-0 ml-ng-1" style="outline:none; box-shadow:none;">
           <img class="w-100 grow" :src="`https://monkeys.appditto.com?address=${message.address}`">
         </button>
       </popper>
@@ -36,7 +36,6 @@
 <script>
 import Vue from 'vue';
 import Popper from "vue-popperjs"
-import "vue-popperjs/dist/vue-popper.css"
 import Stenography from "../util/stenography.ts"
 import linkify from 'vue-linkify'
 import Util from '../util/util.ts'

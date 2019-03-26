@@ -3,7 +3,7 @@
    ========================================================================== */
 
 @import "./includes/theme";
-@import "~bootstrap/scss/bootstrap";
+@import "./includes/bootstrap";
 
 // Import mixins after bootstrap because bootstrap has some that conflict
 @import "./includes/mixins";
@@ -358,8 +358,77 @@ $breakpoints: (
     }
 }
 
+/* popper */
+
+.popper {
+    width: auto;
+    background-color:  map-get($theme-colors, secondary);
+    color: #212121;
+    text-align: center;
+    padding: 2px;
+    display: inline-block;
+    border-radius: 3px;
+    position: absolute;
+    font-size: 14px;
+    font-weight: normal;
+    z-index: 200000;
+}
+.popper .popper__arrow {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    position: absolute;
+    margin: 5px;
+}
+.popper[x-placement^="top"] {
+    margin-bottom: 5px;
+}
+
+.popper[x-placement^="top"] .popper__arrow {
+    border-width: 5px 5px 0 5px;
+    border-color:  map-get($theme-colors, secondary) transparent transparent transparent;
+    bottom: -5px;
+    left: calc(50% - 5px);
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.popper[x-placement^="bottom"] {
+    margin-top: 5px;
+}
+.popper[x-placement^="bottom"] .popper__arrow {
+    border-width: 0 5px 5px 5px;
+    border-color: transparent transparent  map-get($theme-colors, secondary) transparent;
+    top: -5px;
+    left: calc(50% - 5px);
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.popper[x-placement^="right"] {
+    margin-left: 5px;
+}
+.popper[x-placement^="right"] .popper__arrow {
+    border-width: 5px 5px 5px 0;
+    border-color: transparent  map-get($theme-colors, secondary) transparent transparent;
+    left: -5px;
+    top: calc(50% - 5px);
+    margin-left: 0;
+    margin-right: 0;
+}
+.popper[x-placement^="left"] {
+    margin-right: 5px;
+}
+.popper[x-placement^="left"] .popper__arrow {
+    border-width: 5px 0 5px 5px;
+    border-color: transparent transparent transparent  map-get($theme-colors, secondary);
+    right: -5px;
+    top: calc(50% - 5px);
+    margin-left: 0;
+    margin-right: 0;
+}
+
 .pop-up {
 	position: relative;
     border-radius: 0.75em;
     border-color: map-get($theme-colors, secondary);
 }
+
