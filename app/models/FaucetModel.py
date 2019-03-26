@@ -34,7 +34,7 @@ class FaucetPayment(db.Model):
                             & (FaucetPayment.created_at > since_ts)))
             for payment in payment_24h:
                 next_available = datetime.datetime.utcnow() - payment.created_at
-                diff_minutes = next_available.seconds // 60
+                diff_minutes = int(next_available.seconds * 60)
                 return (None, f"You've already stocked up recently - why don't you come back in {diff_minutes} minutes?")
             # Calculate payment amount in raw
             rpc = RPC()
