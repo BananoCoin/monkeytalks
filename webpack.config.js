@@ -81,6 +81,7 @@ module.exports = {
         ],
     },
     plugins: [
+        new webpack.ProvidePlugin({io: 'socket.io-client'}),
         new ManifestPlugin({fileName: path.join(__dirname, 'app', 'webpack', 'manifest.json'), writeToFileEmit: debug}),
         new VueLoaderPlugin(),
         new PurgecssPlugin({
