@@ -53,10 +53,11 @@ export default Vue.extend({
     popper: Popper
   },
   created () {
-    window.addEventListener('scroll', () => {
-      console.log('HIDING POPPER')
-      this.hidePopper()
-    });
+    if ($this.store.state.mobileDetect.mobile()) {
+      window.addEventListener('scroll', () => {
+        this.hidePopper()
+      });
+    }
   },
   methods: {
     decodeMessage(content) {
