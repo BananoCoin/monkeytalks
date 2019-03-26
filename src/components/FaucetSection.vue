@@ -136,7 +136,12 @@ export default Vue.extend({
             this.requestResponse = "Something went wrong. Try again later.";
           }
         } else {
-          this.requestResponse = response.data.toString()
+          if ("error" in response.date) {
+            this.requestError = true
+            this.requestResponse = response.data.error
+          } else {
+            this.requestResponse = response.data.success
+          }
         }
       });
     },
