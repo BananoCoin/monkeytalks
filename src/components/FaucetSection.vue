@@ -61,7 +61,15 @@
         <!-- FAUCET LOADING END -->
 
         <!-- FAUCET RESPONSE RECEIVED -->
-        <div id="faucet-response-received" v-else>Response received {{ requestResponse }}</div>
+        <div id="faucet-response-received" v-else>
+          <div class="row align-items-center d-flex justify-content-around">
+            <div class="col-12">
+              <h3
+                class="text-center text-light font-weight-bold px-3"
+              >Response received. {{ requestResponse }}</h3>
+            </div>
+          </div>
+        </div>
         <!-- FAUCET RESPONSE RECEIVED END-->
 
       </div>
