@@ -286,9 +286,12 @@ $breakpoints: (
     border-bottom-left-radius: 0.75rem;
 }
 
-.emoji-menu > li:hover {
+.emoji-menu > li:hover,
+.emoji-menu > li:focus,
+.emoji-menu > li.focus {
     background-color: map-get($theme-colors, secondary);
     color: map-get($theme-colors, light);
+    outline: none;
 }
 
 .emojiPicker {
