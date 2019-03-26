@@ -35,7 +35,7 @@ class FaucetPayment(db.Model):
                         .where(((FaucetPayment.destination == account) | (FaucetPayment.ip_address == ip)) 
                             & (FaucetPayment.created_at > since_ts)))
             for payment in payment_24h:
-                diff = relativedelta(payment.created_at + datetime.timedelta(days=1), payment.created_at)
+                diff = relativedelta(payment.created_at + datetime.timedelta(days=1), datetime.datetime.utcnow())
                 diffstr = ""
                 if diff.hours > 0:
                     diffstr += str(diff.hours) + ":"
