@@ -66,7 +66,7 @@
             <div class="col-12">
               <h3
                 class="text-center text-light font-weight-bold px-3"
-              >Response received. {{ requestResponse }}</h3>
+              >{{ requestResponse }}</h3>
             </div>
           </div>
         </div>
