@@ -30,7 +30,7 @@ class FaucetPayment(db.Model):
             # Check recent payments
             payment_24h = (cls.select()
                         .where(((FaucetPayment.destination == account) | (FaucetPayment.ip_address == ip)) 
-                            & FaucetPayment.created_at > datetime.datetime.utcnow() - datetime.timedelta(days=1)))
+                            & FaucetPayment.created_at > (datetime.datetime.utcnow() - datetime.timedelta(days=1))))
             for payment in payment_24h:
                 next_available = datetime.datetime.utcnow() - payment.created_at
                 diff_minutes = next_available.seconds // 60
