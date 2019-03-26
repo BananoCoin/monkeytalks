@@ -28,7 +28,7 @@ class FaucetPayment(db.Model):
         if account is None or Validations.validate_address(account) == False:
             return (None, "That doesn't look like a valid BANANO address")
         # Block to prevent concurrent requests
-        with rd.lock(account, timeout=300, blocking_timeout=60):
+        with rd.lock(f'mtlock{account}', timeout=300, blocking_timeout=60):
             # Check recent payments
             since_ts = datetime.datetime.utcnow() - datetime.timedelta(days=1)
             payment_24h = (cls.select()

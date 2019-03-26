@@ -64,7 +64,6 @@
     "vue-loader": "^15.7.0",
     "vue-lottie": "^0.2.1",
     "vue-popperjs": "^2.0.3",
-    "vue-pose": "^0.5.0",
     "vue-qrcode-component": "^2.1.1",
     "vue-qriously": "^1.1.1",
     "vue-recaptcha": "^1.1.1",
@@ -79,6 +78,7 @@
     "ws": "^5.2.0"
   },
   "devDependencies": {
+    "@vue/cli-service": "^3.5.1",
     "babel-core": "^6.25.0",
     "babel-eslint": "^8.2.3",
     "babel-loader": "^7.0.0",
@@ -89,11 +89,14 @@
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.3.0",
     "file-loader": "^3.0.1",
+    "glob-all": "^3.1.0",
     "less": "^3.0.4",
     "less-loader": "^4.0.4",
+    "purgecss-webpack-plugin": "^1.4.0",
     "raw-loader": "^1.0.0",
     "style-loader": "^0.23.1",
     "url-loader": "^1.1.2",
+    "vue-cli": "^2.9.6",
     "webpack": "^4.29.6",
     "webpack-dev-server": "^3.2.1",
     "webpack-manifest-plugin": "^2.0.4"

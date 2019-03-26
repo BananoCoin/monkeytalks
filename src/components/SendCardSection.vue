@@ -58,7 +58,6 @@
 
 <script>
 import Vue from "vue"
-import posed from "vue-pose"
 import VueQriously from "vue-qriously"
 import Stenography from "../util/stenography.ts"
 import Util from "../util/util.ts"

@@ -6,6 +6,8 @@ const webpack = require('webpack');
  */
 const ManifestPlugin = require('webpack-manifest-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const PurgecssPlugin = require('purgecss-webpack-plugin');
+const glob = require('glob-all');
 
 // take debug mode from the environment
 const debug = (process.env.NODE_ENV !== 'production');
@@ -17,10 +19,7 @@ module.exports = {
     // configuration
     context: __dirname,
     entry: {
-        app_js: path.join(__dirname, 'src', 'app'),
-        main_css: [
-            path.join(__dirname, 'src', 'assets', 'css', 'main.scss'),
-        ],
+        app_js: path.join(__dirname, 'src', 'app')
     },
     output: {
         path: path.join(__dirname, 'app', 'static', 'build'),
@@ -82,10 +81,16 @@ module.exports = {
         ],
     },
     plugins: [
-        new webpack.ProvidePlugin({$: 'jquery', jQuery: 'jquery'}),
-        new webpack.ProvidePlugin({io: 'socket.io-client'}),
         new ManifestPlugin({fileName: path.join(__dirname, 'app', 'webpack', 'manifest.json'), writeToFileEmit: debug}),
-        new VueLoaderPlugin()
+        new VueLoaderPlugin(),
+        new PurgecssPlugin({
+            paths: glob.sync([
+                path.join(__dirname, './**/*.vue'),
+                path.join(__dirname, './src/**/*.js'),
+                path.join(__dirname, './src/**/*.ts')
+            ]),
+            minify: true
+        })
     ].concat(debug ? [] : [
         // production webpack plugins go here
         new webpack.DefinePlugin({
