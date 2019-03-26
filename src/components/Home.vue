@@ -56,7 +56,7 @@
     <!-- SEND CARD SECTION END -->
     <!-- CHAT SECTION -->
     <div class="section my-5" id="chat-section">
-      <div class="container my-4">
+      <div class="container my-5">
         <div class="row align-items-center d-flex justify-content-between">
           <div class="col-12 col-md-11 col-lg-9 mx-auto">
             <transition-group name="list-item" v-if="messages">
@@ -79,20 +79,7 @@
     <!-- CHAT SECTION END -->
 
     <!-- FOOTER -->
-    <footer>
-      <div class="section" id="footer">
-        <div class="w-100 bg-primary divider"></div>
-        <div class="container">
-          <div class="row justify-content-center d-flex">
-            <div class="col-12 col-md-8 col-lg-8">
-              <p class="text-primary text-center my-2">
-                ©2019<span class="font-weight-extrabold"> BANANO</span>
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
+    <Footer/>
     <!-- FOOTER END -->
   </div>
 </template>
@@ -100,6 +87,7 @@
 <script>
 import Vue from "vue";
 import Navbar from "./Navbar.vue";
+import Footer from "./Footer.vue";
 import ChatListItem from "./ChatListItem.vue";
 import ChatListItemDummy from "./ChatListItemDummy.vue";
 import FaucetSection from "./FaucetSection.vue";
@@ -228,7 +216,8 @@ export default Vue.extend({
     FaucetSection,
     TransitionExpand,
     SendCardSection,
-    EmojiPicker
+    EmojiPicker,
+    Footer,
   },
   sockets: {
     connect: function() {
