@@ -1,7 +1,7 @@
 <template>
   <div class="emojiPicker">
     <ul class="list-unstyled bg-primary rounded-1 emoji-menu position-absolute mx-4 mt-2">
-      <li :id="key" class="py-4 h4 px-5" v-for="(value, key) in emojiMap" :key="key + '1'" @click="emojiClicked(key)" v-focus data-down="AUTOFOCUS" data-up="AUTOFOCUS">
+      <li :id="key" class="py-3 h4 px-5" v-for="(value, key) in emojiMap" :key="key + '1'" @click="emojiClicked(key)" v-focus data-down="AUTOFOCUS" data-up="AUTOFOCUS">
         <img class="emoji mr-3" :src="value">{{ key }}
       </li>
     </ul>

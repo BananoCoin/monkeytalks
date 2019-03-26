@@ -54,14 +54,22 @@
           </div>
           <div class="row align-items-center d-flex justify-content-around mt-4">
             <div class="col-12">
-              <lottie :options="defaultOptions" v-on:animCreated="handleAnimation"/>
+              <img class="w-100" src="../assets/img/bananofactory_animation.gif">
             </div>
           </div>
         </div>
         <!-- FAUCET LOADING END -->
 
         <!-- FAUCET RESPONSE RECEIVED -->
-        <div id="faucet-response-received" v-else>Response received {{ requestResponse }}</div>
+        <div id="faucet-response-received" v-else>
+          <div class="row align-items-center d-flex justify-content-around">
+            <div class="col-12">
+              <h3
+                class="text-center text-light font-weight-bold px-3"
+              >Response received. {{ requestResponse }}</h3>
+            </div>
+          </div>
+        </div>
         <!-- FAUCET RESPONSE RECEIVED END-->
 
       </div>
@@ -71,8 +79,6 @@
 
 <script>
 import Vue from "vue";
-import Lottie from "vue-lottie";
-import * as animationData from "../assets/img/bananofactory_animation.json";
 import API from "../util/api.ts";
 import Util from "../util/util.ts";
 import VueRecaptcha from "vue-recaptcha";
@@ -83,8 +89,6 @@ export default Vue.extend({
     return {
       addressValue: "",
       isValidAddress: false,
-      defaultOptions: { animationData: animationData },
-      animationSpeed: 1,
       addressValue: "",
       isValidAddress: false,
       requestStarted: false,
@@ -93,13 +97,9 @@ export default Vue.extend({
     };
   },
   components: {
-    Lottie,
     VueRecaptcha
   },
   methods: {
-    handleAnimation: function(anim) {
-      this.anim = anim;
-    },
     onAddressChanged(event) {
       this.addressValue = event.target.value
       if (this.addressValue.length < 64) {

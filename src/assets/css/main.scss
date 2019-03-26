@@ -49,11 +49,11 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
 	top: 50%;
 	width: 0;
 	height: 0;
-	border: 2rem solid transparent;
+	border: 1.6rem solid transparent;
 	border-left: 0;
 	border-bottom: 0;
-	margin-top: -1rem;
-	margin-left: -2rem;
+	margin-top: -0.8rem;
+	margin-left: -1.6rem;
 }
 
 .speech-bubble-purple:after{
@@ -352,7 +352,7 @@ $breakpoints: (
 }
 
 .ml-ng-1 {
-    margin-left: -1.3em;
+    margin-left: -1.2em;
 }
 
 @include respond-above(sm){
@@ -375,28 +375,29 @@ $breakpoints: (
     font-size: 14px;
     font-weight: normal;
     z-index: 200000;
+    @include box-shadow(0 0 2rem rgba($dark-purple, 1));
 }
 .popper .popper__arrow {
     width: 0;
     height: 0;
     border-style: solid;
     position: absolute;
-    margin: 5px;
+    margin: 0px;
 }
 .popper[x-placement^="top"] {
-    margin-bottom: 5px;
+    margin-bottom: 0px;
 }
 
 .popper[x-placement^="top"] .popper__arrow {
     border-width: 5px 5px 0 5px;
     border-color:  map-get($theme-colors, secondary) transparent transparent transparent;
-    bottom: -5px;
+    bottom: -0px;
     left: calc(50% - 5px);
     margin-top: 0;
     margin-bottom: 0;
 }
 .popper[x-placement^="bottom"] {
-    margin-top: 5px;
+    margin-top: 0px;
 }
 .popper[x-placement^="bottom"] .popper__arrow {
     border-width: 0 5px 5px 5px;

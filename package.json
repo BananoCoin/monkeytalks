@@ -62,7 +62,6 @@
     "vue": "^2.6.9",
     "vue-linkify": "^1.0.1",
     "vue-loader": "^15.7.0",
-    "vue-lottie": "^0.2.1",
     "vue-popperjs": "^2.0.3",
     "vue-qrcode-component": "^2.1.1",
     "vue-qriously": "^1.1.1",
