@@ -1,5 +1,5 @@
 <template>
-  <div class="section px-3" id="faucet-section">
+  <div class="section px-3" style="overflow-x:hidden;" id="faucet-section">
     <div class="container px-0">
       <div class="container bg-secondary py-5 rounded-1 px-0">
         <!-- FAUCET FIRST STEP -->
