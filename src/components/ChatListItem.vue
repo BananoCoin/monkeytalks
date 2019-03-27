@@ -53,7 +53,7 @@ export default Vue.extend({
     popper: Popper
   },
   created () {
-    if ($this.store.state.mobileDetect.mobile()) {
+    if (this.$store.state.mobileDetect.mobile()) {
       window.addEventListener('scroll', () => {
         this.hidePopper()
       });

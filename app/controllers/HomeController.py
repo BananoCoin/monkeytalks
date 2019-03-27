@@ -11,9 +11,9 @@ from app.settings import AppConfig
 
 blueprint = Blueprint('home', __name__, static_folder='../static')
 
-@blueprint.route('/', defaults={'path': ''}) 
-@blueprint.route('/<path:path>') 
-def index():
+@blueprint.route('/', defaults={'path': ''})
+@blueprint.route('/<path:path>')
+def index(path):
     return render_template('app.html',
                             mt_account=AppConfig.MONKEYTALKS_ACCOUNT,
                             fee=FeeModel.get_fee(),
