@@ -16,17 +16,30 @@ export default class Util {
         return (bigInt(rawAmount).add(bigInt(fee))).toString()
     }
 
+    static getLang()
+    {
+      if (navigator.languages != undefined) {
+        return navigator.languages[0]; 
+      } else {
+        return navigator.language;
+      }
+    }
+    
+    static getDayName(date: Date) {
+      return date.toLocaleDateString(Util.getLang(), { weekday: "short" });
+    }
+
     static formatDateStr(rawDate : string) : string {
         let date : Date = new Date(rawDate);
         let retTime = "";
-        retTime += date.toLocaleDateString() + ' ';
+        retTime += date.toLocaleDateString();
         let hours = date.getHours();
         let minutes = date.getMinutes();
         let ampm = hours >= 12 ? 'PM' : 'AM';
         hours = hours % 12;
         hours = hours ? hours : 12; // the hour '0' should be '12'
         let minutesStr = minutes < 10 ? '0' + minutes : minutes;
-        retTime += hours + ':' + minutesStr + ' ' + ampm;
+        retTime = hours + ':' + minutesStr + ' ' + ampm + ', ' + Util.getDayName(date) + ', ' + retTime;
         return retTime;       
     }
 
