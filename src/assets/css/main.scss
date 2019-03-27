@@ -487,3 +487,19 @@ input:checked[type="checkbox"]:before{
     height: 3rem;
     width: 3rem;
 }
+
+.hv-100{
+    height:100vh;
+}
+
+.hv-80{
+    height:80vh;
+}
+
+.hv-50{
+    height:50vh;
+}
+
+.my-flex-grow {
+    flex-grow: 1;
+}

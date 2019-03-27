@@ -1,34 +1,37 @@
 <template>
-  <div id="error-section">
+  <div class="hv-100 mx-0 px-0 row d-flex align-items-stretch" id="error-section">
     <!-- NAVBAR -->
-    <Navbar class="mb-1"></Navbar>
+    <Navbar class="mb-1 col-12 mx-auto px-auto"></Navbar>
     <!-- NAVBAR END -->
-    <!-- FAUCET END -->
-    <transition-expand>
-      <FaucetSection v-show="$store.state.showFaucet"/>
-    </transition-expand>
-    <!-- FAUCET END -->
+
+    <!-- ERROR MESSAGE SECTION -->
+    <div class="section bg-secondary col-12 align-self-center" id="error-message-section">
+      <div class="container my-auto">
+        <div class="row d-flex justify-content-center">
+          <div class="col-10 col-lg-8">
+            <img class="w-100 grow-2" src="../assets/img/deadpool-404.svg">
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ERROR MESSAGE SECTION END -->
 
     <!-- FOOTER -->
-    <Footer/>
+    <Footer class="col-12 mx-auto px-auto"/>
     <!-- FOOTER END -->
   </div>
 </template>
 
 <script>
 import Vue from "vue";
-import TransitionExpand from "./TransitionExpand.vue"
 import Navbar from "./Navbar.vue"
 import Footer from "./Footer.vue"
-import FaucetSection from "./FaucetSection.vue"
 
 export default Vue.extend({
   name: "NotFound",
   components: {
-    TransitionExpand,
     Navbar,
     Footer,
-    FaucetSection
   }
 });
 </script>
