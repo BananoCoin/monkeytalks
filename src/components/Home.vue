@@ -1,7 +1,9 @@
 <template>
   <div id="home-section">
     <!-- NAVBAR -->
-    <Navbar class="mb-1"></Navbar>
+    <Navbar class="mb-1"
+      :showHomeButton="false"
+    ></Navbar>
     <!-- NAVBAR END -->
     <!-- FAUCET END -->
     <transition-expand>
@@ -15,7 +17,13 @@
           <div class="col-12 col-lg-10">
             <form>
               <div class="input-group">
-                <EmojiPicker v-show="showEmojiMenu" :searchText="emojiSearchText" :itemClicked="emojiClicked" v-closable="{handler: 'hideEmojiMenu'}"/>
+                <EmojiPicker
+                  v-show="showEmojiMenu"
+                  :visible="showEmojiMenu"
+                  :searchText="emojiSearchText"
+                  :itemClicked="emojiClicked"
+                  v-closable="{handler: 'hideEmojiMenu'}"
+                />
                 <input
                   type="text"
                   class="font-weight-bold form-control form-control-lg rounded-100 bg-transparent border-2 px-4 px-lg-5 col-12 col-md-9 mx-0 mx-md-2"
@@ -49,11 +57,11 @@
     </transition-expand>
     <!-- SEND CARD SECTION END -->
     <!-- CHAT SECTION -->
-    <div class="section mt-5" id="chat-section">
-      <div class="container mt-4">
+    <div class="section mb-5 mt-4 mt-md-5 pb-0 pb-md-3" id="chat-section">
+      <div class="container mb-5 mt-0 md-mt-5">
         <div class="row align-items-center d-flex justify-content-between">
           <div class="col-12 col-md-11 col-lg-9 mx-auto">
-            <transition-group name="list-item" v-if= "messages" >
+            <transition-group name="list-item" v-if="messages">
               <ChatListItem v-for="message in messages" :message="message" :key="message.id"/>
             </transition-group>
             <div v-else>
@@ -71,22 +79,27 @@
       </div>
     </div>
     <!-- CHAT SECTION END -->
+
+    <!-- FOOTER -->
+    <Footer/>
+    <!-- FOOTER END -->
   </div>
 </template>
 
 <script>
-import Vue from "vue"
-import Navbar from "./Navbar.vue"
-import ChatListItem from "./ChatListItem.vue"
-import ChatListItemDummy from "./ChatListItemDummy.vue"
-import FaucetSection from "./FaucetSection.vue"
-import TransitionExpand from "./TransitionExpand.vue"
-import EmojiPicker from "./EmojiPicker.vue"
-import SendCardSection from "./SendCardSection.vue"
-import Stenography from "../util/stenography.ts"
-import Closable from '../directives/closable'
-import API from "../util/api.ts"
-import Big from "big.js"
+import Vue from "vue";
+import Navbar from "./Navbar.vue";
+import Footer from "./Footer.vue";
+import ChatListItem from "./ChatListItem.vue";
+import ChatListItemDummy from "./ChatListItemDummy.vue";
+import FaucetSection from "./FaucetSection.vue";
+import TransitionExpand from "./TransitionExpand.vue";
+import EmojiPicker from "./EmojiPicker.vue";
+import SendCardSection from "./SendCardSection.vue";
+import Stenography from "../util/stenography.ts";
+import Closable from "../directives/closable";
+import API from "../util/api.ts";
+import Big from "big.js";
 
 export default Vue.extend({
   name: "Home",
@@ -98,7 +111,7 @@ export default Vue.extend({
       showEmojiMenu: false,
       emojiIndexStart: -1,
       emojiIndexEnd: -1,
-      emojiSearchText: ''
+      emojiSearchText: ""
     };
   },
   methods: {
@@ -117,51 +130,67 @@ export default Vue.extend({
     },
     emojiClicked(key, event) {
       if (this.showEmojiMenu && key != null) {
-        let newPotentialMessage = this.messageContent.slice(0, -1 * (this.emojiIndexEnd - this.emojiIndexStart)) + key
-        let encodedValue = Stenography.encodeMessage(newPotentialMessage)
-        if (encodedValue == false || Big(Stenography.encodeMessage(newPotentialMessage)).gt(Big(10).pow(29))) {
-          this.showEmojiMenu = false
-          this.emojiIndexStart = -1
-          this.emojiIndexEnd = -1
-          this.emojiSearchText = ''
+        let newPotentialMessage =
+          this.messageContent.slice(
+            0,
+            -1 * (this.emojiIndexEnd - this.emojiIndexStart)
+          ) + key;
+        let encodedValue = Stenography.encodeMessage(newPotentialMessage);
+        if (
+          encodedValue == false ||
+          Big(Stenography.encodeMessage(newPotentialMessage)).gt(
+            Big(10).pow(29)
+          )
+        ) {
+          this.showEmojiMenu = false;
+          this.emojiIndexStart = -1;
+          this.emojiIndexEnd = -1;
+          this.emojiSearchText = "";
         } else {
-          this.messageContent = newPotentialMessage
-          this.$refs.messageInputValue.value = this.messageContent
-          this.showEmojiMenu = false
-          this.emojiIndexStart = -1
-          this.emojiIndexEnd = -1
-          this.emojiSearchText = ''
+          this.messageContent = newPotentialMessage;
+          this.$refs.messageInputValue.value = this.messageContent;
+          this.showEmojiMenu = false;
+          this.emojiIndexStart = -1;
+          this.emojiIndexEnd = -1;
+          this.emojiSearchText = "";
         }
-        this.$refs.messageInputValue.focus()
+        this.$refs.messageInputValue.focus();
       }
     },
     hideEmojiMenu() {
-      this.showEmojiMenu = false
-      this.emojiIndexStart = -1
-      this.emojiIndexEnd = -1
-      this.emojiSearchText = ''
+      this.showEmojiMenu = false;
+      this.emojiIndexStart = -1;
+      this.emojiIndexEnd = -1;
+      this.emojiSearchText = "";
     },
     onMessageChanged(event) {
-      this.messageContent = event.target.value
-      if (!this.showEmojiMenu &&
+      this.messageContent = event.target.value;
+      if (
+        !this.showEmojiMenu &&
         this.$refs.messageInputValue.selectionStart > 0 &&
         this.messageContent.charAt(
           this.$refs.messageInputValue.selectionStart - 1
         ) == ":"
       ) {
         this.showEmojiMenu = true;
-        this.emojiIndexStart = this.$refs.messageInputValue.selectionStart - 1
-        this.emojiIndexEnd = this.$refs.messageInputValue.selectionStart
-        this.emojiSearchText = ':'
+        this.emojiIndexStart = this.$refs.messageInputValue.selectionStart - 1;
+        this.emojiIndexEnd = this.$refs.messageInputValue.selectionStart;
+        this.emojiSearchText = ":";
       } else {
         if (this.showEmojiMenu) {
-          if (this.messageContent.charAt(
-              this.$refs.messageInputValue.selectionStart - 1) == " "
-              || this.messageContent.length == 0) {
-            this.hideEmojiMenu()
+          if (
+            this.messageContent.charAt(
+              this.$refs.messageInputValue.selectionStart - 1
+            ) == " " ||
+            this.messageContent.length == 0
+          ) {
+            this.hideEmojiMenu();
           } else {
-            this.emojiIndexEnd = this.$refs.messageInputValue.selectionStart
-            this.emojiSearchText = this.messageContent.substring(this.emojiIndexStart, this.emojiIndexEnd)
+            this.emojiIndexEnd = this.$refs.messageInputValue.selectionStart;
+            this.emojiSearchText = this.messageContent.substring(
+              this.emojiIndexStart,
+              this.emojiIndexEnd
+            );
           }
         }
       }
@@ -174,7 +203,7 @@ export default Vue.extend({
       ) {
         this.messageContent = this.messageContent.slice(0, -1);
       }
-      event.target.value = this.messageContent
+      event.target.value = this.messageContent;
     }
   },
   computed: {
@@ -189,26 +218,30 @@ export default Vue.extend({
     FaucetSection,
     TransitionExpand,
     SendCardSection,
-    EmojiPicker
+    EmojiPicker,
+    Footer,
   },
   sockets: {
     connect: function() {
-     //console.log("connected to websocket");
+      //console.log("connected to websocket");
     },
     new_message: function(data) {
       let message = JSON.parse(data);
       if (message.test && this.messages != null) {
-        message.id = this.messages[0].id + 1
+        message.id = this.messages[0].id + 1;
       }
       if (this.messages == null) {
-        this.loadingMessages.unshift(message)
+        this.loadingMessages.unshift(message);
       } else {
-        this.messages.forEach((m) => {
+        this.messages.forEach(m => {
           if (m.address == message.address) {
-            m.count = message.count
+            m.count = message.count;
           }
-        })
+        });
         this.messages.unshift(message);
+        if (this.messages.length > 100) {
+          this.$delete(this.messages, this.messages.length - 1)
+        }        
       }
     }
   },
@@ -220,12 +253,12 @@ export default Vue.extend({
           if (Stenography.decodeMessage(element.content) !== false) {
             this.messages.push(element);
           }
-        })
+        });
         this.loadingMessages.forEach(element => {
           if (Stenography.decodeMessage(element.content) !== false) {
-            this.messages.push(element)
+            this.messages.push(element);
           }
-        })
+        });
       }
     });
   }

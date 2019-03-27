@@ -3,95 +3,120 @@
     <div class="container px-0 px-md-4">
       <div class="container bg-secondary py-5 rounded-1 col-12 col-lg-10">
         <div class="row align-items-center d-flex justify-content-center">
-          <!-- DESKTOP -->
-          <div v-if="!$store.state.mobileDetect.mobile()" class="col-12 col-md-5 px-4">
+          <!-- TEXT AND BUTTON -->
+          <div class="col-12 col-md-5 px-4">
             <h4 class="text-center text-md-left text-light font-weight-light">Your Message:</h4>
-            <h2 class="text-center text-md-left text-primary font-weight-extrabold" v-html="emojify(messageContent)" />
+            <h2
+              class="text-center text-md-left text-primary font-weight-extrabold"
+              v-html="emojify(messageContent)"
+            />
             <br>
-            <h4 class="text-center text-md-left text-light font-weight-light">
+            <h4
+              v-if="!$store.state.mobileDetect.mobile()"
+              class="text-center text-md-left text-light font-weight-light"
+            >
               Scan the QR code with
               <span class="font-weight-extrabold h4 text-primary"> Kalium </span>and send
-              <span class="font-weight-extrabold h4 text-primary"> {{ computeWithFeeAsBanano(messageContent).split('.')[0] + "." + computeWithFeeAsBanano(messageContent).split('.')[1].substring(0, 4) + "~"}} Banano</span> to publish the message.
+              <span
+                class="font-weight-extrabold h4 text-primary"
+              >{{ computeWithFeeAsBanano(messageContent).split('.')[0] + "." + computeWithFeeAsBanano(messageContent).split('.')[1].substring(0, 4) + "~"}} Banano</span> to publish the message.
+            </h4>
+             <!-- MOBILE -->
+            <h4
+              v-if="$store.state.mobileDetect.mobile()"
+              class="text-center text-light font-weight-light"
+            >
+              Click the button below and send
+              <span
+                class="font-weight-extrabold h3 text-primary"
+              >{{ computeWithFeeAsBanano(messageContent).split('.')[0] + "." + computeWithFeeAsBanano(messageContent).split('.')[1].substring(0, 4) + "~"}} Banano </span>with
+              <span class="font-weight-extrabold h3 text-primary"> Kalium </span>to publish the message.
             </h4>
             <br>
-          </div>
-          <!-- DESKTOP END -->
-
-          <!-- MOBILE -->
-          <div v-if="$store.state.mobileDetect.mobile()" class="col-12 col-md-5 px-4">
-            <h4 class="text-center text-light font-weight-light">Your Message:</h4>
-            <h2 class="text-center text-primary font-weight-extrabold" v-html="emojify(messageContent)" />
-            <br>
-            <h4 class="text-center text-light font-weight-light">
-              Click the button below and send<span class="font-weight-extrabold h3 text-primary"> {{ computeWithFeeAsBanano(messageContent).split('.')[0] + "." + computeWithFeeAsBanano(messageContent).split('.')[1].substring(0, 4) + "~"}} Banano </span>with<span class="font-weight-extrabold h3 text-primary"> Kalium </span>to publish the message.
-            </h4>
-            <br>
-            <a
-              class="btn btn-lg btn-light btn-block mt-3 mx-auto text-secondary glow-pink grow-3"
+            <div class="row pl-0 pl-md-3 d-flex justify-content-center align-middle">
+              <input type="checkbox" name="premium-checkbox" v-model="isPremium">
+              <span
+                class="font-weight-extrabold h4 text-primary ml-0 mt-3 col-12 text-center col-md text-md-left mt-md-0"
+              >Pimp My Message</span>
+            </div>
+            <a v-if="$store.state.mobileDetect.mobile()"
+              class="btn btn-lg btn-light btn-block mt-4 mx-auto text-secondary glow-pink grow-3"
               :href="getQrUri(messageContent)"
             >Send with Kalium</a>
+             <!-- MOBILE END -->
           </div>
-          <!-- MOBILE END -->
+          <!-- TEXT AND BUTTON END -->
 
           <!-- MONKEYQR -->
-          <div v-if="!$store.state.mobileDetect.mobile()" 
+          <div
+            v-if="!$store.state.mobileDetect.mobile()"
             class="col-10 col-md-6 col-lg-4 d-flex justify-content-center align-items-center mt-4 mt-md-0"
           >
             <div class="w-100">
               <img src="../assets/img/monkeyQR.svg">
             </div>
             <div class="position-absolute qrWidth">
-              <qriously
-                :value="getQrUri(messageContent)" 
-                :size="1024"
-                level="L"
-                id="amountQr"
-              />
+              <qriously :value="getQrUri(messageContent)" :size="1024" level="L" id="amountQr"/>
             </div>
+          </div>
+          <!-- MONKEYQR END -->
         </div>
-        <!-- MONKEYQR END -->
       </div>
     </div>
-  </div>
   </div>
 </template>
 
 <script>
-import Vue from "vue"
-import posed from "vue-pose"
-import VueQriously from "vue-qriously"
-import Stenography from "../util/stenography.ts"
-import Util from "../util/util.ts"
-import API from "../util/api.ts"
+import Vue from "vue";
+import VueQriously from "vue-qriously";
+import Stenography from "../util/stenography.ts";
+import Util from "../util/util.ts";
+import API from "../util/api.ts";
 
 Vue.use(VueQriously);
 
 export default Vue.extend({
   name: "SendCardSection",
+  data() {
+    return {
+      isPremium: false
+    };
+  },
   props: {
-    messageContent: ''
+    messageContent: ""
   },
   methods: {
     computeWithFeeAsBanano(content) {
-      return Util.rawToBanano(Util.computeWithFee(Stenography.encodeMessage(content), this.$store.state.fee))
+      return Util.rawToBanano(
+        Util.computeWithFee(
+          Stenography.encodeMessage(content),
+          this.isPremium ? this.$store.state.premiumFee : this.$store.state.fee
+        )
+      );
     },
     getQrUri(content) {
-      return `ban:${this.$store.state.mtAccount}?amount=${Util.computeWithFee(Stenography.encodeMessage(content), this.$store.state.fee)}`
+      return `ban:${this.$store.state.mtAccount}?amount=${Util.computeWithFee(
+        Stenography.encodeMessage(content),
+        this.isPremium ? this.$store.state.premiumFee : this.$store.state.fee
+      )}`;
     },
     emojify(content) {
-      let emojiMap = this.$store.state.emojiMap
+      let emojiMap = this.$store.state.emojiMap;
       // Process emojis/images
       Object.keys(emojiMap).forEach(function(key) {
-        content = content.replace(key, `<img src=${emojiMap[key]} height="30" width="30" />`)
-      })
-      return content
+        content = content.replace(
+          key,
+          `<img src=${emojiMap[key]} height="30" width="30" />`
+        );
+      });
+      return content;
     }
   },
   mounted: function() {
-    API.getFees().then((response) => {
+    API.getFees().then(response => {
       if (response != null) {
-        this.$store.state.fee = response.fee
-        this.$store.state.premiumFee = response.premiumFee
+        this.$store.state.fee = response.fee;
+        this.$store.state.premiumFee = response.premium;
       }
     });
   }

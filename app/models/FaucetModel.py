@@ -28,7 +28,7 @@ class FaucetPayment(db.Model):
         if account is None or Validations.validate_address(account) == False:
             return (None, "That doesn't look like a valid BANANO address")
         # Block to prevent concurrent requests
-        with rd.lock(account, timeout=300, blocking_timeout=60):
+        with rd.lock(f'mtlock{account}', timeout=300, blocking_timeout=60):
             # Check recent payments
             since_ts = datetime.datetime.utcnow() - datetime.timedelta(days=1)
             payment_24h = (cls.select()
@@ -38,13 +38,10 @@ class FaucetPayment(db.Model):
                 diff = relativedelta(payment.created_at + datetime.timedelta(days=1), datetime.datetime.utcnow())
                 diffstr = ""
                 if diff.hours > 0:
-                    diffstr += str(diff.hours) + ":"
+                    diffstr += str(diff.hours) + " hours, "
                 if diff.minutes > 0:
-                    diffstr += str(diff.minutes) + ":"
-                if diff.hours <= 0 and diff.minutes <= 0:
-                    diffstr += str(diff.seconds) + " seconds"
-                else:
-                    diffstr += str(diff.seconds)
+                    diffstr += str(diff.minutes) + " minutes, and "
+                diffstr += str(diff.seconds) + " seconds"
                 return (None, f"You've already stocked up recently - why don't you come back in {diffstr}")
             # Calculate payment amount in raw
             rpc = RPC()

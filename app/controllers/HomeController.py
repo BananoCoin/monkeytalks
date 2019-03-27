@@ -4,15 +4,15 @@ from flask import Blueprint, render_template, request, abort, jsonify
 from flask_socketio import emit
 from app.extensions import socketio
 from app.util.rpc import RPC
-from app.util.dateutil import format_js_iso
 from app.models.MessageModel import Message
 from app.models.FeeModel import FeeModel
 from app.settings import AppConfig
 
 blueprint = Blueprint('home', __name__, static_folder='../static')
 
-@blueprint.route('/')
-def index():
+@blueprint.route('/', defaults={'path': ''})
+@blueprint.route('/<path:path>')
+def index(path):
     return render_template('app.html',
                             mt_account=AppConfig.MONKEYTALKS_ACCOUNT,
                             fee=FeeModel.get_fee(),
@@ -57,20 +57,9 @@ def get_messages():
     """Load initial messages"""
     message_response = []
     for m in Message.select().where(Message.hidden == False).order_by(Message.id.desc()).limit(100):
-        message_response.append(format_message(m))
+        message_response.append(Message.format_message(m))
     return jsonify(message_response)
-
-def format_message(message : Message) -> dict:
-    message_json = {
-        'id': message.id,
-        'content': message.message_in_raw,
-        'date': format_js_iso(message.created_at),
-        'premium': message.premium,
-        'address': message.address,
-        'count': message.get_message_count()
-    }
-    return message_json
 
 def emit_message(message : Message):
     """Emit a new chat message to the UI - Broadcasted to all clients"""
-    emit('new_message', json.dumps(format_message(message)), namespace='/mtchannel', broadcast=True)
+    emit('new_message', json.dumps(Message.format_message(message)), namespace='/mtchannel', broadcast=True)
