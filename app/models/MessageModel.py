@@ -7,13 +7,14 @@ from app.database import db
 from app.settings import AppConfig
 from app.models.FeeModel import FeeModel
 from app.util.nanote import Nanote
+from app.util.dateutil import format_js_iso
 
 # Redis stores message counts, because postgres count is a slow operation
 RD_COUNT_KEY = 'mtcount'
 rd = redis.Redis()
 
 class Message(db.Model):
-    block_hash = peewee.CharField(max_length=64)
+    block_hash = peewee.CharField(max_length=64, index=True)
     address = peewee.CharField(max_length=64)
     message_in_raw = peewee.CharField()
     created_at = peewee.DateTimeField(default=datetime.datetime.utcnow(), index=True)
@@ -36,19 +37,23 @@ class Message(db.Model):
             return (False, "Message has invalid checksum - can't be decoded")
         return (True, "Valid")
 
-    @staticmethod
-    def save_block_as_message(block : dict):
+    @classmethod
+    def save_block_as_message(cls, block : dict):
         block_contents = json.loads(block['contents'])
+        return cls.save_as_message(block['amount'], block['hash'], block_contents['account'], block_contents['link_as_account'])
+
+    @classmethod
+    def save_as_message(cls, amount: str, block_hash: str, account: str, destination: str):
         premium = False
-        if int(block['amount']) - FeeModel().get_premium_fee() > 0:
+        if int(amount) - FeeModel().get_premium_fee() > 0:
             premium = True
         message = Message(
-            block_hash = block['hash'],
-            destination = block_contents['link_as_account'],
-            message_in_raw = str(int(block['amount'])),
+            block_hash = block_hash,
+            destination = destination,
+            message_in_raw = str(int(amount)),
             created_at = datetime.datetime.utcnow(),
             premium = premium,
-            address = block_contents['account']
+            address = account
         )
         if message.save() > 0:
             message.inc_message_count()
@@ -74,3 +79,16 @@ class Message(db.Model):
         if count is None:
             return 0
         return int(count.decode('utf-8'))
+
+    @staticmethod
+    def format_message(message) -> dict:
+        """Format a message in json to send to the UI"""
+        message_json = {
+            'id': message.id,
+            'content': message.message_in_raw,
+            'date': format_js_iso(message.created_at),
+            'premium': message.premium,
+            'address': message.address,
+            'count': message.get_message_count()
+        }
+        return message_json

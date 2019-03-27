@@ -50,3 +50,16 @@ class RPC():
         if resp is not None and 'block' in resp:
             return resp['block']
         return None
+
+    def account_history(self, account : str, count : int = 100) -> list:
+        """Return account history, limited by count"""
+        action = {
+            "action": "account_history",
+            "account": account,
+            "count": count,
+            "raw": True
+        }
+        resp = self.communicate_wallet(action)
+        if resp is not None and 'history' in resp:
+            return resp['history']
+        return None
