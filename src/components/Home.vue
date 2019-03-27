@@ -1,7 +1,9 @@
 <template>
   <div id="home-section">
     <!-- NAVBAR -->
-    <Navbar class="mb-1"></Navbar>
+    <Navbar class="mb-1"
+      :showHomeButton="false"
+    ></Navbar>
     <!-- NAVBAR END -->
     <!-- FAUCET END -->
     <transition-expand>
