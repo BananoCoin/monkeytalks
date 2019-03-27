@@ -237,6 +237,9 @@ export default Vue.extend({
           }
         });
         this.messages.unshift(message);
+        if (this.messages.length > 100) {
+          this.$delete(this.messages, this.messages.length - 1)
+        }        
       }
     }
   },
