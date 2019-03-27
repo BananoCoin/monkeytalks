@@ -52,13 +52,6 @@ export default Vue.extend({
   components: {
     popper: Popper
   },
-  created () {
-    if (this.$store.state.mobileDetect.mobile()) {
-      window.addEventListener('scroll', () => {
-        this.hidePopper()
-      });
-    }
-  },
   methods: {
     decodeMessage(content) {
       let decodedMessage =  Stenography.decodeMessage(content)
