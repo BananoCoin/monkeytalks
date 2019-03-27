@@ -23,7 +23,7 @@
       v-bind:class="[message.premium ? ['bg-primary', 'grow-2', 'glow-green', 'speech-bubble-green'] : ['bg-secondary', 'grow-2', 'glow-purple', 'speech-bubble-purple'] ]"
     >
       <div class="row align-items-center align-middle d-flex justify-content-between py-2">
-        <h3 class="col-12 text-left col-md-6 font-weight-bold" 
+        <h3 class="col-12 text-left col-md-6 font-weight-bold break-word" 
           v-linkified
           v-bind:class="[message.premium ? ['text-dark'] : ['text-light'] ]"
           v-html="decodeMessage(message.content)"></h3>
