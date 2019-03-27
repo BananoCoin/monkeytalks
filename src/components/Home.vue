@@ -241,7 +241,13 @@ export default Vue.extend({
         this.messages.unshift(message);
         if (this.messages.length > 100) {
           this.$delete(this.messages, this.messages.length - 1)
-        }        
+        }
+        // Auto-close
+        if (bigInt(Stenography.encodeMessage(this.messageContent))
+            .equals(bigInt(message.content.slice(-29)))) {
+          this.messageContent = ""
+          this.$store.state.showSendCard = false
+        }
       }
     }
   },
