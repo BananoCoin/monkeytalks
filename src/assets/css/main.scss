@@ -179,6 +179,14 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
     @include transform(scale(1.06));
 }
 
+.grow-4{
+    @include transform(scale(1));
+    @include transition(all 0.15s ease-out);
+}
+.grow-4:hover{
+    @include transform(scale(1.2));
+}
+
 .glow-green {
     @include box-shadow(0 0 0rem rgba($green, 0));
 }

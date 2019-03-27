@@ -1,5 +1,5 @@
 <template>
-  <div class="row align-items-center d-flex justify-content-around my-3 my-md-4">
+  <div class="row align-items-center d-flex justify-content-around my-4">
     <div class="col z-index-100">
       <popper
         :options="{

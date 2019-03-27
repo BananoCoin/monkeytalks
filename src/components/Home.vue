@@ -55,8 +55,8 @@
     </transition-expand>
     <!-- SEND CARD SECTION END -->
     <!-- CHAT SECTION -->
-    <div class="section my-5" id="chat-section">
-      <div class="container my-5">
+    <div class="section mb-5 mt-4 mt-md-5 pb-0 pb-md-3" id="chat-section">
+      <div class="container mb-5 mt-0 md-mt-5">
         <div class="row align-items-center d-flex justify-content-between">
           <div class="col-12 col-md-11 col-lg-9 mx-auto">
             <transition-group name="list-item" v-if="messages">
