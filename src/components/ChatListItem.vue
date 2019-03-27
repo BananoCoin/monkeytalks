@@ -14,7 +14,7 @@
           <p class="text-left text-light font-weight-light" v-html="threeLineAddress(message.address)" />
         </div>
         <button slot="reference" class="btn-primary bg-transparent border-none rounded-100 px-0 ml-ng-1" style="outline:none; box-shadow:none;">
-          <img class="w-100 grow" :src="`https://monkeys.appditto.com?address=${message.address}`">
+          <img class="w-100 grow" :src="`https://monkeys.appditto.com?address=${message.address}`" ref="monkeyImg">
         </button>
       </popper>
     </div>
@@ -71,7 +71,12 @@ export default Vue.extend({
       return decodedMessage
     },
     hidePopper() {
-      this.$refs.popperT.showPopper = false
+      if (this.$store.state.mobileDetect.mobile()) {
+        if (this.$refs.monkeyImg != null) {
+          this.$refs.monkeyImg.blur()
+        }
+        this.$refs.popperT.showPopper = false
+      }
     },
     formatDate(dateStr) {
       return Util.formatDateStr(dateStr)
