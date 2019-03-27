@@ -30,8 +30,7 @@ def register_extensions(app):
     if not get_debug_flag():
         scheduler.init_app(app)
         scheduler.start()
-        with app.app_context():
-            scheduler.run_job('missingcheck')
+        scheduler.run_job('missingcheck')
 
 def register_blueprints(app):
     """Register Flask blueprints."""
