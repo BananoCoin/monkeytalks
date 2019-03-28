@@ -16,6 +16,10 @@ body{
     background: $dark-purple;
 }
 
+input[type="checkbox"] {
+    cursor: pointer;
+}
+
 /*! Buttons (Custom) START */
 .btn-lg{
     border-radius: 50rem;

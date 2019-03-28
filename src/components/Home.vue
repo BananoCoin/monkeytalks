@@ -87,19 +87,20 @@
 </template>
 
 <script>
-import Vue from "vue";
-import Navbar from "./Navbar.vue";
-import Footer from "./Footer.vue";
-import ChatListItem from "./ChatListItem.vue";
-import ChatListItemDummy from "./ChatListItemDummy.vue";
-import FaucetSection from "./FaucetSection.vue";
-import TransitionExpand from "./TransitionExpand.vue";
-import EmojiPicker from "./EmojiPicker.vue";
-import SendCardSection from "./SendCardSection.vue";
-import Stenography from "../util/stenography.ts";
-import Closable from "../directives/closable";
-import API from "../util/api.ts";
-import Big from "big.js";
+import Vue from "vue"
+import Navbar from "./Navbar.vue"
+import Footer from "./Footer.vue"
+import ChatListItem from "./ChatListItem.vue"
+import ChatListItemDummy from "./ChatListItemDummy.vue"
+import FaucetSection from "./FaucetSection.vue"
+import TransitionExpand from "./TransitionExpand.vue"
+import EmojiPicker from "./EmojiPicker.vue"
+import SendCardSection from "./SendCardSection.vue"
+import Stenography from "../util/stenography.ts"
+import Closable from "../directives/closable"
+import API from "../util/api.ts"
+import Big from "big.js"
+import bigInt from "big-integer"
 
 export default Vue.extend({
   name: "Home",
@@ -241,7 +242,13 @@ export default Vue.extend({
         this.messages.unshift(message);
         if (this.messages.length > 100) {
           this.$delete(this.messages, this.messages.length - 1)
-        }        
+        }
+        // Auto-close
+        if (bigInt(Stenography.encodeMessage(this.messageContent))
+            .equals(bigInt(message.content.slice(-29)))) {
+          this.messageContent = ""
+          this.$store.state.showSendCard = false
+        }
       }
     }
   },
