@@ -11,7 +11,9 @@
       <div class="container my-auto">
         <div class="row d-flex justify-content-center pb-0 pb-md-5">
           <div class="col-12 col-md-10 col-lg-8 col-xl-7">
-            <img class="w-100 grow-2" src="../assets/img/deadpool-404.svg">
+            <a href="/">
+            <img class="w-100 grow-3" src="../assets/img/deadpool-404.svg">
+            </a>
           </div>
         </div>
       </div>
