@@ -1,6 +1,9 @@
 from gevent import monkey
 monkey.patch_all()
 
+import psycogreen.gevent
+psycogreen.gevent.patch_psycopg()
+
 from flask.helpers import get_debug_flag
 
 from app.app import create_app

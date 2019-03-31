@@ -11,6 +11,7 @@ python-dotenv
 # Database
 peewee
 Psycopg2-binary
+psycogreen
 
 # Deployment
 uwsgi
