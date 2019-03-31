@@ -1,3 +1,6 @@
+from gevent import monkey
+monkey.patch_all()
+
 from flask.helpers import get_debug_flag
 
 from app.app import create_app

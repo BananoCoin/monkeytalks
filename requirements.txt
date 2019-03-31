@@ -13,16 +13,15 @@ peewee
 Psycopg2-binary
 
 # Deployment
-gunicorn
+uwsgi
 
 # Webpack
 flask-webpack-fork
 
 # SocketIO
 flask-socketio
-#eventlet
-# Temporary fix for: https://github.com/eventlet/eventlet/issues/551
-git+https://github.com/erickj00001/eventlet.git@select-fix 
+gevent
+gevent-websocket
 
 # Latest JSON lib
 simplejson
