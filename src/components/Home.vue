@@ -259,6 +259,7 @@ export default Vue.extend({
         if (bigInt(Stenography.encodeMessage(this.messageContent))
             .equals(bigInt(message.content.slice(-29)))) {
           this.messageContent = ""
+          this.$refs.messageInputValue.value = ""
           this.$store.state.showSendCard = false
         }
       }
