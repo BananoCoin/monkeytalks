@@ -55,3 +55,14 @@ def deletemsg(hash):
         click.echo(f"deleted message: {hash}")
     except Message.DoesNotExist:
         click.echo(f"Couldn't find message with has {hash}")
+
+@click.command()
+@click.argument('hash', required=True)
+@with_appcontext
+def undeletemsg(hash):
+    try:
+        m = Message.select().where(Message.block_hash  == hash).get()
+        Message.update(hidden = False).where(Message.id == m.id).execute()
+        click.echo(f"Un-hid message: {hash}")
+    except Message.DoesNotExist:
+        click.echo(f"Couldn't find message with has {hash}")
