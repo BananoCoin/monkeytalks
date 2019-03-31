@@ -39,3 +39,4 @@ def register_commands(app):
     app.cli.add_command(commands.test)
     app.cli.add_command(commands.dbinit)
     app.cli.add_command(commands.testmessage)
+    app.cli.add_command(commands.deletemsg)

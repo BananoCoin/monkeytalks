@@ -43,3 +43,14 @@ def testmessage():
         'address':'ban_3jb1fp4diu79wggp7e171jdpxp95auji4moste6gmc55pptwerfjqu48okse'
     }
     emit('new_message', json.dumps(message_json), namespace='/mtchannel', broadcast=True)
+
+@click.command()
+@click.argument('hash', required=True)
+@with_appcontext
+def deletemsg(hash):
+    try:
+        m = Message.select().where(Message.block_hash  == hash).get()
+        Message.update(hidden = True).where(Message.id == m.id).execute()
+        emit('delete_message', json.dumps(Message.format_message(m)), namespace='/mtchannel', broadcast=True)
+    except Message.DoesNotExist:
+        click.echo(f"Couldn't find message with has {hash}")

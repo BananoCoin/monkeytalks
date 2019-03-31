@@ -226,6 +226,18 @@ export default Vue.extend({
     connect: function() {
       //console.log("connected to websocket");
     },
+    delete_message: function(data) {
+      let message = JSON.parse(data)
+      let toDelete = null
+      for (let i = 0; i < this.messages.length; i++) {
+        if (this.messages[i].id == parseInt(message.id)) {
+          toDelete = i
+        }
+      }
+      if (toDelete != null) {
+        this.$delete(this.messages, toDelete)
+      }
+    },
     new_message: function(data) {
       let message = JSON.parse(data);
       if (message.test && this.messages != null) {
