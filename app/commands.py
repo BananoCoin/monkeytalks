@@ -52,5 +52,6 @@ def deletemsg(hash):
         m = Message.select().where(Message.block_hash  == hash).get()
         Message.update(hidden = True).where(Message.id == m.id).execute()
         emit('delete_message', json.dumps(Message.format_message(m)), namespace='/mtchannel', broadcast=True)
+        click.echo(f"deleted message: {hash}")
     except Message.DoesNotExist:
         click.echo(f"Couldn't find message with has {hash}")
