@@ -18,7 +18,7 @@
                 <div class="input-group">
                   <input
                     type="text"
-                    :class="['font-weight-bold', 'textfield-light', 'form-control', 'form-control-lg', 'rounded-100', isValidAddress ? 'text-white' : 'text-light', 'bg-transparent', 'border-light', 'border-2', 'mt-3', 'px-4', 'px-lg-5']"
+                    :class="['font-weight-bold', 'textfield-light', 'form-control', 'form-control-lg', 'rounded-100', isValidAddress ? 'text-primary' : 'text-light', 'bg-transparent', 'border-light', 'border-2', 'mt-3', 'px-4', 'px-lg-5']"
                     id="addressInput"
                     placeholder="ban_address"
                     @input="onAddressChanged"
@@ -33,7 +33,7 @@
                   sitekey="6Lfxq5kUAAAAAEFflKdG_ajIT5WLxnvoQHt_ker1"
                 />
                 <button
-                  :class="['btn', 'btn-lg', isValidAddress ? ['btn-primary', 'glow-green'] : ['btn-light', 'glow-pink'], 'btn-block', 'mt-3', 'mx-auto', 'col-12', 'col-md-8', 'col-lg-6', 'text-secondary', 'grow-3']"
+                  :class="['btn', 'btn-lg', isValidAddress ? ['btn-primary', 'glow-green', 'grow-3', 'text-dark'] : ['btn-light', 'text-secondary'], 'btn-block', 'mt-3', 'mx-auto', 'col-12', 'col-md-8', 'col-lg-6']"
                   :disabled="!isValidAddress"
                   @click="onFaucetSubmit"
                 >Send Me Some Banano</button>
