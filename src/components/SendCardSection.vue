@@ -16,22 +16,22 @@
               class="text-center text-md-left text-light font-weight-light"
             >
               Scan the QR code with
-              <span class="font-weight-extrabold h4 text-primary"> Kalium </span>and send
-              <span
-                class="font-weight-extrabold h4 text-primary"
-              >{{ computeWithFeeAsBanano(messageContent).split('.')[0] + "." + computeWithFeeAsBanano(messageContent).split('.')[1].substring(0, 4) + "~"}} Banano</span> to publish the message.
+              <h4 class="font-weight-extrabold h4 text-primary my-1">Kalium v2</h4>and send
+              <h4
+                class="font-weight-extrabold h4 text-primary my-1"
+              >{{ computeWithFeeAsBanano(messageContent).split('.')[0] + "." + computeWithFeeAsBanano(messageContent).split('.')[1].substring(0, 6) + "~"}} Banano</h4> to publish the message.
             </h4>
              <!-- MOBILE -->
-            <h4
+            <h5
               v-if="$store.state.mobileDetect.mobile()"
               class="text-center text-light font-weight-light"
             >
               Click the button below and send
-              <span
-                class="font-weight-extrabold h3 text-primary"
-              >{{ computeWithFeeAsBanano(messageContent).split('.')[0] + "." + computeWithFeeAsBanano(messageContent).split('.')[1].substring(0, 4) + "~"}} Banano </span>with
-              <span class="font-weight-extrabold h3 text-primary"> Kalium </span>to publish the message.
-            </h4>
+              <h4
+                class="font-weight-extrabold h3 text-primary my-1"
+              >{{ computeWithFeeAsBanano(messageContent).split('.')[0] + "." + computeWithFeeAsBanano(messageContent).split('.')[1].substring(0, 6) + "~"}} Banano</h4>with
+              <h4 class="font-weight-extrabold h3 text-primary my-1">Kalium v2</h4>to publish the message.
+            </h5>
             <br>
             <div class="row pl-0 pl-md-3 d-flex justify-content-center align-middle">
               <input type="checkbox" name="premium-checkbox" v-model="isPremium">
@@ -42,7 +42,7 @@
             <a v-if="$store.state.mobileDetect.mobile()"
               class="btn btn-lg btn-light btn-block mt-4 mx-auto text-secondary glow-pink grow-3"
               :href="getQrUri(messageContent)"
-            >Send with Kalium</a>
+            >Send with Kalium v2</a>
              <!-- MOBILE END -->
           </div>
           <!-- TEXT AND BUTTON END -->
