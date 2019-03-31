@@ -59,7 +59,7 @@ export default Vue.extend({
       // Process emojis/images
       decodedMessage = Util.escapeHtml(decodedMessage)
       Object.keys(emojiMap).forEach(function(key) {
-        decodedMessage = decodedMessage.replace(key, `<img src=${emojiMap[key]} class="emoji" />`)
+        decodedMessage = decodedMessage.replace(new RegExp(key, 'g'), `<img src=${emojiMap[key]} class="emoji" />`)
       })
       return decodedMessage
     },

@@ -105,7 +105,7 @@ export default Vue.extend({
       // Process emojis/images
       Object.keys(emojiMap).forEach(function(key) {
         content = content.replace(
-          key,
+          new RegExp(key, 'g'),
           `<img src=${emojiMap[key]} height="30" width="30" />`
         );
       });
