@@ -1,12 +1,14 @@
 import click
 import datetime
 import random
+import redis
 import os
 import simplejson as json
+from peewee import fn
 from flask_socketio import emit
 from flask.cli import with_appcontext
 
-from app.models.MessageModel import Message
+from app.models.MessageModel import Message, RD_COUNT_KEY
 from app.models.FaucetModel import FaucetPayment
 from app.util.dateutil import format_js_iso
 
@@ -66,3 +68,11 @@ def undeletemsg(hash):
         click.echo(f"Un-hid message: {hash}")
     except Message.DoesNotExist:
         click.echo(f"Couldn't find message with has {hash}")
+
+@click.command()
+@with_appcontext
+def fixcounts():
+    rd = redis.Redis()
+    for r in Message.select(fn.COUNT(Message.id).alias("count"), Message.address).group_by(Message.address):
+        click.echo(f"Setting count for {r.address} to {r.count}")
+        rd.hset(r.address, RD_COUNT_KEY, str(r.count))
