@@ -6,8 +6,6 @@ const webpack = require('webpack');
  */
 const ManifestPlugin = require('webpack-manifest-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
-const PurgecssPlugin = require('purgecss-webpack-plugin');
-const glob = require('glob-all');
 
 // take debug mode from the environment
 const debug = (process.env.NODE_ENV !== 'production');
@@ -43,9 +41,10 @@ module.exports = {
             {
                 test: /\.s?[ac]ss$/,
                 use: [
-                    { loader: 'vue-style-loader', options: { sourceMap: true } },
-                    { loader: 'css-loader', options: { sourceMap: true } },
-                    { loader: 'sass-loader', options: { sourceMap: true, precision:10 } }
+                    'vue-style-loader',
+                    'css-loader',
+                    'sass-loader',
+                    'postcss-loader'
                 ],
             },
             {
@@ -84,14 +83,6 @@ module.exports = {
         new webpack.ProvidePlugin({io: 'socket.io-client'}),
         new ManifestPlugin({fileName: path.join(__dirname, 'app', 'webpack', 'manifest.json'), writeToFileEmit: debug}),
         new VueLoaderPlugin(),
-        new PurgecssPlugin({
-            paths: glob.sync([
-                path.join(__dirname, './**/*.vue'),
-                path.join(__dirname, './src/**/*.js'),
-                path.join(__dirname, './src/**/*.ts')
-            ]),
-            minify: true
-        })
     ].concat(debug ? [] : [
         // production webpack plugins go here
         new webpack.DefinePlugin({
