@@ -45,18 +45,17 @@ class FaucetPayment(db.Model):
                 diffstr += str(diff.seconds) + " seconds"
                 return (None, f"You've already stocked up recently - why don't you come back in {diffstr}")
             # Check risk level
-            high_risk = cls.is_high_risk(ip)
-            if high_risk is None:
+            multiplier = cls.payment_multiplier(ip)
+            if multiplier is None:
                 return (None, "This is embarassing...we have a problem on our end - please try again later!")
             # Calculate payment amount in raw
             rpc = RPC()
             balance = rpc.account_balance(current_app.config['MONKEYTALKS_ACCOUNT'])
             if balance is None:
                 return (None, "This is embarassing...we have a problem on our end - please try again later!")
-            if not high_risk:
-                payment_amount = balance * current_app.config['PAYOUT_FACTOR'] # A portion of our balance
-            else:
-                payment_amount = balance * current_app.config['PAYOUT_FACTOR_RISK'] # A portion of our balance
+            elif multiplier < 0.05:
+                return (None, "Sorry, you are not eligible for the faucet at this time")
+            payment_amount = balance * current_app.config['PAYOUT_FACTOR'] * multiplier # A portion of our balance
             # Be good guys and don't send out odd raw amounts, this trims it. e.g. 10.034566 BANANO = 10.03 BANANO
             payment_amount = BananoConversions.banano_to_raw(BananoConversions.raw_to_banano(payment_amount))
             if int(payment_amount == 0):
@@ -73,12 +72,13 @@ class FaucetPayment(db.Model):
             return (payment_record, f"Congratulations! You've been sent {BananoConversions.raw_to_banano(payment_amount)} BANANO!")
 
     @classmethod
-    def is_high_risk(cls, ip : str) -> bool:
+    def payment_multiplier(cls, ip : str) -> float:
         try:
             r = requests.get(f'https://check.getipintel.net/check.php?ip={ip}&contact=appdev@banano.cc')
             score = float(r.content)
-            if score >= 0.95:
-                return True
-            return False
+            if score < 0:
+                return 0.5
+            else:
+                return 1.0 - score
         except Exception:
             return None
