@@ -73,7 +73,7 @@ class FaucetPayment(db.Model):
             return (payment_record, f"Congratulations! You've been sent {BananoConversions.raw_to_banano(payment_amount)} BANANO!")
 
     @classmethod
-    def is_high_risk(ip : str) -> bool:
+    def is_high_risk(cls, ip : str) -> bool:
         try:
             r = requests.get(f'https://check.getipintel.net/check.php?ip={ip}&contact=appdev@banano.cc')
             score = float(r.content)
