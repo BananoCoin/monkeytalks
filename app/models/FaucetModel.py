@@ -1,6 +1,7 @@
 import datetime
 import redis
 import peewee
+import requests
 
 from dateutil.relativedelta import relativedelta
 
@@ -43,15 +44,19 @@ class FaucetPayment(db.Model):
                     diffstr += str(diff.minutes) + " minutes, and "
                 diffstr += str(diff.seconds) + " seconds"
                 return (None, f"You've already stocked up recently - why don't you come back in {diffstr}")
-            # Check open
-            rpc = RPC()
-            if not rpc.account_open(account):
-                return (None, "Sorry - you can't claim the faucet at this time")
+            # Check risk level
+            high_risk = cls.is_high_risk(ip)
+            if high_risk is None:
+                return (None, "This is embarassing...we have a problem on our end - please try again later!")
             # Calculate payment amount in raw
+            rpc = RPC()
             balance = rpc.account_balance(current_app.config['MONKEYTALKS_ACCOUNT'])
             if balance is None:
                 return (None, "This is embarassing...we have a problem on our end - please try again later!")
-            payment_amount = balance * current_app.config['PAYOUT_FACTOR'] # A portion of our balance
+            if not high_risk:
+                payment_amount = balance * current_app.config['PAYOUT_FACTOR'] # A portion of our balance
+            else:
+                payment_amount = balance * current_app.config['PAYOUT_FACTOR_RISK'] # A portion of our balance
             # Be good guys and don't send out odd raw amounts, this trims it. e.g. 10.034566 BANANO = 10.03 BANANO
             payment_amount = BananoConversions.banano_to_raw(BananoConversions.raw_to_banano(payment_amount))
             if int(payment_amount == 0):
@@ -66,3 +71,14 @@ class FaucetPayment(db.Model):
             )
             payment_record.save()
             return (payment_record, f"Congratulations! You've been sent {BananoConversions.raw_to_banano(payment_amount)} BANANO!")
+
+    @classmethod
+    def is_high_risk(ip : str) -> bool:
+        try:
+            r = requests.get(f'https://check.getipintel.net/check.php?ip={ip}&contact=appdev@banano.cc')
+            score = float(r.content)
+            if score >= 0.95:
+                return True
+            return False
+        except Exception:
+            return None

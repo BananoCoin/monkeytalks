@@ -18,6 +18,7 @@ class AppConfig(object):
     MONKEYTALKS_DEFAULT_FEE=500000000000000000000000000000 # 10 BANANO
     MONKEYTALKS_DEFAULT_PREMIUM_FEE=2000000000000000000000000000000 # 10 BANANO for premium message
     PAYOUT_FACTOR=0.0005 # Pay out 0.05% of account balance
+    PAYOUT_FACTOR_RISK=0.00005 # Pay out 0.005% for high risk clients
     # Recaptcha Secret
     RECAPTCHA_SECRET=os.getenv("RECAPTCHA_SECRET", "password")
 
