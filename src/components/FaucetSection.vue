@@ -9,7 +9,7 @@
               <h3 class="text-center text-light font-weight-bold px-3">Enter your Banano address below.</h3>
               <h5
                 class="text-center text-light font-weight-light mt-2 px-3"
-              >We will send you 0.1% of the faucet balance.</h5>
+              >We will send you upto 0.05% of the faucet balance.</h5>
             </div>
           </div>
           <div class="row align-items-center d-flex justify-content-around py-3">
