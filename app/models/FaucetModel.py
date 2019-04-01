@@ -43,8 +43,11 @@ class FaucetPayment(db.Model):
                     diffstr += str(diff.minutes) + " minutes, and "
                 diffstr += str(diff.seconds) + " seconds"
                 return (None, f"You've already stocked up recently - why don't you come back in {diffstr}")
-            # Calculate payment amount in raw
+            # Check open
             rpc = RPC()
+            if not rpc.account_open(account):
+                return (None, "Sorry - you can't claim the faucet at this time")
+            # Calculate payment amount in raw
             balance = rpc.account_balance(current_app.config['MONKEYTALKS_ACCOUNT'])
             if balance is None:
                 return (None, "This is embarassing...we have a problem on our end - please try again later!")

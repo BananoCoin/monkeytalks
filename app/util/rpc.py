@@ -63,3 +63,13 @@ class RPC():
         if resp is not None and 'history' in resp:
             return resp['history']
         return None
+
+    def account_open(self, account : str) -> bool:
+        action = {
+            "action": "account_info",
+            "account": account
+        }
+        resp = self.communicate_wallet(action)
+        if resp is None or 'error' in resp:
+            return False
+        return True
