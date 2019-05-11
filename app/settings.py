@@ -20,6 +20,10 @@ class AppConfig(object):
     PAYOUT_FACTOR=0.0005 # Pay up to 0.1% of account balance
     # Recaptcha Secret
     RECAPTCHA_SECRET=os.getenv("RECAPTCHA_SECRET", "password")
+    # Solvemedia secret
+    SOLVEMEDIA_CKEY=os.getenv("SOLVEMEDIA_CKEY", "ckey")
+    SOLVEMEDIA_CKEY=os.getenv("SOLVEMEDIA_VKEY", "vkey")
+    SOLVEMEDIA_CKEY=os.getenv("SOLVEMEDIA_HKEY", "hkey")
 
 class DevConfig(AppConfig):
     ENV = 'dev'
