@@ -73,6 +73,7 @@ class FaucetPayment(db.Model):
 
     @classmethod
     def payment_multiplier(cls, ip : str) -> float:
+        return 1.0
         try:
             r = requests.get(f'https://check.getipintel.net/check.php?ip={ip}&contact=appdev@banano.cc')
             score = float(r.content)
