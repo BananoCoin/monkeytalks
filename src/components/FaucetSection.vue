@@ -14,7 +14,7 @@
           </div>
           <div class="row align-items-center d-flex justify-content-around py-3">
             <div class="col-11 col-md-10 col-lg-8">
-              <form>
+              <form id="faucet-form">
                 <div class="input-group">
                   <input
                     type="text"
@@ -32,6 +32,17 @@
                   theme="dark"
                   sitekey="6Lfxq5kUAAAAAEFflKdG_ajIT5WLxnvoQHt_ker1"
                 />
+                <vue-hcaptcha
+                  class="text-center mt-4"
+                  sitekey="686846c4-7200-41c7-918c-ca28e37ef9f3"
+                  theme="dark"
+                  size="normal"
+                  root="faucet-form"
+                  @verify="onVerifyHcaptcha"
+                />
+                <h6 v-if="missingCaptcha"
+                  class="text-center text-danger font-weight-light mt-2 px-3"
+                >Captcha is required.</h6>
                 <button
                   :class="['btn', 'btn-lg', isValidAddress ? ['btn-primary', 'glow-green', 'grow-3', 'text-dark'] : ['btn-light', 'text-secondary'], 'btn-block', 'mt-3', 'mx-auto', 'col-12', 'col-md-8', 'col-lg-6']"
                   :disabled="!isValidAddress"
@@ -82,6 +93,7 @@ import Vue from "vue";
 import API from "../util/api.ts";
 import Util from "../util/util.ts";
 import VueRecaptcha from "vue-recaptcha";
+import VueHcaptcha from "hcaptcha-vue";
 
 export default Vue.extend({
   name: "FaucetSection",
@@ -93,11 +105,14 @@ export default Vue.extend({
       isValidAddress: false,
       requestStarted: false,
       requestResponse: null,
-      requestError: false,      
+      requestError: false,
+      hCaptchaResponse: null,
+      missingCaptcha: false
     };
   },
   components: {
-    VueRecaptcha
+    VueRecaptcha,
+    VueHcaptcha
   },
   methods: {
     onAddressChanged(event) {
@@ -121,9 +136,17 @@ export default Vue.extend({
         this.$refs.recaptcha.execute();
       }
     },
+    onVerifyHcaptcha: function(response) {
+      this.hCaptchaResponse = response
+      this.missingCaptcha = false
+    },
     onCaptchaVerified: function(recaptchaToken) {
+      if (this.hCaptchaResponse == null) {
+        this.missingCaptcha = true
+        return;
+      }
       this.requestStarted = true;
-      API.postFaucet(recaptchaToken, this.addressValue).then(response => {
+      API.postFaucet(recaptchaToken, this.hCaptchaResponse, this.addressValue).then(response => {
         if (response == null || response.status != 200) {
           this.requestError = true;
           if (

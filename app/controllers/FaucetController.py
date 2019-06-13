@@ -13,6 +13,8 @@ def faucet_claim():
         abort(400, 'bad request')
     if not Captcha.verify(json_data['recaptchaToken']):
         return jsonify({"error": "Captcha verification failed"})
+    elif not Captcha.verify_hcaptcha(json_data['hcaptchaResponse'], request.remote_addr):
+        return jsonify({"error": "Captcha verification failed"})
     payment, message = FaucetPayment.make_or_reject_payment(json_data['address'], request.remote_addr)
     if payment is None:
         return jsonify({"error": message})
