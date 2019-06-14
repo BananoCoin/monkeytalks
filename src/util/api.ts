@@ -21,11 +21,10 @@ export default class API {
         }
     }
 
-    static async postFaucet(recaptchaToken: string, hcaptchaResponse: string, address: string) : Promise<any> {
+    static async postFaucet(hcaptchaResponse: string, address: string) : Promise<any> {
         try {
             let faucetResponse = await Axios.post(API_LOCATION + '/faucetClaim', {
                 address: address,
-                recaptchaToken: recaptchaToken,
                 hcaptchaResponse: hcaptchaResponse
             })
             return faucetResponse

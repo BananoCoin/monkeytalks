@@ -24,25 +24,14 @@
                     @input="onAddressChanged"
                   >
                 </div>
-                <vue-recaptcha
-                  ref="recaptcha"
-                  @verify="onCaptchaVerified"
-                  @expired="onCaptchaExpired"
-                  size="invisible"
-                  theme="dark"
-                  sitekey="6Lfxq5kUAAAAAEFflKdG_ajIT5WLxnvoQHt_ker1"
-                />
                 <vue-hcaptcha
                   class="text-center mt-4"
-                  sitekey="686846c4-7200-41c7-918c-ca28e37ef9f3"
+                  ref="hcaptcha"
+                  @verify="onCaptchaVerified"
+                  @expired="onCaptchaExpired"
                   theme="dark"
-                  size="normal"
-                  root="faucet-form"
-                  @verify="onVerifyHcaptcha"
+                  sitekey="686846c4-7200-41c7-918c-ca28e37ef9f3"
                 />
-                <h6 v-if="missingCaptcha"
-                  class="text-center text-danger font-weight-light mt-2 px-3"
-                >Captcha is required.</h6>
                 <button
                   :class="['btn', 'btn-lg', isValidAddress ? ['btn-primary', 'glow-green', 'grow-3', 'text-dark'] : ['btn-light', 'text-secondary'], 'btn-block', 'mt-3', 'mx-auto', 'col-12', 'col-md-8', 'col-lg-6']"
                   :disabled="!isValidAddress"
@@ -92,8 +81,7 @@
 import Vue from "vue";
 import API from "../util/api.ts";
 import Util from "../util/util.ts";
-import VueRecaptcha from "vue-recaptcha";
-import VueHcaptcha from "hcaptcha-vue";
+import VueHcaptcha from "./hcaptcha/VueHcaptcha";
 
 export default Vue.extend({
   name: "FaucetSection",
@@ -106,12 +94,10 @@ export default Vue.extend({
       requestStarted: false,
       requestResponse: null,
       requestError: false,
-      hCaptchaResponse: null,
-      missingCaptcha: false
+      hcaptchaResp: null
     };
   },
   components: {
-    VueRecaptcha,
     VueHcaptcha
   },
   methods: {
@@ -130,23 +116,9 @@ export default Vue.extend({
       }
       event.target.value = this.addressValue
     },
-    onFaucetSubmit(event) {
-      event.preventDefault();
-      if (this.isValidAddress) {
-        this.$refs.recaptcha.execute();
-      }
-    },
-    onVerifyHcaptcha: function(response) {
-      this.hCaptchaResponse = response
-      this.missingCaptcha = false
-    },
-    onCaptchaVerified: function(recaptchaToken) {
-      if (this.hCaptchaResponse == null) {
-        this.missingCaptcha = true
-        return;
-      }
-      this.requestStarted = true;
-      API.postFaucet(recaptchaToken, this.hCaptchaResponse, this.addressValue).then(response => {
+    postFaucet() {
+      this.requestStated = true
+      API.postFaucet(this.hcaptchaResp, this.addressValue).then(response => {
         if (response == null || response.status != 200) {
           this.requestError = true;
           if (
@@ -168,8 +140,23 @@ export default Vue.extend({
         }
       });
     },
+    onFaucetSubmit(event) {
+      event.preventDefault();
+      if (this.isValidAddress && this.hcaptchaResp == null) {
+        this.$refs.hcaptcha.execute();
+      } else if (this.isValidAddress && this.hcaptchaResp != null) {
+        postFaucet()
+      }
+    },
+    onCaptchaVerified: function(hcaptchaResponse) {
+      this.hcaptchaResp = hcaptchaResponse
+      if (this.isValidAddress) {
+        postFaucet()
+      }
+    },
     onCaptchaExpired: function() {
-      this.$refs.recaptcha.reset();
+      this.$refs.hcaptcha.reset();
+      this.hcaptchaResp = null
     }
   }
 });
