@@ -117,7 +117,7 @@ export default Vue.extend({
       event.target.value = this.addressValue
     },
     postFaucet() {
-      this.requestStated = true
+      this.requestStarted = true
       API.postFaucet(this.hcaptchaResp, this.addressValue).then(response => {
         if (response == null || response.status != 200) {
           this.requestError = true;
