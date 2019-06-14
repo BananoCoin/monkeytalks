@@ -145,13 +145,13 @@ export default Vue.extend({
       if (this.isValidAddress && this.hcaptchaResp == null) {
         this.$refs.hcaptcha.execute();
       } else if (this.isValidAddress && this.hcaptchaResp != null) {
-        postFaucet()
+        this.postFaucet()
       }
     },
     onCaptchaVerified: function(hcaptchaResponse) {
       this.hcaptchaResp = hcaptchaResponse
       if (this.isValidAddress) {
-        postFaucet()
+        this.postFaucet()
       }
     },
     onCaptchaExpired: function() {
