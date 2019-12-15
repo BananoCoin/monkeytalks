@@ -10,8 +10,8 @@ class AppConfig(object):
     # Webpack
     WEBPACK_MANIFEST_PATH = os.path.join(APP_DIR, 'webpack', 'manifest.json')
     # Node Info
-    NODE_URL = '[::1]'
-    NODE_IP = 7072
+    NODE_URL = os.environ.get('NODE_URL', '[::1]')
+    NODE_IP = int(os.environ.get('NODE_PORT', '7072'))
     # Our account info
     WALLET_ID=os.environ.get('MONKEYTALKS_WALLET_ID', '1234')
     MONKEYTALKS_ACCOUNT=os.environ.get('MONKEYTALKS_ACCOUNT', 'ban_1234')
