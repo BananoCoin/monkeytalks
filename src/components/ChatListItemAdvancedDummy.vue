@@ -1,7 +1,7 @@
 <template>
   <div class="row align-items-center d-flex justify-content-around my-4 my-md-3">
     <div
-      class="col-10 py-2 py-md-3 py-lg-4 px-4 bg-secondary grow-2 glow-purple speech-bubble-purple opacity-animation-2"
+      class="col-10 py-2 py-md-3 py-lg-4 px-4 bg-secondary speech-bubble-purple opacity-animation-2"
     >
       <div class="row align-items-center align-middle d-flex justify-content-between py-2">
         <h3

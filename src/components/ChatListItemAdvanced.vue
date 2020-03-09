@@ -2,7 +2,7 @@
   <div class="row align-items-center d-flex justify-content-around my-4">
     <div
       class="col-10 py-2 py-md-3 py-lg-4 px-4"
-      v-bind:class="[message.premium ? ['bg-primary', 'grow-2', 'glow-green', 'speech-bubble-green'] : ['bg-secondary', 'grow-2', 'glow-purple', 'speech-bubble-purple'] ]"
+      v-bind:class="[message.premium ? ['bg-primary', 'speech-bubble-green'] : ['bg-secondary', 'speech-bubble-purple'] ]"
     >
       <div class="row align-items-center align-middle d-flex justify-content-between py-2">
         <h3
@@ -16,7 +16,12 @@
         >{{ formatDate(message.date) }}</h6>
       </div>
       <div class="row align-items-center d-flex justify-content-center px-3 px-md-4">
-        <a class="py-3" :href="'https://creeper.banano.cc/explorer/account/'+message.address">
+        <a
+          target="_blank"
+          class="py-3"
+          v-bind:class="[message.premium ? ['underline-dark'] : ['underline-light'] ]"
+          :href="'https://creeper.banano.cc/explorer/account/'+message.address"
+        >
           <h6
             v-bind:class="[message.premium ? ['text-dark'] : ['text-light'] ]"
             class="text-center font-weight-light break-word tk-ibm-plex-mono"
@@ -58,10 +63,13 @@ export default Vue.extend({
 });
 </script>
 <style scoped>
-a,
-a:hover,
-a:active,
-a:visited {
-  text-decoration: none !important; /* no underline */
+.underline-dark:hover {
+  text-decoration: underline !important;
+  text-decoration-color: #2a1052 !important;
+}
+
+.underline-light:hover {
+  text-decoration: underline !important;
+  text-decoration-color: #d1a4ff !important;
 }
 </style>
