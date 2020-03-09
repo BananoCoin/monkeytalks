@@ -95,11 +95,11 @@ export default Vue.extend({
       if (address.length < 64) {
         return address;
       }
-      return `<a href="https://creeper.banano.cc/explorer/account/${address}" target="_blank" >${address.substring(
+      return `<a class="text-center" href="https://creeper.banano.cc/explorer/account/${address}" target="_blank" >${address.substring(
         0,
         22
-      )}<br />${address.substring(22, 43)}<br />${address.substring(
-        43,
+      )}<br />${address.substring(22, 44)}<br />${address.substring(
+        44,
         64
       )}</a>`;
     }
