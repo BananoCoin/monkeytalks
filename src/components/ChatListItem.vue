@@ -11,10 +11,21 @@
       >
         <div class="popper bg-secondary p-3 pop-up">
           <h3 class="text-left text-primary font-weight-bold">Messages: {{ message.count }}</h3>
-          <p class="text-left text-light font-weight-light" v-html="threeLineAddress(message.address)" />
+          <p
+            class="text-left text-light font-weight-light tk-ibm-plex-mono"
+            v-html="threeLineAddress(message.address)"
+          />
         </div>
-        <button slot="reference" class="btn-primary bg-transparent border-none rounded-100 px-0 ml-ng-1" style="outline:none; box-shadow:none;">
-          <img class="w-100 grow" :src="`https://monkeys.appditto.com?address=${message.address}`" ref="monkeyImg">
+        <button
+          slot="reference"
+          class="btn-primary bg-transparent border-none rounded-100 px-0 ml-ng-1"
+          style="outline:none; box-shadow:none;"
+        >
+          <img
+            class="w-100 grow"
+            :src="`https://monkeys.appditto.com?address=${message.address}`"
+            ref="monkeyImg"
+          />
         </button>
       </popper>
     </div>
@@ -23,11 +34,14 @@
       v-bind:class="[message.premium ? ['bg-primary', 'grow-2', 'glow-green', 'speech-bubble-green'] : ['bg-secondary', 'grow-2', 'glow-purple', 'speech-bubble-purple'] ]"
     >
       <div class="row align-items-center align-middle d-flex justify-content-between py-2">
-        <h3 class="col-12 text-left col-md-6 font-weight-bold break-word" 
+        <h3
+          class="col-12 text-left col-md-6 font-weight-bold break-word"
           v-linkified
           v-bind:class="[message.premium ? ['text-dark'] : ['text-light'] ]"
-          v-html="decodeMessage(message.content)"></h3>
-        <h6 class="col-12 text-left mt-1 col-md-6 text-md-right mt-md-0 font-weight-light "
+          v-html="decodeMessage(message.content)"
+        ></h3>
+        <h6
+          class="col-12 text-left mt-1 col-md-6 text-md-right mt-md-0 font-weight-light"
           v-bind:class="[message.premium ? ['text-dark'] : ['text-light'] ]"
         >{{ formatDate(message.date) }}</h6>
       </div>
@@ -36,13 +50,13 @@
 </template>
 
 <script>
-import Vue from 'vue';
-import Popper from "vue-popperjs"
-import Stenography from "../util/stenography.ts"
-import linkify from 'vue-linkify'
-import Util from '../util/util.ts'
+import Vue from "vue";
+import Popper from "vue-popperjs";
+import Stenography from "../util/stenography.ts";
+import linkify from "vue-linkify";
+import Util from "../util/util.ts";
 
-Vue.directive('linkified', linkify)
+Vue.directive("linkified", linkify);
 
 export default Vue.extend({
   name: "ChatListItem",
@@ -54,31 +68,40 @@ export default Vue.extend({
   },
   methods: {
     decodeMessage(content) {
-      let decodedMessage =  Stenography.decodeMessage(content)
-      let emojiMap = this.$store.state.emojiMap
+      let decodedMessage = Stenography.decodeMessage(content);
+      let emojiMap = this.$store.state.emojiMap;
       // Process emojis/images
-      decodedMessage = Util.escapeHtml(decodedMessage)
+      decodedMessage = Util.escapeHtml(decodedMessage);
       Object.keys(emojiMap).forEach(function(key) {
-        decodedMessage = decodedMessage.replace(new RegExp(key, 'g'), `<img src=${emojiMap[key]} class="emoji" />`)
-      })
-      return decodedMessage
+        decodedMessage = decodedMessage.replace(
+          new RegExp(key, "g"),
+          `<img src=${emojiMap[key]} class="emoji" />`
+        );
+      });
+      return decodedMessage;
     },
     hidePopper() {
       if (this.$store.state.mobileDetect.mobile()) {
         if (this.$refs.monkeyImg != null) {
-          this.$refs.monkeyImg.blur()
+          this.$refs.monkeyImg.blur();
         }
-        this.$refs.popperT.showPopper = false
+        this.$refs.popperT.showPopper = false;
       }
     },
     formatDate(dateStr) {
-      return Util.formatDateStr(dateStr)
+      return Util.formatDateStr(dateStr);
     },
     threeLineAddress(address) {
       if (address.length < 64) {
         return address;
       }
-      return `<a href="https://creeper.banano.cc/explorer/account/${address}" target="_blank" >${address.substring(0, 22)}<br />${address.substring(22, 43)}<br />${address.substring(43, 64)}</a>`
+      return `<a href="https://creeper.banano.cc/explorer/account/${address}" target="_blank" >${address.substring(
+        0,
+        22
+      )}<br />${address.substring(22, 43)}<br />${address.substring(
+        43,
+        64
+      )}</a>`;
     }
   }
 });
