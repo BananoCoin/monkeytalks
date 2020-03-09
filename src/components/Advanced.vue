@@ -9,11 +9,13 @@
         <div class="row align-items-center d-flex justify-content-between">
           <div class="col-12 col-md-11 col-lg-9 mx-auto">
             <transition-group name="list-item" v-if="messages">
-              <ChatListItemAdvanced
-                v-for="message in messages"
-                :message="message"
-                :key="message.id"
-              />
+              <a :href="'https://creeper.banano.cc/explorer/block/'+message.block_hash">
+                <ChatListItemAdvanced
+                  v-for="message in messages"
+                  :message="message"
+                  :key="message.id"
+                />
+              </a>
             </transition-group>
             <div v-else>
               <ChatListItemAdvancedDummy />
