@@ -1,5 +1,5 @@
 <template>
-  <div class="row align-items-center d-flex justify-content-around my-2 my-md-3">
+  <div class="row align-items-center d-flex justify-content-around my-4 my-md-3">
     <div
       class="col-10 col-md-9 col-xl-10 py-2 py-md-3 py-lg-4 px-4 bg-secondary grow-2 glow-purple speech-bubble-purple opacity-animation-2"
     >
@@ -10,6 +10,11 @@
         <h5
           class="text-left mx-4 font-weight-light text-light bg-light rounded-100 px-3 mx-2 opacity-animation"
         >22:15 / Thu, 16 Mar 2019</h5>
+      </div>
+      <div class="row align-items-center d-flex justify-content-center py-3 px-3 px-md-4">
+        <h6
+          class="text-center text-light font-weight-light bg-light break-word rounded-100 px-3 my-2 opacity-animation"
+        >ban_3h9ykbjs5aor438byaopjekjcwnxixfhmuzsqepsoifxr4qnrfwmn1t6qfh3</h6>
       </div>
     </div>
   </div>

@@ -15,11 +15,11 @@
           v-bind:class="[message.premium ? ['text-dark'] : ['text-light'] ]"
         >{{ formatDate(message.date) }}</h6>
       </div>
-      <div class="row align-items-center d-flex justify-content-center py-3 mt-4 px-3 px-md-4">
+      <div class="row align-items-center d-flex justify-content-center py-3 px-3 px-md-4">
         <a :href="'https://creeper.banano.cc/explorer/account/'+message.address">
           <h6
             v-bind:class="[message.premium ? ['text-dark'] : ['text-light'] ]"
-            class="text-center font-weight-light"
+            class="text-center font-weight-light break-word"
           >{{message.address}}</h6>
         </a>
       </div>
