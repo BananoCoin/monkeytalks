@@ -66,11 +66,11 @@ def get_messages():
     return jsonify(message_response)
 
 
-@blueprint.route('/allmessages', methods=['GET'])
+@blueprint.route('/2000messages', methods=['GET'])
 def get_all_messages():
     """Load initial messages"""
     message_response = []
-    for m in Message.select().where(Message.hidden == False).order_by(Message.id.desc()):
+    for m in Message.select().where(Message.hidden == False).order_by(Message.id.desc()).limit(2000):
         message_response.append(Message.format_message(m))
     return jsonify(message_response)
 
