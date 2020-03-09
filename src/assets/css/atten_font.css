@@ -91,4 +91,4 @@ font-display:auto;font-style:normal;font-weight:400;
 }
 
 .tk-atten-round-new { font-family: "atten-round-new",sans-serif; }
-.tk-ibm-plex-mono { font-family: "ibm-plex-mono",sans-serif; }
+.tk-ibm-plex-mono { font-family: "ibm-plex-mono",sans-serif; line-height: 1.5;}
