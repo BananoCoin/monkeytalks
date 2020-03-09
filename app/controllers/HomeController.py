@@ -10,17 +10,20 @@ from app.settings import AppConfig
 
 blueprint = Blueprint('home', __name__, static_folder='../static')
 
+
 @blueprint.route('/', defaults={'path': ''})
 @blueprint.route('/<path:path>')
 def index(path):
     return render_template('app.html',
-                            mt_account=AppConfig.MONKEYTALKS_ACCOUNT,
-                            fee=FeeModel.get_fee(),
-                            premium=FeeModel.get_premium_fee())
+                           mt_account=AppConfig.MONKEYTALKS_ACCOUNT,
+                           fee=FeeModel.get_fee(),
+                           premium=FeeModel.get_premium_fee())
+
 
 @socketio.on('connect', namespace='/mtchannel')
 def on_socket_connect():
     logging.info('SocketIO client connected')
+
 
 @blueprint.route('/callback', methods=['POST'])
 def banano_callback():
@@ -46,11 +49,13 @@ def banano_callback():
             abort(500, 'server error processing message')
         # Emit message to the UI
         emit_message(message)
-    return ('',204)
+    return ('', 204)
+
 
 @blueprint.route('/fees', methods=['GET'])
 def get_fees():
-    return jsonify({'fee':str(FeeModel.get_fee()), 'premium':str(FeeModel.get_premium_fee())})
+    return jsonify({'fee': str(FeeModel.get_fee()), 'premium': str(FeeModel.get_premium_fee())})
+
 
 @blueprint.route('/messages', methods=['GET'])
 def get_messages():
@@ -60,6 +65,16 @@ def get_messages():
         message_response.append(Message.format_message(m))
     return jsonify(message_response)
 
-def emit_message(message : Message):
+
+@blueprint.route('/allmessages', methods=['GET'])
+def get_all_messages():
+    """Load initial messages"""
+    message_response = []
+    for m in Message.select().where(Message.hidden == False).order_by(Message.id.desc()):
+        message_response.append(Message.format_message(m))
+    return jsonify(message_response)
+
+
+def emit_message(message: Message):
     """Emit a new chat message to the UI - Broadcasted to all clients"""
     emit('new_message', json.dumps(Message.format_message(message)), namespace='/mtchannel', broadcast=True)

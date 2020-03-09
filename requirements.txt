@@ -2,7 +2,7 @@
 Flask
 Flask-CORS
 MarkupSafe
-Werkzeug
+Werkzeug==0.16.0
 Jinja2
 itsdangerous
 click

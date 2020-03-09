@@ -13,12 +13,13 @@ export default new Router({
       name: 'Home',
       component: Home,
     },
-    { 
-      path: '/404', 
-      component: Page404 
+    {
+      path: '/404',
+      component: Page404
     },
-    { path: '*', 
-      redirect: '/404' 
+    {
+      path: '*',
+      redirect: '/404'
     },
   ],
 });
