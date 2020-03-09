@@ -1,7 +1,6 @@
 <template>
   <div class="row align-items-center d-flex justify-content-around my-4">
-    <a
-      :href="'https://creeper.banano.cc/explorer/account/'+message.address"
+    <div
       class="col-10 py-2 py-md-3 py-lg-4 px-4"
       v-bind:class="[message.premium ? ['bg-primary', 'grow-2', 'glow-green', 'speech-bubble-green'] : ['bg-secondary', 'grow-2', 'glow-purple', 'speech-bubble-purple'] ]"
     >
@@ -17,12 +16,14 @@
         >{{ formatDate(message.date) }}</h6>
       </div>
       <div class="row align-items-center d-flex justify-content-center py-3 px-3 px-md-4">
-        <h6
-          v-bind:class="[message.premium ? ['text-dark'] : ['text-light'] ]"
-          class="text-center font-weight-light break-word tk-ibm-plex-mono"
-        >{{message.address}}</h6>
+        <a :href="'https://creeper.banano.cc/explorer/account/'+message.address">
+          <h6
+            v-bind:class="[message.premium ? ['text-dark'] : ['text-light'] ]"
+            class="text-center font-weight-light break-word tk-ibm-plex-mono"
+          >{{message.address}}</h6>
+        </a>
       </div>
-    </a>
+    </div>
   </div>
 </template>
 
@@ -57,7 +58,10 @@ export default Vue.extend({
 });
 </script>
 <style scoped>
-a {
-  text-decoration: none; /* no underline */
+a,
+a:hover,
+a:active,
+a:visited {
+  text-decoration: none !important; /* no underline */
 }
 </style>
