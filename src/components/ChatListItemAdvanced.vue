@@ -2,7 +2,12 @@
   <div class="row align-items-center d-flex justify-content-around my-4">
     <div class="col-2 z-index-100">
       <a :href="'https://creeper.banano.cc/explorer/account/'+message.address">
-        <h6>{{message.address.substring(0,9)}}</h6>
+        <h6 class="text-center break-word">
+          {{message.address.substring(0,9)}}
+          <br />...
+          <br />
+          {{message.address.substring(59)}}
+        </h6>
       </a>
     </div>
     <div
