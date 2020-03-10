@@ -10,7 +10,7 @@
           <div class="col-12 col-lg-10 align-items-center justify-content-center">
             <input
               type="text"
-              class="font-weight-bold form-control form-control-lg rounded-100 bg-transparent border-2 px-4 px-lg-5 col-12 col-md-9 mx-0 mx-md-2"
+              class="font-weight-bold form-control form-control-lg rounded-100 bg-transparent border-2 px-4 px-lg-5 col-12 col-md-9 mx-auto"
               id="searchInput"
               v-model="searchValue"
               placeholder="Search a message"
