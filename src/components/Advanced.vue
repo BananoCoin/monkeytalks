@@ -27,29 +27,32 @@
       <div class="container mb-5 mt-0 md-mt-5">
         <div class="row align-items-center d-flex justify-content-between">
           <div class="col-12 col-md-11 col-lg-9 mx-auto">
-            <div v-if="messages">
+            <div v-if="messages && isThereAnyMatch">
               <ChatListItemAdvanced
                 v-for="message in filteredMessages"
                 :message="message"
                 :key="message.id"
               />
             </div>
-            <div v-else-if="isThereAnyMatch">
-              <ChatListItemAdvancedDummy />
-              <ChatListItemAdvancedDummy />
-              <ChatListItemAdvancedDummy />
-              <ChatListItemAdvancedDummy />
-              <ChatListItemAdvancedDummy />
-              <ChatListItemAdvancedDummy />
-              <ChatListItemAdvancedDummy />
-              <ChatListItemAdvancedDummy />
-            </div>
-            <div v-else class="row align-items-center d-flex justify-content-around my-4">
+            <div
+              v-else-if="!isThereAnyMatch"
+              class="row align-items-center d-flex justify-content-around my-4"
+            >
               <div class="col-10 py-2 py-md-3 px-3">
                 <h3
                   class="text-center mx-auto font-weigh-bold text-primary word-break"
                 >There is no match, be less original.</h3>
               </div>
+            </div>
+            <div v-else>
+              <ChatListItemAdvancedDummy />
+              <ChatListItemAdvancedDummy />
+              <ChatListItemAdvancedDummy />
+              <ChatListItemAdvancedDummy />
+              <ChatListItemAdvancedDummy />
+              <ChatListItemAdvancedDummy />
+              <ChatListItemAdvancedDummy />
+              <ChatListItemAdvancedDummy />
             </div>
           </div>
         </div>
