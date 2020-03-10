@@ -1,7 +1,7 @@
 <template>
   <div class="row align-items-center d-flex justify-content-around my-4">
     <div
-      class="col-10 py-2 py-md-3 py-lg-4 px-4"
+      class="col-10 py-2 py-md-3 px-4"
       v-bind:class="[message.premium ? ['bg-primary', 'speech-bubble-green'] : ['bg-secondary', 'speech-bubble-purple'] ]"
     >
       <div class="row align-items-center align-middle d-flex justify-content-between py-2">
@@ -15,10 +15,16 @@
           v-bind:class="[message.premium ? ['text-dark'] : ['text-light'] ]"
         >{{ formatDate(message.date) }}</h6>
       </div>
+      <div class="row justify-content-center my-2 px-3">
+        <div
+          class="col-12 rounded-100 divider"
+          v-bind:class="[message.premium ? ['bg-dark'] : ['bg-light'] ]"
+        ></div>
+      </div>
       <div class="row align-items-center d-flex justify-content-center px-3 px-md-4">
         <a
           target="_blank"
-          class="py-3"
+          class="py-2"
           v-bind:class="[message.premium ? ['underline-dark'] : ['underline-light'] ]"
           :href="'https://creeper.banano.cc/explorer/account/'+message.address"
         >
@@ -71,5 +77,9 @@ export default Vue.extend({
 .underline-light:hover {
   text-decoration: underline !important;
   text-decoration-color: #d1a4ff !important;
+}
+.divider {
+  height: 2px;
+  opacity: 15%;
 }
 </style>
