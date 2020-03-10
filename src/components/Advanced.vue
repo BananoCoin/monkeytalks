@@ -44,10 +44,7 @@
               <ChatListItemAdvancedDummy />
               <ChatListItemAdvancedDummy />
             </div>
-            <div
-              v-else-if="!isThereAnyMatch"
-              class="row align-items-center d-flex justify-content-around my-4"
-            >
+            <div v-else class="row align-items-center d-flex justify-content-around my-4">
               <div class="col-10 py-2 py-md-3 px-3">
                 <h3
                   class="text-center mx-auto font-weigh-bold text-primary word-break"
@@ -116,6 +113,7 @@ export default Vue.extend({
           });
           if (filteredArray.length < 1) {
             this.isThereAnyMatch = false;
+            console.log("There is no match");
           }
           return filteredArray;
         }
