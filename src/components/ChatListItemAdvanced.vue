@@ -13,7 +13,7 @@
             :href="'https://creeper.banano.cc/explorer/block/'+message.block_hash"
           >
             <h3
-              class="text-left font-weight-bold break-word"
+              class="text-left font-weight-bold break-word inline"
               v-bind:class="[message.premium ? ['text-dark'] : ['text-light'] ]"
               v-html="decodeMessage(message.content)"
             ></h3>
@@ -39,7 +39,7 @@
         >
           <h6
             v-bind:class="[message.premium ? ['text-dark'] : ['text-light'] ]"
-            class="text-center font-weight-light break-word tk-ibm-plex-mono"
+            class="text-center font-weight-light break-word tk-ibm-plex-mono inline"
           >{{message.address}}</h6>
         </a>
       </div>
