@@ -123,7 +123,7 @@ export default Vue.extend({
     Footer
   },
   mounted: function() {
-    API.get2000Messages().then(response => {
+    API.getMessagesAdvanced().then(response => {
       if (response != null) {
         this.messages = [];
         response.forEach(element => {

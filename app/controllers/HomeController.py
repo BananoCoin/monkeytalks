@@ -66,7 +66,7 @@ def get_messages():
     return jsonify(message_response)
 
 
-@blueprint.route('/2000messages', methods=['GET'])
+@blueprint.route('/messagesadvanced', methods=['GET'])
 def get_all_messages():
     """Load initial messages"""
     message_response = []

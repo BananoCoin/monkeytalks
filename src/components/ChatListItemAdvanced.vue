@@ -5,11 +5,18 @@
       v-bind:class="[message.premium ? ['bg-primary', 'speech-bubble-green'] : ['bg-secondary', 'speech-bubble-purple'] ]"
     >
       <div class="row align-items-center align-middle d-flex justify-content-between py-2">
-        <h3
-          class="col-12 text-left col-md-6 font-weight-bold break-word"
-          v-bind:class="[message.premium ? ['text-dark'] : ['text-light'] ]"
-          v-html="decodeMessage(message.content)"
-        ></h3>
+        <a
+          target="_blank"
+          class="py-1"
+          v-bind:class="[message.premium ? ['underline-dark'] : ['underline-light'] ]"
+          :href="'https://creeper.banano.cc/explorer/block/'+message.block_hash"
+        >
+          <h3
+            class="col-12 text-left col-md-6 font-weight-bold break-word"
+            v-bind:class="[message.premium ? ['text-dark'] : ['text-light'] ]"
+            v-html="decodeMessage(message.content)"
+          ></h3>
+        </a>
         <h6
           class="col-12 text-left mt-1 col-md-6 text-md-right mt-md-0 font-weight-light"
           v-bind:class="[message.premium ? ['text-dark'] : ['text-light'] ]"

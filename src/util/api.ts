@@ -21,9 +21,9 @@ export default class API {
         }
     }
 
-    static async get2000Messages(): Promise<any> {
+    static async getMessagesAdvanced(): Promise<any> {
         try {
-            let messageData = await Axios(API_LOCATION + '/2000messages')
+            let messageData = await Axios(API_LOCATION + '/messagesadvanced')
             return messageData.data
         } catch (e) {
             return null;
