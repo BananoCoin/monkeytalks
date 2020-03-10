@@ -3,6 +3,30 @@
     <!-- NAVBAR -->
     <Navbar class="mb-1" :showHomeButton="true"></Navbar>
     <!-- NAVBAR END -->
+    <!-- SEARCH MESSAGE SECTION -->
+    <div class="section pt-4 pt-md-5 pb-4 px-1 my-1" id="enter-message-section">
+      <div class="container pt-4 pt-md-5">
+        <div class="row align-items-center d-flex justify-content-around">
+          <div class="col-12 col-lg-10">
+            <form>
+              <div class="input-group">
+                <input
+                  type="text"
+                  class="font-weight-bold form-control form-control-lg rounded-100 bg-transparent border-2 px-4 px-lg-5 col-12 col-md-9 mx-0 mx-md-2"
+                  id="searchInput"
+                  v-model="searchValue"
+                  placeholder="Search a message"
+                  ref="messageInputValue"
+                  autocomplete="off"
+                  v-bind:class="[$store.state.showSendCard ? ['textfield-secondary', 'text-secondary', 'border-secondary'] : ['textfield-primary', 'text-primary', 'border-primary'], 'text-lowercase']"
+                />
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- SEARCH MESSAGE SECTION END -->
     <!-- CHAT SECTION -->
     <div class="section mb-5 mt-4 mt-md-5 pb-0 pb-md-3" id="chat-section">
       <div class="container mb-5 mt-0 md-mt-5">
@@ -10,7 +34,7 @@
           <div class="col-12 col-md-11 col-lg-9 mx-auto">
             <transition-group name="list-item" v-if="messages">
               <ChatListItemAdvanced
-                v-for="message in messages"
+                v-for="message in filteredMessages"
                 :message="message"
                 :key="message.id"
               />
@@ -53,7 +77,8 @@ export default Vue.extend({
   data() {
     return {
       messages: null,
-      loadingMessages: [],
+      filteredMessages: [],
+      searchValue: "",
       messageContent: "",
       showEmojiMenu: false,
       emojiIndexStart: -1,
@@ -63,8 +88,10 @@ export default Vue.extend({
   },
   methods: {},
   computed: {
-    inputDisabled: function() {
-      return this.messageContent.length == 0 && !this.$store.state.showSendCard;
+    filteredMessages: function() {
+      return this.messages.filter(message => {
+        return messages.content.match(this.searchValue);
+      });
     }
   },
   components: {
@@ -78,11 +105,6 @@ export default Vue.extend({
       if (response != null) {
         this.messages = [];
         response.forEach(element => {
-          if (Stenography.decodeMessage(element.content) !== false) {
-            this.messages.push(element);
-          }
-        });
-        this.loadingMessages.forEach(element => {
           if (Stenography.decodeMessage(element.content) !== false) {
             this.messages.push(element);
           }
