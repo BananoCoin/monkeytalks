@@ -10,7 +10,7 @@
           <div class="col-12 col-lg-10 align-items-center justify-content-center">
             <input
               type="text"
-              class="textfield-secondary text-secondary border-secondary font-weight-bold form-control form-control-lg rounded-100 bg-transparent border-2 px-4 px-lg-5 col-12 col-md-9 mx-auto"
+              class="textfield-primary text-primary border-primary font-weight-bold form-control form-control-lg rounded-100 bg-transparent border-2 px-4 px-lg-5 col-12 col-md-9 mx-auto"
               id="searchInput"
               v-model="searchValue"
               placeholder="Search a message"
@@ -80,12 +80,26 @@ export default Vue.extend({
       emojiSearchText: ""
     };
   },
-  methods: {},
+  methods: {
+    decodeMessage(content) {
+      let decodedMessage = Stenography.decodeMessage(content);
+      let emojiMap = this.$store.state.emojiMap;
+      // Process emojis/images
+      decodedMessage = Util.escapeHtml(decodedMessage);
+      Object.keys(emojiMap).forEach(function(key) {
+        decodedMessage = decodedMessage.replace(
+          new RegExp(key, "g"),
+          `<img src=${emojiMap[key]} class="emoji" />`
+        );
+      });
+      return decodedMessage;
+    }
+  },
   computed: {
     filteredMessages: function() {
       if (this.messages) {
         return this.messages.filter(message => {
-          return message.content.match(this.searchValue);
+          return this.decodeMessage(message.content).match(this.searchValue);
         });
       }
     }
