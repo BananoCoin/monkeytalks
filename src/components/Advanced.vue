@@ -27,7 +27,7 @@
       <div class="container mb-5 mt-0 md-mt-5">
         <div class="row align-items-center d-flex justify-content-between">
           <div class="col-12 col-md-11 col-lg-9 mx-auto">
-            <div v-if="messages && isThereAnyMatch">
+            <div v-if="messages && filteredMessages.length >= 1">
               <ChatListItemAdvanced
                 v-for="message in filteredMessages"
                 :message="message"
@@ -35,7 +35,7 @@
               />
             </div>
             <div
-              v-else-if="messages && !isThereAnyMatch"
+              v-else-if="messages && filteredMessages.length < 1"
               class="row align-items-center d-flex justify-content-around my-4"
             >
               <div class="col-10 py-2 py-md-3 px-3">
@@ -84,7 +84,6 @@ export default Vue.extend({
     return {
       messages: null,
       searchValue: "",
-      isThereAnyMatch: true,
       messageContent: "",
       showEmojiMenu: false,
       emojiIndexStart: -1,
@@ -108,27 +107,14 @@ export default Vue.extend({
           this.searchValue.length < 1
         ) {
           console.log("Filtered function this.message if invoked");
-          this.isThereAnyMatch = true;
           return this.messages;
         } else {
           console.log("Filtered function this.message else invoked");
-          // Filter the array
-          var filteredArray = this.messages.filter(message => {
+          return this.messages.filter(message => {
             return this.decodeMessage(message.content).match(
               this.searchValue.toLowerCase()
             );
           });
-          // Check if there is any match
-          if (filteredArray.length == 0) {
-            this.isThereAnyMatch = false;
-            console.log("There is no match");
-          } else {
-            this.isThereAnyMatch = true;
-            console.log("There is a match");
-          }
-          // Return the array
-          console.log(filteredArray);
-          return filteredArray;
         }
       }
     }
