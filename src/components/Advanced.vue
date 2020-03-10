@@ -115,10 +115,8 @@ export default Vue.extend({
             );
           });
           if (filteredArray.length < 1) {
-            if (this.isThereAnyMatch) {
-              this.isThereAnyMatch = false;
-              console.log("There is no match");
-            }
+            this.isThereAnyMatch = false;
+            console.log("There is no match");
           } else {
             this.isThereAnyMatch = true;
             console.log("There is a match");
