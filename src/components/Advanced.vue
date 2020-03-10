@@ -95,7 +95,7 @@ export default Vue.extend({
     ChatListItemAdvancedDummy,
     Footer
   },
-  mounted: function() {
+  created() {
     API.get2000Messages().then(response => {
       if (response != null) {
         this.messages = [];
