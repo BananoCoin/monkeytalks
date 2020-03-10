@@ -6,7 +6,7 @@
     <!-- SEARCH MESSAGE SECTION -->
     <div class="section pt-4 pt-md-5 pb-4 px-1 my-1" id="enter-message-section">
       <div class="container pt-4 pt-md-5">
-        <div class="row align-items-center d-flex justify-content-around">
+        <div class="row align-items-center d-flex justify-content-center">
           <div class="col-12 col-lg-10">
             <form>
               <div class="input-group">
@@ -28,7 +28,7 @@
     </div>
     <!-- SEARCH MESSAGE SECTION END -->
     <!-- CHAT SECTION -->
-    <div class="section mb-5 mt-4 mt-md-5 pb-0 pb-md-3" id="chat-section">
+    <div class="section mb-5 mt-2 mt-md-5 pb-0 pb-md-3" id="chat-section">
       <div class="container mb-5 mt-0 md-mt-5">
         <div class="row align-items-center d-flex justify-content-between">
           <div class="col-12 col-md-11 col-lg-9 mx-auto">
@@ -77,7 +77,6 @@ export default Vue.extend({
   data() {
     return {
       messages: null,
-      filteredMessages: [],
       searchValue: "",
       messageContent: "",
       showEmojiMenu: false,
