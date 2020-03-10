@@ -124,6 +124,7 @@ export default Vue.extend({
             console.log("There is a match");
           }
           // Return the array
+          console.log(filteredArray);
           return filteredArray;
         }
       }
