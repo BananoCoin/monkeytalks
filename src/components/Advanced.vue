@@ -117,6 +117,8 @@ export default Vue.extend({
           if (filteredArray.length < 1) {
             this.isThereAnyMatch = false;
             console.log("There is no match");
+          } else {
+            this.isThereAnyMatch = true;
           }
           return filteredArray;
         }
