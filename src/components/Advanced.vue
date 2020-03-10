@@ -35,7 +35,7 @@
               />
             </div>
             <div
-              v-else-if="!isThereAnyMatch"
+              v-else-if="messages && !isThereAnyMatch"
               class="row align-items-center d-flex justify-content-around my-4"
             >
               <div class="col-10 py-2 py-md-3 px-3">
@@ -109,11 +109,13 @@ export default Vue.extend({
           this.isThereAnyMatch = true;
           return this.messages;
         } else {
+          // Filter the array
           var filteredArray = this.messages.filter(message => {
             return this.decodeMessage(message.content).match(
               this.searchValue.toLowerCase()
             );
           });
+          // Check if there is any match
           if (filteredArray.length < 1) {
             this.isThereAnyMatch = false;
             console.log("There is no match");
@@ -121,6 +123,7 @@ export default Vue.extend({
             this.isThereAnyMatch = true;
             console.log("There is a match");
           }
+          // Return the array
           return filteredArray;
         }
       }
