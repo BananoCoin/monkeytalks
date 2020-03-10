@@ -16,7 +16,6 @@
               placeholder="Search a message"
               ref="messageInputValue"
               autocomplete="off"
-              v-bind:class="[$store.state.showSendCard ? ['textfield-secondary', 'text-secondary', 'border-secondary'] : ['textfield-primary', 'text-primary', 'border-primary'], 'text-lowercase']"
             />
           </div>
         </div>
@@ -24,17 +23,17 @@
     </div>
     <!-- SEARCH MESSAGE SECTION END -->
     <!-- CHAT SECTION -->
-    <div class="section mb-5 mt-2 mt-md-5 pb-0 pb-md-3" id="chat-section">
+    <div class="section mb-5 mt-md-5 pb-0 pb-md-3" id="chat-section">
       <div class="container mb-5 mt-0 md-mt-5">
         <div class="row align-items-center d-flex justify-content-between">
           <div class="col-12 col-md-11 col-lg-9 mx-auto">
-            <transition-group name="list-item" v-if="messages">
+            <div v-if="messages">
               <ChatListItemAdvanced
                 v-for="message in filteredMessages"
                 :message="message"
                 :key="message.id"
               />
-            </transition-group>
+            </div>
             <div v-else>
               <ChatListItemAdvancedDummy />
               <ChatListItemAdvancedDummy />
@@ -84,7 +83,7 @@ export default Vue.extend({
   methods: {},
   computed: {
     filteredMessages: function() {
-      if (this.messages != null) {
+      if (this.messages) {
         return this.messages.filter(message => {
           return message.content.match(this.searchValue);
         });
@@ -115,7 +114,4 @@ export default Vue.extend({
 <style lang="scss">
 @import "../assets/css/atten_font.css";
 @import "../assets/css/main.scss";
-</style>
-
-<style>
 </style>
