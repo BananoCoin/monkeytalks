@@ -129,17 +129,17 @@ export default Vue.extend({
 <style lang="scss">
 @import "../assets/css/atten_font.css";
 @import "../assets/css/main.scss";
-#home-section {
+#chat-section {
   min-height: 25vh;
 }
 @media only screen and (min-width: 768px) {
-  #home-section {
+  #chat-section {
     min-height: 35vh;
   }
 }
 @media only screen and (min-width: 992px) {
-  #home-section {
-    min-height: 50vh;
+  #chat-section {
+    min-height: 45vh;
   }
 }
 </style>
