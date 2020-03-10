@@ -115,7 +115,7 @@ export default Vue.extend({
             );
           });
           if (filteredArray.length < 1) {
-            isThereAnyMatch = false;
+            this.isThereAnyMatch = false;
           }
           return filteredArray;
         }
