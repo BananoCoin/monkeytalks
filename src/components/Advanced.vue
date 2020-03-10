@@ -84,9 +84,11 @@ export default Vue.extend({
   methods: {},
   computed: {
     filteredMessages: function() {
-      return this.messages.filter(message => {
-        return this.message.content.match(this.searchValue);
-      });
+      if (this.messages != null) {
+        return this.messages.filter(message => {
+          return message.content.match(this.searchValue);
+        });
+      }
     }
   },
   components: {
