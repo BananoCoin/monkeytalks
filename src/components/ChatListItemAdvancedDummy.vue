@@ -12,7 +12,7 @@
       <div class="row justify-content-center my-2 px-3">
         <div class="col-12 rounded-100 divider bg-light"></div>
       </div>
-      <div class="row align-items-center d-flex justify-content-center py-3 px-3 px-md-4">
+      <div class="row align-items-center d-flex justify-content-center py-1 px-3 px-md-4">
         <h6
           class="tk-ibm-plex-mono text-center text-light font-weight-light bg-light break-word rounded-100 px-3 my-2 opacity-animation"
         >ban_3h9ykbjs5aor438byaopjekjcwnxixfhmuzsqepsoifxr4qnrfwmn1t6qfh3</h6>

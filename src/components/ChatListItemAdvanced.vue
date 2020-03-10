@@ -18,7 +18,7 @@
       <div class="row justify-content-center my-2 px-3">
         <div
           class="col-12 rounded-100 divider"
-          v-bind:class="[message.premium ? ['bg-dark'] : ['bg-light'] ]"
+          v-bind:class="[message.premium ? ['bg-dark', 'divider-dark'] : ['bg-light', 'divider-light'] ]"
         ></div>
       </div>
       <div class="row align-items-center d-flex justify-content-center px-3 px-md-4">
@@ -78,8 +78,12 @@ export default Vue.extend({
   text-decoration: underline !important;
   text-decoration-color: #d1a4ff !important;
 }
-.divider {
+.divider-light {
   height: 2px;
-  opacity: 15%;
+  opacity: 12%;
+}
+.divider-dark {
+  height: 2px;
+  opacity: 8%;
 }
 </style>
