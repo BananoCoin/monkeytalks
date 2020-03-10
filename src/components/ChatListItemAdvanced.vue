@@ -7,12 +7,12 @@
       <div class="row align-items-center align-middle d-flex justify-content-between py-2">
         <a
           target="_blank"
-          class="py-1"
+          class="py-1 col-12 col-md-6"
           v-bind:class="[message.premium ? ['underline-dark'] : ['underline-light'] ]"
           :href="'https://creeper.banano.cc/explorer/block/'+message.block_hash"
         >
           <h3
-            class="col-12 text-left col-md-6 font-weight-bold break-word"
+            class="text-left font-weight-bold break-word"
             v-bind:class="[message.premium ? ['text-dark'] : ['text-light'] ]"
             v-html="decodeMessage(message.content)"
           ></h3>
