@@ -34,7 +34,7 @@
                 :key="message.id"
               />
             </div>
-            <div v-else-if="filteredMessages.length>0">
+            <div v-else-if="!filteredMessages">
               <ChatListItemAdvancedDummy />
               <ChatListItemAdvancedDummy />
               <ChatListItemAdvancedDummy />
@@ -45,7 +45,7 @@
               <ChatListItemAdvancedDummy />
             </div>
             <div
-              v-else-if="filteredMessages.length<1"
+              v-else-if="filteredMessages"
               class="row align-items-center d-flex justify-content-around my-4"
             >
               <div class="col-10 py-2 py-md-3 px-3">
