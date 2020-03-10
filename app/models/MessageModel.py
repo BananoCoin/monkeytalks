@@ -13,6 +13,7 @@ from app.util.dateutil import format_js_iso
 RD_COUNT_KEY = 'mtcount'
 rd = redis.Redis()
 
+
 class Message(db.Model):
     block_hash = peewee.CharField(max_length=64, index=True)
     address = peewee.CharField(max_length=64)
@@ -24,9 +25,9 @@ class Message(db.Model):
 
     class Meta:
         db_table = 'messages'
-    
+
     @staticmethod
-    def validate_block(block : dict) -> tuple:
+    def validate_block(block: dict) -> tuple:
         block_contents = json.loads(block['contents'])
         """Ensure a block is to the appropriate destination, of the minimum amount, etc"""
         if block_contents['link_as_account'] != AppConfig.MONKEYTALKS_ACCOUNT:
@@ -38,7 +39,7 @@ class Message(db.Model):
         return (True, "Valid")
 
     @classmethod
-    def save_block_as_message(cls, block : dict):
+    def save_block_as_message(cls, block: dict):
         block_contents = json.loads(block['contents'])
         return cls.save_as_message(block['amount'], block['hash'], block_contents['account'], block_contents['link_as_account'])
 
@@ -48,12 +49,12 @@ class Message(db.Model):
         if int(amount) - FeeModel().get_premium_fee() > 0:
             premium = True
         message = Message(
-            block_hash = block_hash,
-            destination = destination,
-            message_in_raw = str(int(amount)),
-            created_at = datetime.datetime.utcnow(),
-            premium = premium,
-            address = account
+            block_hash=block_hash,
+            destination=destination,
+            message_in_raw=str(int(amount)),
+            created_at=datetime.datetime.utcnow(),
+            premium=premium,
+            address=account
         )
         if message.save() > 0:
             message.inc_message_count()
@@ -90,5 +91,19 @@ class Message(db.Model):
             'premium': message.premium,
             'address': message.address,
             'count': message.get_message_count()
+        }
+        return message_json
+
+    @staticmethod
+    def format_message_advanced(message) -> dict:
+        """Format a message in json to send to the UI"""
+        message_json = {
+            'id': message.id,
+            'content': message.message_in_raw,
+            'date': format_js_iso(message.created_at),
+            'premium': message.premium,
+            'address': message.address,
+            'count': message.get_message_count(),
+            'block_hash': message.block_hash
         }
         return message_json

@@ -71,7 +71,7 @@ def get_all_messages():
     """Load initial messages"""
     message_response = []
     for m in Message.select().where(Message.hidden == False).order_by(Message.id.desc()).limit(2000):
-        message_response.append(Message.format_message(m))
+        message_response.append(Message.format_message_advanced(m))
     return jsonify(message_response)
 
 
