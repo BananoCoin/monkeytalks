@@ -90,7 +90,11 @@ export default Vue.extend({
   computed: {
     filteredMessages: function() {
       if (this.messages) {
-        if (this.searchValue == "" || this.searchValue == null) {
+        if (
+          this.searchValue == "" ||
+          this.searchValue == null ||
+          this.searchValue.length < 1
+        ) {
           return this.messages;
         } else {
           return this.messages.filter(message => {
