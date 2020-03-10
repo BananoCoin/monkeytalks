@@ -10,7 +10,7 @@
           <div class="col-12 col-lg-10 align-items-center justify-content-center">
             <input
               type="text"
-              class="textfield-primary text-primary border-primary font-weight-bold form-control form-control-lg rounded-100 bg-transparent border-2 px-4 px-lg-5 col-12 col-md-9 mx-auto"
+              class="text-lowercase textfield-primary text-primary border-primary font-weight-bold form-control form-control-lg rounded-100 bg-transparent border-2 px-4 px-lg-5 col-12 col-md-9 mx-auto"
               id="searchInput"
               v-model="searchValue"
               placeholder="Search a message"
@@ -23,7 +23,7 @@
     </div>
     <!-- SEARCH MESSAGE SECTION END -->
     <!-- CHAT SECTION -->
-    <div class="section mb-5 mt-md-5 pb-0 pb-md-3" id="chat-section">
+    <div class="section mb-5 mt-md-2 pb-0 pb-md-3" id="chat-section">
       <div class="container mb-5 mt-0 md-mt-5">
         <div class="row align-items-center d-flex justify-content-between">
           <div class="col-12 col-md-11 col-lg-9 mx-auto">
@@ -129,4 +129,7 @@ export default Vue.extend({
 <style lang="scss">
 @import "../assets/css/atten_font.css";
 @import "../assets/css/main.scss";
+#chat-section {
+  min-height: 40vh;
+}
 </style>
