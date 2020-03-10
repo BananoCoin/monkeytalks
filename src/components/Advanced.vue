@@ -34,7 +34,7 @@
                 :key="message.id"
               />
             </div>
-            <div v-else-if="!filteredMessages">
+            <div v-else-if="isThereAnyMatch">
               <ChatListItemAdvancedDummy />
               <ChatListItemAdvancedDummy />
               <ChatListItemAdvancedDummy />
@@ -45,7 +45,7 @@
               <ChatListItemAdvancedDummy />
             </div>
             <div
-              v-else-if="filteredMessages"
+              v-else-if="!isThereAnyMatch"
               class="row align-items-center d-flex justify-content-around my-4"
             >
               <div class="col-10 py-2 py-md-3 px-3">
@@ -84,6 +84,7 @@ export default Vue.extend({
     return {
       messages: null,
       searchValue: "",
+      isThereAnyMatch: true,
       messageContent: "",
       showEmojiMenu: false,
       emojiIndexStart: -1,
@@ -105,13 +106,18 @@ export default Vue.extend({
           this.searchValue == null ||
           this.searchValue.length < 1
         ) {
+          this.isThereAnyMatch = true;
           return this.messages;
         } else {
-          return this.messages.filter(message => {
+          var filteredArray = this.messages.filter(message => {
             return this.decodeMessage(message.content).match(
               this.searchValue.toLowerCase()
             );
           });
+          if (filteredArray.length < 1) {
+            isThereAnyMatch = false;
+          }
+          return filteredArray;
         }
       }
     }
