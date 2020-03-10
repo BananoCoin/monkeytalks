@@ -99,17 +99,14 @@ export default Vue.extend({
   },
   computed: {
     filteredMessages: function() {
-      console.log("Filtered function invoked");
       if (this.messages) {
         if (
           this.searchValue == "" ||
           this.searchValue == null ||
           this.searchValue.length < 1
         ) {
-          console.log("Filtered function this.message if invoked");
           return this.messages;
         } else {
-          console.log("Filtered function this.message else invoked");
           return this.messages.filter(message => {
             return this.decodeMessage(message.content).match(
               this.searchValue.toLowerCase()
