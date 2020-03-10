@@ -132,12 +132,12 @@ export default Vue.extend({
 #home-section {
   min-height: 25vh;
 }
-@media only screen and (max-width: 768px) {
+@media only screen and (min-width: 768px) {
   #home-section {
     min-height: 35vh;
   }
 }
-@media only screen and (max-width: 992px) {
+@media only screen and (min-width: 992px) {
   #home-section {
     min-height: 50vh;
   }
