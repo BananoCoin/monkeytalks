@@ -108,7 +108,7 @@ export default Vue.extend({
           return this.messages;
         } else {
           return this.messages.filter(message => {
-            return this.decodeMessage(message.content).match(
+            return this.decodeMessage(message.content).includes(
               this.searchValue.toLowerCase()
             );
           });
