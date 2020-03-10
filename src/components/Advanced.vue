@@ -84,15 +84,6 @@ export default Vue.extend({
   methods: {
     decodeMessage(content) {
       let decodedMessage = Stenography.decodeMessage(content);
-      let emojiMap = this.$store.state.emojiMap;
-      // Process emojis/images
-      decodedMessage = Util.escapeHtml(decodedMessage);
-      Object.keys(emojiMap).forEach(function(key) {
-        decodedMessage = decodedMessage.replace(
-          new RegExp(key, "g"),
-          `<img src=${emojiMap[key]} class="emoji" />`
-        );
-      });
       return decodedMessage;
     }
   },
@@ -100,7 +91,9 @@ export default Vue.extend({
     filteredMessages: function() {
       if (this.messages) {
         return this.messages.filter(message => {
-          return this.decodeMessage(message.content).match(this.searchValue);
+          return this.decodeMessage(message.content).match(
+            this.searchValue.toLowerCase()
+          );
         });
       }
     }
