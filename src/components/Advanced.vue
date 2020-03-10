@@ -7,21 +7,17 @@
     <div class="section pt-4 pt-md-5 pb-4 px-1 my-1" id="enter-message-section">
       <div class="container pt-4 pt-md-5">
         <div class="row align-items-center d-flex justify-content-center">
-          <div class="col-12 col-lg-10">
-            <form>
-              <div class="input-group">
-                <input
-                  type="text"
-                  class="font-weight-bold form-control form-control-lg rounded-100 bg-transparent border-2 px-4 px-lg-5 col-12 col-md-9 mx-0 mx-md-2"
-                  id="searchInput"
-                  v-model="searchValue"
-                  placeholder="Search a message"
-                  ref="messageInputValue"
-                  autocomplete="off"
-                  v-bind:class="[$store.state.showSendCard ? ['textfield-secondary', 'text-secondary', 'border-secondary'] : ['textfield-primary', 'text-primary', 'border-primary'], 'text-lowercase']"
-                />
-              </div>
-            </form>
+          <div class="col-12 col-lg-10 align-items-center justify-content-center">
+            <input
+              type="text"
+              class="font-weight-bold form-control form-control-lg rounded-100 bg-transparent border-2 px-4 px-lg-5 col-12 col-md-9 mx-0 mx-md-2"
+              id="searchInput"
+              v-model="searchValue"
+              placeholder="Search a message"
+              ref="messageInputValue"
+              autocomplete="off"
+              v-bind:class="[$store.state.showSendCard ? ['textfield-secondary', 'text-secondary', 'border-secondary'] : ['textfield-primary', 'text-primary', 'border-primary'], 'text-lowercase']"
+            />
           </div>
         </div>
       </div>
