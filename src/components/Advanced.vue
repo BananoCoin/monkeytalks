@@ -85,7 +85,7 @@ export default Vue.extend({
   computed: {
     filteredMessages: function() {
       return this.messages.filter(message => {
-        return messages.content.match(this.searchValue);
+        return this.messages.content.match(this.searchValue);
       });
     }
   },
@@ -95,7 +95,7 @@ export default Vue.extend({
     ChatListItemAdvancedDummy,
     Footer
   },
-  created() {
+  mounted: function() {
     API.get2000Messages().then(response => {
       if (response != null) {
         this.messages = [];
