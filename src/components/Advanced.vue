@@ -85,7 +85,7 @@ export default Vue.extend({
   computed: {
     filteredMessages: function() {
       return this.messages.filter(message => {
-        return this.messages.content.match(this.searchValue);
+        return this.message.content.match(this.searchValue);
       });
     }
   },
