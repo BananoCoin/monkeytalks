@@ -100,15 +100,18 @@ export default Vue.extend({
   },
   computed: {
     filteredMessages: function() {
+      console.log("Filtered function invoked");
       if (this.messages) {
         if (
           this.searchValue == "" ||
           this.searchValue == null ||
           this.searchValue.length < 1
         ) {
+          console.log("Filtered function this.message if invoked");
           this.isThereAnyMatch = true;
           return this.messages;
         } else {
+          console.log("Filtered function this.message else invoked");
           // Filter the array
           var filteredArray = this.messages.filter(message => {
             return this.decodeMessage(message.content).match(
@@ -116,7 +119,7 @@ export default Vue.extend({
             );
           });
           // Check if there is any match
-          if (filteredArray.length < 1) {
+          if (filteredArray.length == 0) {
             this.isThereAnyMatch = false;
             console.log("There is no match");
           } else {
