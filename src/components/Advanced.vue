@@ -90,11 +90,15 @@ export default Vue.extend({
   computed: {
     filteredMessages: function() {
       if (this.messages) {
-        return this.messages.filter(message => {
-          return this.decodeMessage(message.content).match(
-            this.searchValue.toLowerCase()
-          );
-        });
+        if (this.searchValue == "" || this.searchValue == null) {
+          return this.messages;
+        } else {
+          return this.messages.filter(message => {
+            return this.decodeMessage(message.content).match(
+              this.searchValue.toLowerCase()
+            );
+          });
+        }
       }
     }
   },
