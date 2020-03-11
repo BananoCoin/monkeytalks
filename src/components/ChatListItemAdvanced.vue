@@ -24,13 +24,10 @@
           v-bind:class="[message.premium ? ['text-dark'] : ['text-light'] ]"
         >{{ formatDate(message.date) }}</h6>
       </div>
-      <div class="row justify-content-center my-2 px-3">
-        <div
-          class="col-12 rounded-100 divider"
-          v-bind:class="[message.premium ? ['bg-dark', 'divider-dark'] : ['bg-light', 'divider-light'] ]"
-        ></div>
-      </div>
-      <div class="row align-items-center d-flex justify-content-center px-3 px-md-4">
+      <div
+        class="row align-items-center d-flex justify-content-center px-3 px-md-4 mx-0 py-1 my-2 rounded-1"
+        v-bind:class="[message.premium ? ['bg-black-10'] : ['bg-black-15'] ]"
+      >
         <a
           target="_blank"
           class="py-2"
@@ -39,15 +36,9 @@
         >
           <h6
             v-bind:class="[message.premium ? ['text-dark'] : ['text-light'] ]"
-            class="text-center font-weight-light break-word tk-ibm-plex-mono"
+            class="text-center font-weight-light break-word tk-ibm-plex-mono text-small"
           >{{message.content + ' raw'}}</h6>
         </a>
-      </div>
-      <div class="row justify-content-center my-2 px-3">
-        <div
-          class="col-12 rounded-100 divider"
-          v-bind:class="[message.premium ? ['bg-dark', 'divider-dark'] : ['bg-light', 'divider-light'] ]"
-        ></div>
       </div>
       <div class="row align-items-center d-flex justify-content-center px-3 px-md-4">
         <a
@@ -58,7 +49,7 @@
         >
           <h6
             v-bind:class="[message.premium ? ['text-dark'] : ['text-light'] ]"
-            class="text-center font-weight-light break-word tk-ibm-plex-mono"
+            class="text-center font-weight-light break-word tk-ibm-plex-mono text-small"
           >{{message.address}}</h6>
         </a>
       </div>
@@ -116,5 +107,14 @@ export default Vue.extend({
 }
 .inline-text {
   display: inline !important;
+}
+.bg-black-15 {
+  background-color: rgba(0, 0, 0, 0.15);
+}
+.bg-black-10 {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.text-small {
+  font-size: 0.9rem;
 }
 </style>
