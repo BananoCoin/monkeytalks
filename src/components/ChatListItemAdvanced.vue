@@ -35,12 +35,12 @@
           target="_blank"
           class="py-2"
           v-bind:class="[message.premium ? ['underline-dark'] : ['underline-light'] ]"
-          :href="'https://creeper.banano.cc/explorer/account/'+message.address"
+          :href="'https://creeper.banano.cc/explorer/block/'+message.block_hash"
         >
           <h6
             v-bind:class="[message.premium ? ['text-dark'] : ['text-light'] ]"
             class="text-center font-weight-light break-word tk-ibm-plex-mono"
-          >{{message.address}}</h6>
+          >{{message.content + ' raw'}}</h6>
         </a>
       </div>
       <div class="row justify-content-center my-2 px-3">
@@ -59,10 +59,7 @@
           <h6
             v-bind:class="[message.premium ? ['text-dark'] : ['text-light'] ]"
             class="text-center font-weight-light break-word tk-ibm-plex-mono"
-          >
-            <span class="font-weight-bold">Raw Amount (Message):</span>
-            {{message.content}}
-          </h6>
+          >{{message.address}}</h6>
         </a>
       </div>
     </div>
