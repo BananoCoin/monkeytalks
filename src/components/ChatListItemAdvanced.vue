@@ -25,7 +25,8 @@
         >{{ formatDate(message.date) }}</h6>
       </div>
       <div
-        class="row align-items-center d-flex justify-content-center px-3 px-md-4 mx-0 py-1 my-2 rounded-2 bg-black-15"
+        v-bind:class="[message.premium ? ['bg-black-10'] : ['bg-black-15'] ]"
+        class="row align-items-center d-flex justify-content-center px-3 px-md-4 mx-0 py-1 my-2 rounded-2"
       >
         <a
           target="_blank"

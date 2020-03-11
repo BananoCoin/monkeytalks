@@ -10,7 +10,7 @@
         >22:15 / Thu, 16 Mar 2019</h5>
       </div>
       <div
-        class="row align-items-center d-flex justify-content-center mx-3 mx-md-2 px-3 px-md-4 py-2 my-2 rounded-2 bg-black-15"
+        class="row align-items-center d-flex justify-content-center mx-0 mx-md-2 px-3 px-md-4 py-2 my-2 rounded-2 bg-black-15"
       >
         <h6
           class="text-center font-weight-light break-word text-transparent tk-ibm-plex-mono text-small"
