@@ -37,7 +37,7 @@
           <h6
             v-bind:class="[message.premium ? ['text-dark'] : ['text-light'] ]"
             class="text-center font-weight-light break-word tk-ibm-plex-mono text-small"
-          >{{message.content + ' raw'}}</h6>
+          >{{message.content}}</h6>
         </a>
       </div>
       <div class="row align-items-center d-flex justify-content-center px-3 px-md-4">

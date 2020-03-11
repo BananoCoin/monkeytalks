@@ -14,7 +14,7 @@
       >
         <h6
           class="text-center font-weight-light break-word text-transparent tk-ibm-plex-mono text-small"
-        >549536066067248428368798158059 raw</h6>
+        >549536066067248428368798158059</h6>
       </div>
       <div class="row align-items-center d-flex justify-content-center px-3 px-md-4 py-1">
         <h6
