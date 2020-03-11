@@ -43,6 +43,28 @@
           >{{message.address}}</h6>
         </a>
       </div>
+      <div class="row justify-content-center my-2 px-3">
+        <div
+          class="col-12 rounded-100 divider"
+          v-bind:class="[message.premium ? ['bg-dark', 'divider-dark'] : ['bg-light', 'divider-light'] ]"
+        ></div>
+      </div>
+      <div class="row align-items-center d-flex justify-content-center px-3 px-md-4">
+        <a
+          target="_blank"
+          class="py-2"
+          v-bind:class="[message.premium ? ['underline-dark'] : ['underline-light'] ]"
+          :href="'https://creeper.banano.cc/explorer/account/'+message.address"
+        >
+          <h6
+            v-bind:class="[message.premium ? ['text-dark'] : ['text-light'] ]"
+            class="text-center font-weight-light break-word tk-ibm-plex-mono"
+          >
+            <span class="font-weight-bold">Raw Amount (Message):</span>
+            {{message.content}}
+          </h6>
+        </a>
+      </div>
     </div>
   </div>
 </template>
