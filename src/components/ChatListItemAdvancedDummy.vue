@@ -9,8 +9,12 @@
           class="text-left mx-4 font-weight-light text-light bg-light rounded-100 px-3 mx-2 opacity-animation"
         >22:15 / Thu, 16 Mar 2019</h5>
       </div>
-      <div class="row justify-content-center my-2 px-3">
-        <div class="col-12 rounded-100 divider bg-light"></div>
+      <div
+        class="row align-items-center d-flex justify-content-center px-3 px-md-4 mx-0 py-1 my-2 rounded-2 bg-black-15"
+      >
+        <h6
+          class="text-center font-weight-light break-word text-transparent tk-ibm-plex-mono text-small"
+        >549536066067248428368798158059 raw</h6>
       </div>
       <div class="row align-items-center d-flex justify-content-center py-1 px-3 px-md-4">
         <h6
@@ -29,9 +33,8 @@ export default Vue.extend({
 });
 </script>
 
-<style scoped>
-.divider {
-  height: 2px;
-  opacity: 15%;
+<style>
+.text-transparent {
+  color: transparent;
 }
 </style>

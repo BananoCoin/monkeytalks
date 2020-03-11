@@ -25,8 +25,7 @@
         >{{ formatDate(message.date) }}</h6>
       </div>
       <div
-        class="row align-items-center d-flex justify-content-center px-3 px-md-4 mx-0 py-1 my-2 rounded-1"
-        v-bind:class="[message.premium ? ['bg-black-10'] : ['bg-black-15'] ]"
+        class="row align-items-center d-flex justify-content-center px-3 px-md-4 mx-0 py-1 my-2 rounded-2 bg-black-15"
       >
         <a
           target="_blank"
@@ -97,24 +96,7 @@ export default Vue.extend({
   text-decoration: underline !important;
   text-decoration-color: #d1a4ff !important;
 }
-.divider-light {
-  height: 2px;
-  opacity: 12%;
-}
-.divider-dark {
-  height: 2px;
-  opacity: 8%;
-}
 .inline-text {
   display: inline !important;
-}
-.bg-black-15 {
-  background-color: rgba(0, 0, 0, 0.15);
-}
-.bg-black-10 {
-  background-color: rgba(0, 0, 0, 0.1);
-}
-.text-small {
-  font-size: 0.9rem;
 }
 </style>

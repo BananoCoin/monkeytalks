@@ -37,6 +37,10 @@ input[type="checkbox"] {
     border-radius: 0.75rem;
 }
 
+.rounded-2{
+    border-radius: 0.5rem;
+}
+
 h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
     margin: 0px;
 }
@@ -506,4 +510,14 @@ input:checked[type="checkbox"]:before{
 
 .break-word{
     word-break: break-word;
+}
+
+.bg-black-15 {
+    background-color: rgba(0, 0, 0, 0.15);
+}
+.bg-black-10 {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+.text-small {
+    font-size: 0.8rem;
 }
