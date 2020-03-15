@@ -1,18 +1,18 @@
 # Monkeytalks
 
-Monkeytalks is an on-chain messaging/chat system that uses BANANO. Messages are encoded on the BANANO block lettuce TM, and decoded and displayed by the application.
+Monkeytalks is an on-chain messaging/chat system that uses BANANO. Messages are encoded on the BANANO Block Lettuce™, and decoded and displayed by the application.
 
-In addition, it also has basic faucet included.
+In addition, it also has a basic faucet included.
 
 # Development
 
-MonkeyTalks consists of two parts.
+MonkeyTalks consists of two parts:
 
-1) A Vue.JS front end, using typescript and webpack as a bundler
+1) A Vue.JS front end, using TypeScript and webpack as a bundler
 
 2) A Python backend, written with Flask
 
-Setting up development environment is simple on unix-based systems (Mac, Linux, WSL):
+Setting up the development environment is simple on UNIX-based systems (Mac, Linux, WSL):
 ```
 virtualenv -p python3.6 venv
 source venv/bin/activate
@@ -25,6 +25,6 @@ To start a development server, run `npm start`
 
 # Deploying to production
 
-Recommend using any of the methods described in the flask-socketio documentation. (gunicorn, uwsgi, etc.)
+It is recommended to use any of the methods described in the flask-socketio documentation. (gunicorn, uwsgi, etc.)
 
 https://flask-socketio.readthedocs.io/en/latest/
