@@ -14,7 +14,7 @@ Psycopg2-binary
 psycogreen
 
 # Deployment
-uwsgi
+gunicorn
 
 # Webpack
 flask-webpack-fork

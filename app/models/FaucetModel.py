@@ -2,6 +2,7 @@ import datetime
 import redis
 import peewee
 import requests
+import os
 
 from dateutil.relativedelta import relativedelta
 
@@ -12,7 +13,7 @@ from app.util.validations import Validations
 from app.util.rpc import RPC
 from app.util.conversions import BananoConversions
 
-rd = redis.Redis()
+rd = redis.Redis(host=os.getenv('REDIS_HOST', 'localhost'))
 
 class FaucetPayment(db.Model):
     destination = peewee.CharField(max_length=64, index=True)

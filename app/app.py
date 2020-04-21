@@ -6,7 +6,7 @@ from app.settings import AppConfig, ProdConfig
 from app.controllers import HomeController, FaucetController
 from app.database import db
 from app.extensions import webpack, socketio, cors, scheduler
-from werkzeug.contrib.fixers import ProxyFix
+from werkzeug.middleware.proxy_fix import ProxyFix
 
 def create_app(config_object : AppConfig = ProdConfig) -> Flask:
     """Application Factory Pattern"""
@@ -22,7 +22,7 @@ def register_extensions(app):
     """Register Flask extensions."""
     cors.init_app(app)
     webpack.init_app(app)
-    socketio.init_app(app, message_queue='redis://')
+    socketio.init_app(app, message_queue=f'redis://{os.getenv("REDIS_HOST", "localhost")}:6379/')
     db.init_app(app)
     if not get_debug_flag():
         scheduler.init_app(app)

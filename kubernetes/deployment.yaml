@@ -1,0 +1,81 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: monkeytalks
+  namespace: monkeytalks
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: monkeytalks
+  template:
+    metadata:
+      labels:
+        app: monkeytalks
+    spec:
+      containers:
+      - name: monkeytalks
+        image: bananocoin/monkeytalks:1.0.2
+        ports:
+        - containerPort: 5000
+          name: app
+        env:
+          - name: FLASK_APP
+            value: autoapp.py
+          - name: FLASK_DEBUG
+            value: "0"
+          - name: NODE_URL
+            value: pippin-banano.pippin
+          - name: NODE_PORT
+            value: "11338"
+          - name: APP_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: monkeytalks
+                key: app_secret
+          - name: RECAPTCHA_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: monkeytalks
+                key: recaptcha_secret
+          - name: MONKEYTALKS_DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: monkeytalks
+                key: db_password
+          - name: MONKEYTALKS_WALLET_ID
+            valueFrom:
+              secretKeyRef:
+                name: monkeytalks
+                key: wallet_id
+          - name: MONKEYTALKS_ACCOUNT
+            valueFrom:
+              secretKeyRef:
+                name: monkeytalks
+                key: account
+          - name: SOLVEMEDIA_VKEY
+            valueFrom:
+              secretKeyRef:
+                name: monkeytalks
+                key: sm_vkey
+          - name: SOLVEMEDIA_CKEY
+            valueFrom:
+              secretKeyRef:
+                name: monkeytalks
+                key: sm_ckey
+          - name: SOLVEMEDIA_HKEY
+            valueFrom:
+              secretKeyRef:
+                name: monkeytalks
+                key: sm_hkey
+          - name: HCAPTCHA_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: monkeytalks
+                key: hcaptcha_secret
+          - name: DB_HOST
+            value: postgres.postgres
+          - name: REDIS_HOST
+            value: redis-0.redis
+          - name: APP_HOST
+            value: "0.0.0.0"

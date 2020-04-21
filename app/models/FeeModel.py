@@ -1,7 +1,8 @@
 import redis
+import os
 from app.settings import AppConfig
 
-rd = redis.Redis()
+rd = redis.Redis(host=os.getenv('REDIS_HOST', 'localhost'))
 
 class FeeModel():
     FEE_KEY = 'mt_fee_key'

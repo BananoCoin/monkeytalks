@@ -1,4 +1,5 @@
 import redis
+import os
 import simplejson as json
 
 from flask_socketio import emit
@@ -9,7 +10,7 @@ from app.util.nanote import Nanote
 from app.models.FeeModel import FeeModel
 from app.models.MessageModel import Message
 
-rd = redis.Redis()
+rd = redis.Redis(host=os.getenv('REDIS_HOST', 'localhost'))
 
 lock_key = 'CRONMISSING_KEY'
 

@@ -2,6 +2,7 @@ import datetime
 import simplejson as json
 import peewee
 import redis
+import os
 
 from app.database import db
 from app.settings import AppConfig
@@ -11,7 +12,7 @@ from app.util.dateutil import format_js_iso
 
 # Redis stores message counts, because postgres count is a slow operation
 RD_COUNT_KEY = 'mtcount'
-rd = redis.Redis()
+rd = redis.Redis(host=os.getenv('REDIS_HOST', 'localhost'))
 
 
 class Message(db.Model):

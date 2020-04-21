@@ -72,7 +72,7 @@ def undeletemsg(hash):
 @click.command()
 @with_appcontext
 def fixcounts():
-    rd = redis.Redis()
+    rd = redis.Redis(host=os.getenv('REDIS_HOST', 'localhost'))
     for r in Message.select(fn.COUNT(Message.id).alias("count"), Message.address).where(Message.hidden == False).group_by(Message.address):
         click.echo(f"Setting count for {r.address} to {r.count}")
         rd.hset(r.address, RD_COUNT_KEY, str(r.count))

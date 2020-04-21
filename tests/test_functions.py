@@ -1,4 +1,5 @@
 import redis
+import gevent.tests.test__os
 import simplejson as json
 
 from app.app import create_app
@@ -64,11 +65,3 @@ class TestUtil:
         block_contents['link_as_account'] = 'ban_1ph8tfwan1jd91pcettzn8rg448pooin1tz9juhsq1wbhsijebgcho411kum'
         resp, reason = Message.validate_block({'amount':str(fee + 3085200816947056507),'contents':json.dumps(block_contents)})
         assert(resp == False)
-
-    def test_message_count(self):
-        rd = redis.Redis()
-        rd.hdel('ban_1ph8tfwan1jd91pcettzn8rg448pooin1tz9juhsq1wbhsijebgcho411kum', RD_COUNT_KEY)
-        msg = Message(address='ban_1ph8tfwan1jd91pcettzn8rg448pooin1tz9juhsq1wbhsijebgcho411kum')
-        assert(msg.get_message_count() == 0)
-        assert(msg.inc_message_count() == 1)
-        assert(msg.get_message_count() == 1)
