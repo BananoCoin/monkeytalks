@@ -11,8 +11,10 @@ jobs:
     env:
       FLASK_DEBUG: 1
     steps:
-      - uses: fylein/python-pytest-github-action@v1
-      - with:
+      - uses: actions/checkout@master 
+      - name: Run tests
+        uses: fylein/python-pytest-github-action@v1
+        with:
           args: pip3 install -r requirements.txt && flask test
 
   build_and_publish:
