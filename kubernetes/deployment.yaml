@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: monkeytalks
-        image: bananocoin/monkeytalks:1.0.2
+        image: replaceme
         ports:
         - containerPort: 5000
           name: app
