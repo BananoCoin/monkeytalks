@@ -10,6 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       FLASK_DEBUG: 1
+      FLASK_APP: autoapp.py
+      APP_SECRET: 1234
     strategy:
       matrix:
         python-version: [3.7]
