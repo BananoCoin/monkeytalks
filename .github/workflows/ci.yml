@@ -10,12 +10,22 @@ jobs:
     runs-on: ubuntu-latest
     env:
       FLASK_DEBUG: 1
+    strategy:
+      matrix:
+        python-version: [3.7]
     steps:
       - uses: actions/checkout@master 
-      - name: Run tests
-        uses: fylein/python-pytest-github-action@v1
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
         with:
-          args: pip3 install -r requirements.txt && flask test
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Run tests
+        run: |
+          flask test
 
   build_and_publish:
     name: Build and Publish Image
