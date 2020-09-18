@@ -23,7 +23,7 @@
         >
           <img
             class="w-100 grow"
-            :src="`https://monkeys.appditto.com?address=${message.address}`"
+            :src="`https://monkey.banano.cc/api/v1/monkey/${message.address}?svc=monkeytalks`"
             ref="monkeyImg"
           />
         </button>
