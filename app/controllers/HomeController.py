@@ -7,6 +7,7 @@ from app.util.rpc import RPC
 from app.models.MessageModel import Message
 from app.models.FeeModel import FeeModel
 from app.settings import AppConfig
+from app.database import db
 
 blueprint = Blueprint('home', __name__, static_folder='../static')
 
@@ -44,7 +45,8 @@ def banano_callback():
         if not is_valid:
             abort(400, message)
         # Save message to database
-        message = Message.save_block_as_message(block)
+        with db.database.connection_context():
+            message = Message.save_block_as_message(block)
         if message is None:
             abort(500, 'server error processing message')
         # Emit message to the UI
