@@ -1,6 +1,7 @@
 from flask import Blueprint, request, abort, jsonify
 from app.util.captcha import Captcha
 from app.models.FaucetModel import FaucetPayment
+from app.database import db
 
 blueprint = Blueprint('faucet', __name__, static_folder='../static')
 
@@ -17,7 +18,8 @@ def faucet_claim():
         abort(500, 'server error')
     if not Captcha.verify_hcaptcha(json_data['hcaptchaResponse'], request.remote_addr):
         return jsonify({"error": "Captcha verification failed"})
-    payment, message = FaucetPayment.make_or_reject_payment(json_data['address'], request.remote_addr)
+    with db.database.connection_context():
+        payment, message = FaucetPayment.make_or_reject_payment(json_data['address'], request.remote_addr)
     if payment is None:
         return jsonify({"error": message})
     return jsonify({"success":message})
