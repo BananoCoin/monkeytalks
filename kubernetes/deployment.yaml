@@ -74,8 +74,8 @@ spec:
                 name: monkeytalks
                 key: hcaptcha_secret
           - name: DB_HOST
-            value: postgres.postgres
+            value: postgres-ha-postgresql-ha-pgpool.postgres
           - name: REDIS_HOST
-            value: redis-0.redis
+            value: redis.redis
           - name: APP_HOST
             value: "0.0.0.0"

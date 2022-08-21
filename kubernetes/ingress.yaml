@@ -1,4 +1,4 @@
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: monkeytalks-ingress
@@ -18,24 +18,20 @@ metadata:
     nginx.ingress.kubernetes.io/session-cookie-name: "monkeytalks_socket"
     nginx.ingress.kubernetes.io/session-cookie-expires: "172800"
     nginx.ingress.kubernetes.io/session-cookie-max-age: "172800"    
+    nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
 spec:
   tls:
   - hosts:
     - monkeytalks.cc
-    - www.monkeytalks.cc
     secretName: monkeytalks-cc-server-secret
   rules:
   - host: monkeytalks.cc
     http:
       paths:
       - path: /
+        pathType: Prefix
         backend:
-          serviceName: monkeytalks
-          servicePort: 5000
-  - host: www.monkeytalks.cc
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: monkeytalks
-          servicePort: 5000
+          service:
+            name: monkeytalks
+            port:
+              number: 5000
