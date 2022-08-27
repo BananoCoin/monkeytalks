@@ -1,5 +1,6 @@
 import simplejson as json
 import requests
+import os
 
 from app.settings import AppConfig
 
@@ -7,6 +8,7 @@ class RPC():
     def __init__(self, node_url : str = AppConfig.NODE_URL, node_ip : str = AppConfig.NODE_IP):
         self.node_url = node_url
         self.node_ip = node_ip
+        self.bpow_key = os.getenv('BPOW_KEY', None)
 
     def communicate_wallet(self, wallet_command : dict) -> dict:
         formattedUrl = "http://{0}:{1}".format(self.node_url, self.node_ip)
@@ -46,6 +48,8 @@ class RPC():
             "destination": destination,
             "amount": amount_raw
         }
+        if self.bpow_key is not None:
+            action['bpow_key'] = self.bpow_key
         resp = self.communicate_wallet(action)
         if resp is not None and 'block' in resp:
             return resp['block']

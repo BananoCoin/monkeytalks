@@ -73,6 +73,11 @@ spec:
               secretKeyRef:
                 name: monkeytalks
                 key: hcaptcha_secret
+          - name: BPOW_KEY
+            valueFrom:
+              secretKeyRef:
+                name: monkeytalks
+                key: bpow_key
           - name: DB_HOST
             value: postgres-ha-postgresql-ha-pgpool.postgres
           - name: REDIS_HOST
