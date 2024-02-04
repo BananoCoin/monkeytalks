@@ -21,7 +21,7 @@ flask-webpack-fork==0.1.1
 
 # SocketIO
 flask-socketio<=4.3.2
-gevent=21.12.0
+gevent==21.12.0
 gevent-websocket==0.10.1
 
 # Latest JSON lib
