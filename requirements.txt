@@ -1,28 +1,28 @@
 # Flask
-Flask
-Flask-CORS
+Flask==1.1.4
+Flask-CORS==3.0.10
 MarkupSafe==2.0.1
 Werkzeug==0.16.0
-Jinja2
-itsdangerous
-click
+Jinja2==2.11.3
+itsdangerous==1.1.0
+click==7.1.2
 python-dotenv
 
 # Database
-peewee
-Psycopg2-binary
-psycogreen
+peewee==3.15.2
+Psycopg2-binary==2.9.3
+psycogreen==1.0.2
 
 # Deployment
-gunicorn
+gunicorn==20.1.0
 
 # Webpack
-flask-webpack-fork
+flask-webpack-fork==0.1.1
 
 # SocketIO
 flask-socketio<=4.3.2
-gevent
-gevent-websocket
+gevent=21.12.0
+gevent-websocket==0.10.1
 
 # Latest JSON lib
 simplejson
@@ -31,13 +31,13 @@ simplejson
 pylint
 
 # Redis
-redis
+redis==4.3.4
 
 # HTTP requests
 requests
 
 # Task scheduler
-flask-apscheduler
+flask-apscheduler==1.12.4
 
 # Tests
 pytest

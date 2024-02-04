@@ -19,7 +19,10 @@ def faucet_claim():
     if not Captcha.verify_hcaptcha(json_data['hcaptchaResponse'], request.remote_addr):
         return jsonify({"error": "Captcha verification failed"})
     with db.database.connection_context():
-        payment, message = FaucetPayment.make_or_reject_payment(json_data['address'], request.remote_addr)
+        ip = request.headers.get('CF-Connecting-IP')
+        if ip is None:
+            return jsonify({"error": "An unknown error has occured"})
+        payment, message = FaucetPayment.make_or_reject_payment(json_data['address'], ip)
     if payment is None:
         return jsonify({"error": message})
     return jsonify({"success":message})
