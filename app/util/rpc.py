@@ -36,7 +36,7 @@ class RPC():
         }
         resp = self.communicate_wallet(action)
         if resp is not None and 'balance' in resp:
-            return int(resp['balance'])
+            return int(resp['balance']) + int(resp['receivable'])
         return None
 
     def send(self, destination: str, amount_raw : str) -> str:
