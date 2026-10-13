@@ -13,7 +13,7 @@ from app.util.validations import Validations
 from app.util.rpc import RPC
 from app.util.conversions import BananoConversions
 
-rd = redis.Redis(host=os.getenv('REDIS_HOST', 'localhost'))
+rd = redis.Redis(host=os.getenv('REDIS_HOST', 'localhost'), password=os.getenv('REDIS_PASSWORD') or None)
 
 class FaucetPayment(db.Model):
     destination = peewee.CharField(max_length=64, index=True)

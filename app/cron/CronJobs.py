@@ -10,7 +10,7 @@ from app.util.nanote import Nanote
 from app.models.FeeModel import FeeModel
 from app.models.MessageModel import Message
 
-rd = redis.Redis(host=os.getenv('REDIS_HOST', 'localhost'))
+rd = redis.Redis(host=os.getenv('REDIS_HOST', 'localhost'), password=os.getenv('REDIS_PASSWORD') or None)
 
 lock_key = 'CRONMISSING_KEY'
 

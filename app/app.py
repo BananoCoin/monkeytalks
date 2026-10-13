@@ -1,4 +1,5 @@
 import os
+from urllib.parse import quote
 from flask import Flask
 from flask.helpers import get_debug_flag
 from app import commands
@@ -22,12 +23,19 @@ def register_extensions(app):
     """Register Flask extensions."""
     cors.init_app(app)
     webpack.init_app(app)
-    socketio.init_app(app, message_queue=f'redis://{os.getenv("REDIS_HOST", "localhost")}:6379/')
+    socketio.init_app(app, message_queue=redis_url())
     db.init_app(app)
     if not get_debug_flag():
         scheduler.init_app(app)
         scheduler.start()
         scheduler.run_job('missingcheck')
+
+def redis_url() -> str:
+    host = os.getenv("REDIS_HOST", "localhost")
+    password = os.getenv("REDIS_PASSWORD")
+    if not password:
+        return f'redis://{host}:6379/'
+    return f'redis://:{quote(password, safe="")}@{host}:6379/'
 
 def register_blueprints(app):
     """Register Flask blueprints."""

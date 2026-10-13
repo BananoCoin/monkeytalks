@@ -12,7 +12,7 @@ from app.util.dateutil import format_js_iso
 
 # Redis stores message counts, because postgres count is a slow operation
 RD_COUNT_KEY = 'mtcount'
-rd = redis.Redis(host=os.getenv('REDIS_HOST', 'localhost'))
+rd = redis.Redis(host=os.getenv('REDIS_HOST', 'localhost'), password=os.getenv('REDIS_PASSWORD') or None)
 
 
 class Message(db.Model):
