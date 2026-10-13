@@ -48,10 +48,10 @@ class ProdConfig(AppConfig):
     ]
     SCHEDULER_API_ENABLED = True
     # Postgres for production
-    DB_USER = 'postgres'
+    DB_USER = os.getenv('DB_USER', 'postgres')
     DB_PASS = os.getenv("MONKEYTALKS_DB_PASSWORD", "password")
     DB_HOST = os.getenv('DB_HOST', '127.0.0.1')
-    DB_NAME = 'postgres'
+    DB_NAME = os.getenv('DB_NAME', 'postgres')
     DATABASE = f'postgresext+pool://{DB_USER}:{DB_PASS}@{DB_HOST}/{DB_NAME}?max_connections=70&stale_timeout=300&autorollback=True'
 
 class TestConfig(AppConfig):
