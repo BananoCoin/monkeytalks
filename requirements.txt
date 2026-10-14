@@ -10,7 +10,7 @@ python-dotenv
 
 # Database
 peewee==3.15.2
-Psycopg2-binary==2.9.3
+Psycopg2-binary==2.9.9
 psycogreen==1.0.2
 
 # Deployment
